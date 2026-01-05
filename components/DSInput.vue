@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, useSlots } from 'vue'
 
 interface Props {
   modelValue?: string | number
@@ -60,6 +60,7 @@ const emit = defineEmits<{
   (e: 'focus'): void
 }>()
 
+const slots = useSlots()
 const inputId = ref(`input-${Math.random().toString(36).substring(2, 9)}`)
 const inputValue = computed({
   get: () => props.modelValue,
@@ -75,9 +76,8 @@ const inputClasses = computed(() => {
     lg: 'px-5 py-3 text-lg',
   }
   
-  const hasPrefix = !!props.error || !!props.hint
-  const prefix = hasPrefix ? 'pl-10' : ''
-  const suffix = hasPrefix ? 'pr-10' : ''
+  const prefix = slots.prefix ? 'pl-10' : ''
+  const suffix = slots.suffix ? 'pr-10' : ''
   
   const state = props.error
     ? 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500'
