@@ -34,10 +34,6 @@ export default {
           yellow: '#E5D62E',
         }
       },
-      fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
-      },
     },
   },
   plugins: [],
