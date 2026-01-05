@@ -247,7 +247,6 @@ const { data: service } = await supabase
   .eq('slug', 'ia-automatisation')
   .single()
 ```
-```
 
 ## Indexes
 
