@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS skills (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     category VARCHAR(100) NOT NULL,
-    proficiency_level INTEGER CHECK (proficiency_level >= 1 AND proficiency_level <= 5),
+    proficiency_level INTEGER CONSTRAINT chk_skills_proficiency_level CHECK (proficiency_level >= 1 AND proficiency_level <= 5),
     years_of_experience NUMERIC(3, 1),
     icon_url TEXT,
     order_index INTEGER DEFAULT 0,
