@@ -43,8 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 
 interface Props {
   variant?: 'default' | 'transparent' | 'bordered'
