@@ -132,13 +132,14 @@ bun run preview
 
 ## Database Structure
 
-The application uses 5 main tables:
+The application uses 6 main tables:
 
 - **projects** - Portfolio projects showcase
 - **skills** - Technical skills and competencies
 - **experience** - Professional work experience
 - **education** - Educational background
 - **contact_messages** - Contact form submissions
+- **services** - Professional services offered
 
 See [supabase/README.md](./supabase/README.md) for complete database documentation.
 

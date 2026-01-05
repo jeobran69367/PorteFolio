@@ -28,6 +28,11 @@ export interface Database {
         Insert: ContactMessageInsert
         Update: ContactMessageUpdate
       }
+      services: {
+        Row: Service
+        Insert: ServiceInsert
+        Update: ServiceUpdate
+      }
     }
   }
 }
@@ -261,4 +266,67 @@ export interface ContactMessageUpdate {
   is_read?: boolean
   replied?: boolean
   replied_at?: string | null
+}
+
+// Service types
+export interface Service {
+  id: string
+  title: string
+  slug: string
+  category: string
+  subtitle: string | null
+  description: string
+  icon_url: string | null
+  problems_addressed: string[]
+  solutions: string[]
+  benefits: string[]
+  tech_stack: string[]
+  approach: string[]
+  status: string
+  featured: boolean
+  order_index: number
+  metadata: Record<string, any>
+  created_at: string
+  updated_at: string
+}
+
+export interface ServiceInsert {
+  id?: string
+  title: string
+  slug: string
+  category: string
+  subtitle?: string | null
+  description: string
+  icon_url?: string | null
+  problems_addressed?: string[]
+  solutions?: string[]
+  benefits?: string[]
+  tech_stack?: string[]
+  approach?: string[]
+  status?: string
+  featured?: boolean
+  order_index?: number
+  metadata?: Record<string, any>
+  created_at?: string
+  updated_at?: string
+}
+
+export interface ServiceUpdate {
+  id?: string
+  title?: string
+  slug?: string
+  category?: string
+  subtitle?: string | null
+  description?: string
+  icon_url?: string | null
+  problems_addressed?: string[]
+  solutions?: string[]
+  benefits?: string[]
+  tech_stack?: string[]
+  approach?: string[]
+  status?: string
+  featured?: boolean
+  order_index?: number
+  metadata?: Record<string, any>
+  updated_at?: string
 }

@@ -34,4 +34,52 @@ INSERT INTO education (institution, degree, field_of_study, description, start_d
 ('University of Technology', 'Master''s Degree', 'Computer Science', 'Specialized in software engineering and web development.', '2018-09-01', '2020-06-30', false, 'Paris, France'),
 ('Engineering School', 'Bachelor''s Degree', 'Information Technology', 'Studied fundamentals of computer science and programming.', '2015-09-01', '2018-06-30', false, 'Lyon, France');
 
+-- Sample services
+INSERT INTO services (title, slug, category, subtitle, description, problems_addressed, solutions, benefits, tech_stack, approach, status, featured, order_index) VALUES
+(
+    'Développement IA & Automatisation',
+    'ia-automatisation',
+    'AI & Automation',
+    'Modèles d''intelligence artificielle et automatisation de processus',
+    'Développement de solutions d''intelligence artificielle et d''automatisation pour optimiser vos processus métier, réduire les coûts et améliorer la prise de décision.',
+    '["Processus manuels chronophages", "Décisions peu ou pas orientées données", "Données sous-exploitées"]'::jsonb,
+    '["IA prédictive", "NLP / Chatbots", "Workflows automatisés", "APIs intelligentes"]'::jsonb,
+    '["Réduction des coûts opérationnels", "Gain de temps opérationnel", "Aide à la prise de décision basée sur les données"]'::jsonb,
+    '["Python", "TensorFlow", "scikit-learn", "NLP", "APIs REST"]'::jsonb,
+    '["Analyse des besoins métier", "Conception de modèles IA adaptés", "Intégration dans l''infrastructure existante", "Formation et documentation"]'::jsonb,
+    'active',
+    true,
+    1
+),
+(
+    'Développement Full Stack',
+    'full-stack',
+    'Web Development',
+    'Frontend moderne et Backend robuste pour applications scalables',
+    'Développement d''applications web complètes, du frontend au backend, avec une architecture scalable et maintenable.',
+    '["Applications legacy difficiles à maintenir", "Performances médiocres", "Manque de scalabilité"]'::jsonb,
+    '["Frontend moderne (Vue.js, React)", "Backend robuste (Spring Boot)", "APIs REST sécurisées", "Architecture microservices"]'::jsonb,
+    '["Code maintenable et testé", "Applications performantes", "Architecture évolutive", "Sécurité renforcée"]'::jsonb,
+    '["Vue.js", "React", "TypeScript", "Spring Boot", "PostgreSQL", "APIs REST"]'::jsonb,
+    '["Architecture scalable", "Tests automatisés", "Intégration continue", "Code maintenable", "Sécurité & authentification"]'::jsonb,
+    'active',
+    true,
+    2
+),
+(
+    'Product Owner / Stakeholder',
+    'product-owner',
+    'Product Management',
+    'Vision produit et coordination des acteurs',
+    'Accompagnement dans la définition de la vision produit, la coordination des équipes techniques et métier, et la gestion du backlog produit.',
+    '["Manque de vision produit claire", "Communication difficile entre équipes tech et métier", "Priorisation inefficace"]'::jsonb,
+    '["Compréhension des enjeux métier", "Traduction des besoins en solutions techniques", "Collaboration équipes techniques et business"]'::jsonb,
+    '["Vision produit alignée avec les objectifs business", "Meilleure communication inter-équipes", "Priorisation optimisée"]'::jsonb,
+    '[]'::jsonb,
+    '["Gestion de backlog", "Rédaction de user stories", "Méthodes agiles (Scrum)", "Facilitation des cérémonies agiles"]'::jsonb,
+    'in_development',
+    false,
+    3
+);
+
 -- Note: Contact messages are not seeded as they should come from actual user submissions

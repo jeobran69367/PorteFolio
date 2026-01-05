@@ -4,7 +4,7 @@ This directory contains the database schema and migrations for the portfolio app
 
 ## Database Schema
 
-The database consists of 5 main tables:
+The database consists of 6 main tables:
 
 ### 1. Projects Table
 Stores portfolio projects to showcase work.
@@ -93,11 +93,34 @@ Stores messages submitted via contact form.
 - `replied_at` (TIMESTAMPTZ): Reply timestamp
 - `created_at` (TIMESTAMPTZ): Creation timestamp
 
+### 6. Services Table
+Stores professional services offered on the portfolio.
+
+**Columns:**
+- `id` (UUID): Primary key
+- `title` (VARCHAR): Service name
+- `slug` (VARCHAR): URL-friendly identifier (unique)
+- `category` (VARCHAR): Service category (e.g., "AI & Automation", "Web Development", "Product Management")
+- `subtitle` (TEXT): Short subtitle
+- `description` (TEXT): Detailed service description
+- `icon_url` (TEXT): Service icon URL
+- `problems_addressed` (JSONB): Array of problems this service addresses
+- `solutions` (JSONB): Array of solutions provided
+- `benefits` (JSONB): Array of client benefits
+- `tech_stack` (JSONB): Array of technologies used (for technical services)
+- `approach` (JSONB): Array of methodology/approach details
+- `status` (VARCHAR): Service status (e.g., "active", "in_development", "coming_soon")
+- `featured` (BOOLEAN): Whether to feature this service
+- `order_index` (INTEGER): Display order
+- `metadata` (JSONB): Additional flexible metadata
+- `created_at` (TIMESTAMPTZ): Creation timestamp
+- `updated_at` (TIMESTAMPTZ): Last update timestamp
+
 ## Row Level Security (RLS)
 
 All tables have RLS enabled with the following policies:
 
-### Projects, Skills, Experience, Education
+### Projects, Skills, Experience, Education, Services
 - **Public Read Access**: Anyone can view these records
 - **Authenticated Write Access**: Only authenticated users can create, update, or delete records
 
@@ -109,8 +132,10 @@ All tables have RLS enabled with the following policies:
 
 Migrations are located in the `migrations/` directory and are applied in order:
 
-1. `20260105000001_initial_schema.sql` - Creates all tables, indexes, and triggers
-2. `20260105000002_rls_policies.sql` - Sets up Row Level Security policies
+1. `20260105000001_initial_schema.sql` - Creates initial tables (projects, skills, experience, education, contact_messages), indexes, and triggers
+2. `20260105000002_rls_policies.sql` - Sets up Row Level Security policies for initial tables
+3. `20260105000003_add_services_table.sql` - Creates services table with indexes and triggers
+4. `20260105000004_services_rls_policies.sql` - Sets up Row Level Security policies for services table
 
 ## Seed Data
 
@@ -119,6 +144,7 @@ Sample data for development and testing is provided in `seed.sql`. This includes
 - 12 sample skills
 - 2 sample work experiences
 - 2 sample education entries
+- 3 sample services (IA & Automatisation, Full Stack, Product Owner)
 
 ## Usage
 
@@ -204,6 +230,25 @@ const { data, error } = await supabase
   ])
 ```
 
+### Fetch all active services
+```typescript
+const { data: services } = await supabase
+  .from('services')
+  .select('*')
+  .eq('status', 'active')
+  .order('order_index', { ascending: true })
+```
+
+### Fetch service by slug
+```typescript
+const { data: service } = await supabase
+  .from('services')
+  .select('*')
+  .eq('slug', 'ia-automatisation')
+  .single()
+```
+```
+
 ## Indexes
 
 Indexes are created on commonly queried columns for optimal performance:
@@ -212,6 +257,7 @@ Indexes are created on commonly queried columns for optimal performance:
 - Experience: is_current, start_date
 - Education: is_current, start_date
 - Contact Messages: is_read, created_at
+- Services: category, status, featured, slug, order_index
 
 ## Automatic Timestamp Updates
 

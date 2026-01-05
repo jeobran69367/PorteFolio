@@ -142,6 +142,49 @@ export const useDatabase = () => {
           .update({ is_read: true })
           .eq('id', id)
       }
+    },
+    
+    // Services
+    services: {
+      getAll: async () => {
+        return await client
+          .from('services')
+          .select('*')
+          .order('order_index', { ascending: true })
+      },
+      
+      getActive: async () => {
+        return await client
+          .from('services')
+          .select('*')
+          .eq('status', 'active')
+          .order('order_index', { ascending: true })
+      },
+      
+      getFeatured: async () => {
+        return await client
+          .from('services')
+          .select('*')
+          .eq('featured', true)
+          .eq('status', 'active')
+          .order('order_index', { ascending: true })
+      },
+      
+      getBySlug: async (slug: string) => {
+        return await client
+          .from('services')
+          .select('*')
+          .eq('slug', slug)
+          .single()
+      },
+      
+      getByCategory: async (category: string) => {
+        return await client
+          .from('services')
+          .select('*')
+          .eq('category', category)
+          .order('order_index', { ascending: true })
+      }
     }
   }
 }
