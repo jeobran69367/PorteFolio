@@ -359,7 +359,7 @@ const mockServices = [
   {
     id: '1',
     title: 'Développement Full-Stack',
-    description: 'Conception et développement d\'applications web modernes, responsives et performantes, du frontend au backend.',
+    description: "Conception et développement d'applications web modernes, responsives et performantes, du frontend au backend.",
     solutions: [
       'Développement frontend (interfaces modernes, responsives)',
       'Développement backend (API, logique métier)',
@@ -379,7 +379,7 @@ const mockServices = [
   {
     id: '3',
     title: 'Gestion de projet & Ingénierie',
-    description: 'Pilotage technique et fonctionnel des projets numériques, de la livraison des besoins à la livraison.',
+    description: "Pilotage technique et fonctionnel des projets numériques, de l'analyse des besoins à la livraison.",
     solutions: [
       'Analyse des besoins',
       'Ingénierie technico-fonctionnelle',
