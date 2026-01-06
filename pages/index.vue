@@ -112,7 +112,7 @@
         </div>
         
         <div class="space-y-6">
-          <div v-for="edu in education" :key="edu.id" class="bg-surface border border-border-light rounded-xl p-6 hover:border-border-strong transition-all">
+          <div v-for="edu in educations" :key="edu.id" class="bg-surface border border-border-light rounded-xl p-6 hover:border-border-strong transition-all">
             <div class="flex justify-between items-start">
               <div class="flex-1">
                 <h3 class="text-xl font-bold text-text-primary mb-2">{{ edu.degree }}</h3>
@@ -273,17 +273,17 @@
 </template>
 
 <script setup lang="ts">
-const { projects, experience, education, services } = useDatabase()
+const db = useDatabase()
 
 // Fetch data
-const { data: projectsData } = await useAsyncData('projects', () => projects.getFeatured())
-const { data: experiencesData } = await useAsyncData('experiences', () => experience.getAll())
-const { data: educationData } = await useAsyncData('education', () => education.getAll())
-const { data: servicesData } = await useAsyncData('services', () => services.getFeatured())
+const { data: projectsData } = await useAsyncData('projects', () => db.projects.getFeatured())
+const { data: experiencesData } = await useAsyncData('experiences', () => db.experience.getAll())
+const { data: educationData } = await useAsyncData('education', () => db.education.getAll())
+const { data: servicesData } = await useAsyncData('services', () => db.services.getFeatured())
 
 const recentProjects = computed(() => (projectsData.value?.data || []).slice(0, 4))
 const experiences = computed(() => experiencesData.value?.data || [])
-const education = computed(() => educationData.value?.data || [])
+const educations = computed(() => educationData.value?.data || [])
 const services = computed(() => servicesData.value?.data || [])
 
 // Helper functions
