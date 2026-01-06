@@ -275,16 +275,164 @@
 <script setup lang="ts">
 const db = useDatabase()
 
-// Fetch data
-const { data: projectsData } = await useAsyncData('projects', () => db.projects.getFeatured())
-const { data: experiencesData } = await useAsyncData('experiences', () => db.experience.getAll())
-const { data: educationData } = await useAsyncData('education', () => db.education.getAll())
-const { data: servicesData } = await useAsyncData('services', () => db.services.getFeatured())
+// Mock data fallbacks
+const mockProjects = [
+  {
+    id: '1',
+    title: 'Nom du projet',
+    description: 'Description du projet avec les technologies utilisées et objectifs atteints.',
+    technologies: ['Vue.js', 'PostgreSQL', 'Vuetify'],
+    end_date: '2025-11-01'
+  },
+  {
+    id: '2',
+    title: 'Application Mobile',
+    description: 'Application mobile moderne avec interface intuitive et performante.',
+    technologies: ['Flutter', 'Firebase', 'Dart'],
+    end_date: '2025-12-01'
+  },
+  {
+    id: '3',
+    title: 'Site E-commerce',
+    description: 'Plateforme e-commerce complète avec paiement sécurisé et gestion des commandes.',
+    technologies: ['React', 'MongoDB', 'Bootstrap'],
+    end_date: '2026-01-01'
+  },
+  {
+    id: '4',
+    title: 'Gestion de Tâches',
+    description: 'Application de gestion de tâches collaborative pour équipes.',
+    technologies: ['Vue.js', 'PostgreSQL', 'Vuetify'],
+    end_date: '2026-02-01'
+  }
+]
 
-const recentProjects = computed(() => (projectsData.value?.data || []).slice(0, 4))
-const experiences = computed(() => experiencesData.value?.data || [])
-const educations = computed(() => educationData.value?.data || [])
-const services = computed(() => servicesData.value?.data || [])
+const mockExperiences = [
+  {
+    id: '1',
+    position: 'Alternant Développeur / Ingénieur Informatique',
+    company_name: 'VisionCMI – Lille',
+    start_date: '2024-01-01',
+    end_date: '2025-12-31'
+  },
+  {
+    id: '2',
+    position: 'Développeur Web & Chatbot',
+    company_name: 'Alternance',
+    start_date: '2024-01-01',
+    end_date: null
+  },
+  {
+    id: '3',
+    position: 'Intégrateur Web',
+    company_name: 'IVSTORE – Stage',
+    start_date: '2023-01-01',
+    end_date: '2023-12-31'
+  }
+]
+
+const mockEducation = [
+  {
+    id: '1',
+    degree: 'Back end',
+    institution: 'Openclassroom',
+    start_date: '2024-01-01',
+    end_date: '2025-12-31'
+  },
+  {
+    id: '2',
+    degree: 'Front end',
+    institution: 'Openclassroom',
+    start_date: '2024-01-01',
+    end_date: null
+  },
+  {
+    id: '3',
+    degree: 'React',
+    institution: 'Freecodecamp',
+    start_date: '2023-01-01',
+    end_date: '2023-12-31'
+  }
+]
+
+const mockServices = [
+  {
+    id: '1',
+    title: 'Développement Full-Stack',
+    description: 'Conception et développement d\'applications web modernes, responsives et performantes, du frontend au backend.',
+    solutions: [
+      'Développement frontend (interfaces modernes, responsives)',
+      'Développement backend (API, logique métier)',
+      'Intégration et maintenance applicative'
+    ]
+  },
+  {
+    id: '2',
+    title: 'DevOps & Déploiement',
+    description: 'Mise en place de workflows techniques pour améliorer la fiabilité, la performance et le déploiement des applications.',
+    solutions: [
+      'Automatisation des environnements',
+      'Déploiement et gestion applicative',
+      'Amélioration des processus techniques'
+    ]
+  },
+  {
+    id: '3',
+    title: 'Gestion de projet & Ingénierie',
+    description: 'Pilotage technique et fonctionnel des projets numériques, de la livraison des besoins à la livraison.',
+    solutions: [
+      'Analyse des besoins',
+      'Ingénierie technico-fonctionnelle',
+      'Ingénierie technique'
+    ]
+  }
+]
+
+// Fetch data with fallbacks
+const { data: projectsData } = await useAsyncData('projects', 
+  async () => {
+    try {
+      return await db.projects.getFeatured()
+    } catch (e) {
+      return { data: mockProjects, error: null }
+    }
+  }
+)
+
+const { data: experiencesData } = await useAsyncData('experiences',
+  async () => {
+    try {
+      return await db.experience.getAll()
+    } catch (e) {
+      return { data: mockExperiences, error: null }
+    }
+  }
+)
+
+const { data: educationData } = await useAsyncData('education',
+  async () => {
+    try {
+      return await db.education.getAll()
+    } catch (e) {
+      return { data: mockEducation, error: null }
+    }
+  }
+)
+
+const { data: servicesData } = await useAsyncData('services',
+  async () => {
+    try {
+      return await db.services.getFeatured()
+    } catch (e) {
+      return { data: mockServices, error: null }
+    }
+  }
+)
+
+const recentProjects = computed(() => (projectsData.value?.data || mockProjects).slice(0, 4))
+const experiences = computed(() => experiencesData.value?.data || mockExperiences)
+const educations = computed(() => educationData.value?.data || mockEducation)
+const services = computed(() => servicesData.value?.data || mockServices)
 
 // Helper functions
 const formatDate = (dateString: string | null) => {
