@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/supabase'],
   supabase: {
+    url: process.env.SUPABASE_URL || 'https://placeholder.supabase.co',
+    key: process.env.SUPABASE_KEY || 'placeholder-key',
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
