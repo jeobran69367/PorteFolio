@@ -2,15 +2,15 @@ name: Deploy Supabase migrations
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'supabase/**'
+      - "supabase/**"
 
 jobs:
   migrate:
     name: Apply DB migrations
     runs-on: ubuntu-latest
-  environment: production
+    environment: production
     permissions:
       contents: read
     env:
