@@ -1,10 +1,32 @@
 -- Seed data for portfolio database (for testing and development)
 
 -- Sample projects
-INSERT INTO projects (title, description, long_description, technologies, category, featured, status, order_index) VALUES
-('Portfolio Website', 'Personal portfolio website built with Nuxt.js and Supabase', 'A modern, responsive portfolio website showcasing my projects, skills, and experience. Built using Nuxt.js for the frontend and Supabase for the backend database and authentication.', '["Nuxt.js", "Vue.js", "TypeScript", "Supabase", "TailwindCSS"]'::jsonb, 'Web Development', true, 'completed', 1),
-('E-commerce Platform', 'Full-stack e-commerce solution with payment integration', 'A complete e-commerce platform featuring product catalog, shopping cart, secure checkout, and order management. Integrated with Stripe for payment processing.', '["React", "Node.js", "Express", "MongoDB", "Stripe"]'::jsonb, 'Web Development', true, 'completed', 2),
-('Task Management App', 'Collaborative task management application', 'A collaborative task management tool allowing teams to organize projects, assign tasks, and track progress in real-time.', '["Vue.js", "Firebase", "Vuex", "TailwindCSS"]'::jsonb, 'Web Development', false, 'completed', 3);
+INSERT INTO projects (title, description, long_description, technologies, category, featured, status, order_index, objectif, solution, role, stack_details, end_date) VALUES
+('CuraConnect', 'Application web basée sur l''intelligence artificielle', 'CuraConnect est une application web basée sur l''intelligence artificielle, conçue pour proposer des recommandations médicales personnalisées à partir des informations fournies par l''utilisateur. Le projet vise à faciliter l''accès à l''information médicale en combinant analyse de données, IA et une interface moderne, accessible et intuitive.', 
+'["Application web", "Full-Stack", "AI"]'::jsonb, 'Web Development', true, 'completed', 1,
+'["CuraConnect est un projet académique réalisé dans le cadre d''une formation en ingénierie informatique. L''objectif était de concevoir une application capable de proposer des recommandations médicales personnalisées à partir des informations fournies par l''utilisateur, tout en garantissant clarté et accessibilité."]'::text[],
+'["Analyse des données utilisateurs", "Génération de recommandations médicales via IA", "Interface moderne et responsive", "Communication sécurisée avec une API"]'::text[],
+'Développeur Full-Stack & IA',
+'{"Frontend": ["Next.js", "Tailwind CSS"], "Backend": ["API REST"], "IA": ["OpenAI API"], "Outils": ["Git", "GitHub", "Postman"]}'::jsonb,
+'2024-02-01'),
+('Portfolio Website', 'Personal portfolio website built with Nuxt.js and Supabase', 'A modern, responsive portfolio website showcasing my projects, skills, and experience. Built using Nuxt.js for the frontend and Supabase for the backend database and authentication.', '["Nuxt.js", "Vue.js", "TypeScript", "Supabase", "TailwindCSS"]'::jsonb, 'Web Development', true, 'completed', 2,
+'["Créer un portfolio moderne et professionnel pour présenter mes compétences et projets", "Mettre en place une architecture scalable et maintenable"]'::text[],
+'["Interface responsive et moderne", "Système de gestion de contenu dynamique", "Intégration avec Supabase pour la base de données"]'::text[],
+'Développeur Full-Stack',
+'{"Frontend": ["Nuxt.js", "Vue.js", "TypeScript", "TailwindCSS"], "Backend": ["Supabase", "PostgreSQL"]}'::jsonb,
+NULL),
+('E-commerce Platform', 'Full-stack e-commerce solution with payment integration', 'A complete e-commerce platform featuring product catalog, shopping cart, secure checkout, and order management. Integrated with Stripe for payment processing.', '["React", "Node.js", "Express", "MongoDB", "Stripe"]'::jsonb, 'Web Development', true, 'completed', 3,
+'["Développer une plateforme e-commerce complète et sécurisée", "Intégrer un système de paiement fiable"]'::text[],
+'["Catalogue de produits dynamique", "Panier d''achat et système de checkout", "Intégration Stripe pour les paiements", "Gestion des commandes"]'::text[],
+'Développeur Full-Stack',
+'{"Frontend": ["React", "Redux"], "Backend": ["Node.js", "Express", "MongoDB"], "Paiement": ["Stripe API"]}'::jsonb,
+NULL),
+('Task Management App', 'Collaborative task management application', 'A collaborative task management tool allowing teams to organize projects, assign tasks, and track progress in real-time.', '["Vue.js", "Firebase", "Vuex", "TailwindCSS"]'::jsonb, 'Web Development', false, 'completed', 4,
+'["Créer un outil de gestion de tâches collaboratif", "Permettre le suivi en temps réel des projets"]'::text[],
+'["Organisation de projets par équipes", "Attribution de tâches", "Suivi en temps réel", "Notifications"]'::text[],
+'Développeur Frontend',
+'{"Frontend": ["Vue.js", "Vuex", "TailwindCSS"], "Backend": ["Firebase"]}'::jsonb,
+NULL);
 
 -- Sample skills
 INSERT INTO skills (name, category, proficiency_level, years_of_experience, order_index) VALUES

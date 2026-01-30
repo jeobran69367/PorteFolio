@@ -8,10 +8,12 @@ A modern portfolio website built with Nuxt.js and Supabase.
 - 🗄️ Supabase backend for data management
 - 🔒 Row Level Security (RLS) for data protection
 - 📝 Contact form with message storage
-- 💼 Projects showcase
+- 💼 Projects showcase with detailed project pages
+- 📊 Enhanced project detail views with sections for objectives, solutions, role, and tech stack
 - 🎓 Education and experience sections
 - 🛠️ Skills display with proficiency levels
 - 📱 TypeScript support for type safety
+- 🌓 Dark mode support with consistent color scheme
 
 ## Setup
 
