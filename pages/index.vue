@@ -359,8 +359,10 @@
 import Header from "~/components/Header.vue";
 import ContactModal from "~/components/ContactModal.vue";
 import Footer from "~/components/Footer.vue";
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 import Typed from "typed.js"
+import { useAsyncData } from "nuxt/app";
+import { useDatabase } from "../composables/useDatabase";
 
 const db = useDatabase();
 const typedEl = ref<HTMLElement | null>(null)

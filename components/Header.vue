@@ -15,10 +15,10 @@
 
         <!-- Links -->
         <nav class="hidden md:flex items-center justify-center gap-8" style="width:400px;">
-          <a href="/" :class="isDark ? 'text-white' : 'text-[#0E0E10]'">Accueil</a>
-          <a href="/propos" :class="isDark ? 'text-white' : 'text-[#0E0E10]'">A propos</a>
-          <a href="/projets" :class="isDark ? 'text-white' : 'text-[#0E0E10]'">Projets</a>
-          <a href="/services" :class="isDark ? 'text-white' : 'text-[#0E0E10]'">Services</a>
+          <router-link :to="{ path: '/' }" :class="isDark ? 'text-white' : 'text-[#0E0E10]'">Accueil</router-link>
+          <router-link :to="{ path: '/propos' }" :class="isDark ? 'text-white' : 'text-[#0E0E10]'">A propos</router-link>
+          <router-link :to="{ path: '/projets' }" :class="isDark ? 'text-white' : 'text-[#0E0E10]'">Projets</router-link>
+          <router-link :to="{ path: '/services' }" :class="isDark ? 'text-white' : 'text-[#0E0E10]'">Services</router-link>
         </nav>
 
         <!-- Actions -->
