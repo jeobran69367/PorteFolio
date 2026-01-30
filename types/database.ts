@@ -49,6 +49,8 @@ export interface Project {
   project_url: string | null
   github_url: string | null
   technologies: string[]
+  role: string | null
+  stack_details: Record<string, string[]> | null
   category: string | null
   featured: boolean
   start_date: string | null
@@ -70,6 +72,8 @@ export interface ProjectInsert {
   project_url?: string | null
   github_url?: string | null
   technologies?: string[]
+  role?: string | null
+  stack_details?: Record<string, string[]> | null
   category?: string | null
   featured?: boolean
   start_date?: string | null
@@ -91,6 +95,8 @@ export interface ProjectUpdate {
   project_url?: string | null
   github_url?: string | null
   technologies?: string[]
+  role?: string | null
+  stack_details?: Record<string, string[]> | null
   category?: string | null
   featured?: boolean
   start_date?: string | null
