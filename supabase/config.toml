@@ -1,8 +1,7 @@
 # Supabase Local Development Configuration
 
 # Project Settings
-project_id = "portfolio-project"
-name = "Portfolio Database"
+project_id = "portfolio"
 
 [api]
 enabled = true

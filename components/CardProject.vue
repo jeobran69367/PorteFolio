@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-surface rounded-2xl p-6 border border-border-light hover:border-border-strong transition-all duration-300 group">
+  <div class="bg-background rounded-2xl p-6 border border-border-light transition-all duration-300 group">
     <!-- Header with date badge -->
     <div class="flex justify-between items-start mb-4">
       <div class="flex-1">
         <slot name="header" />
       </div>
-      <Badge v-if="date" type="date" :variant="dateVariant">
+  <Badge v-if="date" type="date" :variant="dateVariant">
         {{ date }}
       </Badge>
     </div>

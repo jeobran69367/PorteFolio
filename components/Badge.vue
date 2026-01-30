@@ -19,21 +19,22 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const badgeClasses = computed(() => {
-  const baseClasses = 'inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200'
+  const baseClasses = 'inline-flex items-center px-2 py-1 rounded-full text-xs font-medium transition-colors duration-200'
   
   if (props.type === 'availability') {
-    return [
-      baseClasses,
-      'bg-success bg-opacity-10 text-success border border-success border-opacity-30',
-    ].join(' ')
+      return [
+        baseClasses,
+        'bg-success bg-opacity-10 text-success border border-success border-opacity-30',
+      ].join(' ')
   }
   
   if (props.type === 'date') {
-    const variantClasses = {
-      primary: 'bg-hover text-text-primary border border-border-light',
-      secondary: 'bg-surface text-text-secondary border border-border-light',
-      muted: 'bg-surface bg-opacity-50 text-text-muted',
-    }
+      const variantClasses = {
+        // Force date badges to always show black text on white background so labels remain readable
+        primary: 'bg-white text-[#0E0E10] border border-border-light text-[11px] px-2 py-1',
+        secondary: 'bg-white text-[#0E0E10] border border-border-light text-[11px] px-2 py-1',
+        muted: 'bg-white text-[#0E0E10] border border-border-light text-[11px] px-2 py-1',
+      }
     return [baseClasses, variantClasses[props.variant]].join(' ')
   }
   
