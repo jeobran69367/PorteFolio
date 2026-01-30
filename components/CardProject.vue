@@ -11,13 +11,13 @@
     </div>
     
     <!-- Image placeholder -->
-    <div v-if="hasImage" class="w-full h-48 bg-background rounded-xl mb-4 overflow-hidden">
+  <div v-if="hasImage" class="w-full h-48 bg-background rounded-xl mb-4 overflow-hidden">
       <slot name="image" />
     </div>
     
     <!-- Content -->
     <div class="mb-4">
-      <h3 class="text-xl font-bold text-text-primary mb-2 font-satoshi">
+  <h3 class="text-xl font-bold text-text-primary mb-2 font-satoshi">
         <slot name="title" />
       </h3>
       <p class="text-text-secondary text-sm leading-relaxed">
