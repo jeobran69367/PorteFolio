@@ -13,7 +13,7 @@ A modern portfolio website built with Nuxt.js and Supabase.
 - 🎓 Education and experience sections
 - 🛠️ Skills display with proficiency levels
 - 📱 TypeScript support for type safety
-- 🌓 Dark mode support (using consistent color scheme)
+- 🌓 Dark mode support with consistent color scheme
 
 ## Setup
 

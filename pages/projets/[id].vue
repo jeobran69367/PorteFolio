@@ -33,9 +33,10 @@
           <!-- CTA Button -->
           <div class="mt-6">
             <a v-if="project.project_url" :href="project.project_url" target="_blank" rel="noopener noreferrer" 
+               aria-label="View project external link"
                class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-cta text-primary-cta-text font-medium hover:bg-primary-cta-hover transition-colors">
               Voir le projet
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
@@ -66,9 +67,6 @@
           <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-6">Solution & fonctionnalités clés</h2>
           <div class="bg-surface rounded-2xl p-8">
             <div class="space-y-3">
-              <p class="text-text-secondary leading-relaxed mb-4">
-                La solution repose sur une application web full-stack intégrant une logique d'intelligence artificielle.
-              </p>
               <p class="text-text-secondary font-medium mb-3">Fonctionnalités principales :</p>
               <ul class="space-y-2">
                 <li v-for="(sol, idx) in project.solution" :key="idx" class="flex items-start gap-3">
@@ -101,11 +99,12 @@
         </div>
 
         <!-- Screenshots Grid (Placeholder for future images) -->
-        <section class="mb-12">
+        <!-- Note: This section is hidden by default. Add project.screenshots field to display actual images -->
+        <section v-if="false" class="mb-12">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- These would be populated with project screenshots -->
             <div v-for="i in 4" :key="i" class="aspect-video bg-surface rounded-xl flex items-center justify-center border border-border-light">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="text-text-muted opacity-30">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="text-text-muted opacity-30" aria-hidden="true">
                 <rect width="48" height="48" rx="4" fill="currentColor" opacity="0.1" />
                 <path d="M16 20l8 8-8 8M26 24h8" stroke="currentColor" opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
@@ -114,12 +113,8 @@
         </section>
 
         <!-- Action Buttons -->
-        <section class="flex flex-wrap gap-4">
-          <a v-if="project.project_url" :href="project.project_url" target="_blank" rel="noopener noreferrer" 
-             class="px-6 py-3 rounded-lg bg-primary-cta text-primary-cta-text font-medium hover:bg-primary-cta-hover transition-colors">
-            Voir le projet
-          </a>
-          <a v-if="project.github_url" :href="project.github_url" target="_blank" rel="noopener noreferrer" 
+        <section v-if="project.github_url" class="flex flex-wrap gap-4">
+          <a :href="project.github_url" target="_blank" rel="noopener noreferrer" 
              class="px-6 py-3 rounded-lg border border-border-light text-text-primary hover:bg-hover transition-colors">
             Code source
           </a>
