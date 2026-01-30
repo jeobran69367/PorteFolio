@@ -47,4 +47,5 @@ const badgeClasses = computed(() => {
   
   return [baseClasses, variantClasses[props.variant]].join(' ')
 })
+//test
 </script>
