@@ -9,7 +9,7 @@
 			</div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div v-for="project in recentProjects" :key="project.id">
-                <NuxtLink :to="`/projets/${project.id}`" class="block no-underline">
+                <NuxtLink :to="{ path: `/projets/view/${project.id}` }" class="block no-underline">
                   <CardProject :date="formatDate(project.end_date)" date-variant="primary">
                     <template #image>
                       <div class="w-full h-full bg-background flex items-center justify-center">
@@ -49,7 +49,7 @@ import { ref } from 'vue'
 const db = useDatabase()
 
 const recentProjects = computed<Project[]>(
-  () => projectsData.value?.slice(0, 4) ?? [],
+  () => projectsData.value?.slice(0, 20) ?? [],
 );
 
 interface Project {
