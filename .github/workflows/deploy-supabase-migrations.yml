@@ -1,0 +1,78 @@
+name: Deploy Supabase migrations
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'supabase/**'
+
+jobs:
+  migrate:
+    name: Apply DB migrations
+    runs-on: ubuntu-latest
+  environment: production
+    permissions:
+      contents: read
+    env:
+      DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install psql and pg_dump
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Install dependencies (pnpm)
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install project dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint (if configured)
+        run: |
+          if pnpm -s run | grep -q "lint"; then
+            pnpm lint
+          else
+            echo "No lint script configured, skipping"
+          fi
+
+      - name: Build (smoke test)
+        run: pnpm build
+
+      - name: Show migrations (debug)
+        run: |
+          echo "Migrations available:"
+          ls -la supabase/migrations || echo "No migrations folder"
+
+      - name: Create DB backup (pg_dump)
+        env:
+          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "ERROR: PROD_DATABASE_URL secret not set" >&2
+            exit 1
+          fi
+          # Create a timestamped dump
+          BACKUP_FILE="db-backup-$(date -u +'%Y%m%dT%H%M%SZ').sql.gz"
+          pg_dump "$DATABASE_URL" --format=custom --file="$BACKUP_FILE" || { echo "pg_dump failed"; exit 1; }
+          echo "Backup created: $BACKUP_FILE"
+          mkdir -p artifacts
+          mv "$BACKUP_FILE" artifacts/
+
+      - name: Upload DB backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: db-backup
+          path: artifacts
+
+      - name: Apply migrations via script
+        env:
+          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+          SUPABASE_APPLY_SEED: ${{ secrets.SUPABASE_APPLY_SEED }}
+        run: |
+          chmod +x ./scripts/apply-migrations.sh
+          ./scripts/apply-migrations.sh
