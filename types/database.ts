@@ -42,6 +42,8 @@ export interface Project {
   id: string
   title: string
   description: string
+  objectif: string[]
+  solution: string[]
   long_description: string | null
   image_url: string | null
   project_url: string | null
@@ -61,6 +63,8 @@ export interface ProjectInsert {
   id?: string
   title: string
   description: string
+  objectif?: string[]
+  solution?: string[]
   long_description?: string | null
   image_url?: string | null
   project_url?: string | null
@@ -80,6 +84,8 @@ export interface ProjectUpdate {
   id?: string
   title?: string
   description?: string
+  objectif?: string[]
+  solution?: string[]
   long_description?: string | null
   image_url?: string | null
   project_url?: string | null

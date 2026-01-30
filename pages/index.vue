@@ -1,19 +1,505 @@
 <template>
-  <div class="min-h-screen bg-background flex items-center justify-center px-6">
-    <div class="text-center">
-      <h1 class="text-5xl font-bold text-text-primary mb-4 font-satoshi">Portfolio Design System</h1>
-      <p class="text-xl text-text-secondary mb-8 font-inter">
-        Système de design moderne pour portfolio
-      </p>
-      <Button variant="primary" icon="arrow" @click="navigateToDesignSystem">
-        Voir le Design System
-      </Button>
-    </div>
+  <div class="min-h-screen bg-background">
+    <Header @open-contact="showContact = true" />
+
+    <!-- Hero Section -->
+    <section id="accueil" class="pt-32 pb-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex flex-col items-center text-center mb-12">
+          <!-- Profile Image Placeholder -->
+          <div
+            class="w-32 h-32 rounded-full bg-surface border-4 border-border-light mb-8 flex items-center justify-center overflow-hidden"
+          >
+            <svg
+              width="64"
+              height="64"
+              viewBox="0 0 64 64"
+              fill="none"
+              class="text-text-muted"
+            >
+              <rect width="64" height="64" fill="currentColor" opacity="0.1" />
+              <path
+                d="M32 32C37.5228 32 42 27.5228 42 22C42 16.4772 37.5228 12 32 12C26.4772 12 22 16.4772 22 22C22 27.5228 26.4772 32 32 32Z"
+                fill="currentColor"
+                opacity="0.3"
+              />
+              <path
+                d="M52 52C52 42.0589 42.9411 34 32 34C21.0589 34 12 42.0589 12 52"
+                fill="currentColor"
+                opacity="0.3"
+              />
+            </svg>
+          </div>
+
+          <h1 class="text-5xl font-bold text-text-primary mb-4">
+            Hey, je suis
+            <span class="text-text-secondary">Jeobran Nathanael Kombou</span>
+          </h1>
+
+          <div class="flex items-center gap-4 mb-6">
+            <h2 class="text-4xl font-bold text-text-primary">
+              <span ref="typedEl"></span>
+            </h2>
+
+            <!-- Overlapping tech badges matching design -->
+            <div class="flex items-center -space-x-4">
+              <div
+                class="w-12 h-12 rounded-xl shadow-md transform -rotate-6 bg-center bg-no-repeat bg-contain"
+                style="background-image: url(&quot;/img/code.png&quot;)"
+              ></div>
+              <div
+                class="w-12 h-12 rounded-xl shadow-md transform rotate-2 bg-center bg-no-repeat bg-contain"
+                style="background-image: url(&quot;/img/ia.png&quot;)"
+              ></div>
+              <div
+                class="w-12 h-12 rounded-xl shadow-md transform rotate-6 bg-center bg-no-repeat bg-contain"
+                style="background-image: url(&quot;/img/po.png&quot;)"
+              ></div>
+            </div>
+          </div>
+
+          <p class="text-lg text-text-secondary mb-8 max-w-2xl">
+            Construire, encadrer et innover : je mets la technologie au service
+            de vos projets pour créer des solutions fiables et performantes.
+          </p>
+
+          <div class="flex items-center gap-4">
+            <Button
+              variant="primary"
+              icon="arrow"
+              size="md"
+              @click="showContact = true"
+              >Me contacter</Button
+            >
+            <Badge type="availability" class="text-xl px-6 py-4"
+              >Disponible pour un appel</Badge
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Experience Section -->
+    <section id="apropos" class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="mb-12">
+          <h2 class="text-4xl font-bold text-text-primary mb-4">
+            Expériences professionnelles
+          </h2>
+          <p class="text-text-secondary">
+            Un parcours construit autour de la création de solutions digitales
+            simples, utiles et efficaces.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div
+            v-for="exp in experiences"
+            :key="exp.id"
+            class="bg-surface border border-border-light rounded-xl p-6 hover:border-border-strong transition-all"
+          >
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-text-primary mb-2">
+                  {{ exp.position }}
+                </h3>
+                <p class="text-text-secondary mb-2">{{ exp.company_name }}</p>
+              </div>
+              <span class="text-text-secondary">{{
+                formatYear(exp.start_date, exp.end_date)
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="py-20 px-6 bg-surface bg-opacity-30">
+      <div class="max-w-6xl mx-auto">
+        <div class="mb-12">
+          <h2 class="text-4xl font-bold text-text-primary mb-4">
+            Certifications
+          </h2>
+          <p class="text-text-secondary">
+            Voici mes certifications obtenues, qui témoignent de mon expertise
+            dans la création de solutions digitales simples, utiles et
+            efficaces.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div
+            v-for="edu in educations"
+            :key="edu.id"
+            class="bg-surface border border-border-light rounded-xl p-6 hover:border-border-strong transition-all"
+          >
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-text-primary mb-2">
+                  {{ edu.degree }}
+                </h3>
+                <p class="text-text-secondary mb-2">{{ edu.institution }}</p>
+              </div>
+              <span class="text-text-secondary">{{
+                formatYear(edu.start_date, edu.end_date)
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Projects Section -->
+    <section id="projets" class="py-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <!-- Card wrapper to match CTA style (slightly larger) -->
+        <div
+          class="bg-surface border border-border-light rounded-3xl pt-16 px-16 pb-24 relative"
+        >
+          <div class="mb-12 text-center">
+            <h2 class="text-5xl font-bold text-text-primary mb-4">
+              Projets récents
+            </h2>
+            <p class="text-text-secondary text-lg max-w-2xl mx-auto">
+              Une sélection de travaux réalisés qui illustrent ma façon
+              d'aborder le design et la création de produits digitaux.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <CardProject
+              v-for="project in recentProjects"
+              :key="project.id"
+              :date="formatDate(project.end_date)"
+              date-variant="primary"
+            >
+              <template #image>
+                <div
+                  class="w-full h-full bg-background flex items-center justify-center"
+                >
+                  <svg
+                    width="80"
+                    height="80"
+                    viewBox="0 0 80 80"
+                    fill="none"
+                    class="text-text-muted"
+                  >
+                    <rect
+                      width="80"
+                      height="80"
+                      fill="currentColor"
+                      opacity="0.1"
+                    />
+                    <path
+                      d="M30 35L40 45L30 55M45 50H55"
+                      stroke="currentColor"
+                      opacity="0.3"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </template>
+
+              <template #title>{{ project.title }}</template>
+
+              <template #description>{{ project.description }}</template>
+
+              <template #technologies>
+                <Badge
+                  v-for="(tech, idx) in project.technologies.slice(0, 3)"
+                  :key="idx"
+                  type="tech"
+                  variant="primary"
+                >
+                  {{ tech }}
+                </Badge>
+              </template>
+            </CardProject>
+          </div>
+          <!-- Floating centered button overlapping the bottom of the card -->
+          <div
+            class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-30"
+          >
+            <Button variant="primary" icon="arrow"
+              >Voir d'autres projets</Button
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-6 bg-surface bg-opacity-30">
+      <div class="max-w-6xl mx-auto">
+        <div class="mb-12 text-center">
+          <h2 class="text-4xl font-bold text-text-primary mb-4">
+            Des services techniques pensés
+          </h2>
+          <h3 class="text-3xl font-bold text-text-primary mb-4">
+            pour des projets solides et évolutifs
+          </h3>
+          <p class="text-text-secondary max-w-3xl mx-auto">
+            Du développement à la gestion de projet, j'accompagne les équipes et
+            les entreprises dans la conception, la mise en œuvre et
+            l'optimisation de solutions numériques.
+          </p>
+
+          <div class="flex justify-center mt-8"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            v-for="service in services"
+            :key="service.id"
+            class="bg-surface border border-border-light rounded-xl p-8 hover:border-border-strong transition-all group"
+          >
+            <div
+              class="w-16 h-16 bg-hover border border-border-light rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                class="text-text-primary"
+              >
+                <rect
+                  x="8"
+                  y="8"
+                  width="16"
+                  height="16"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M12 14H20M12 18H18"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+
+            <h3 class="text-xl font-bold text-text-primary mb-4">
+              {{ service.title }}
+            </h3>
+            <p class="text-text-secondary mb-6 text-sm leading-relaxed">
+              {{ service.description }}
+            </p>
+
+            <div class="space-y-3">
+              <div
+                v-for="(solution, idx) in service.solutions.slice(0, 3)"
+                :key="idx"
+                class="flex items-start gap-3"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  class="text-success mt-0.5 flex-shrink-0"
+                >
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M6 10L9 13L14 8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span class="text-text-secondary text-sm">{{ solution }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div
+          class="bg-surface border border-border-light rounded-3xl p-12 text-center"
+        >
+          <h2 class="text-4xl font-bold text-text-primary mb-4">
+            Travaillons ensemble
+          </h2>
+          <p class="text-text-secondary mb-8">
+            Disponible pour projets, missions et collaborations.
+          </p>
+          <Button
+            variant="primary"
+            @click="showContact = true"
+            icon="arrow"
+            size="lg"
+            >Me contacter</Button
+          >
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ContactModal v-model="showContact" />
   </div>
 </template>
 
 <script setup lang="ts">
-const navigateToDesignSystem = () => {
-  navigateTo('/design-system')
+import Header from "~/components/Header.vue";
+import ContactModal from "~/components/ContactModal.vue";
+import Footer from "~/components/Footer.vue";
+import { ref, onMounted, onUnmounted } from "vue";
+import Typed from "typed.js"
+
+const db = useDatabase();
+const typedEl = ref<HTMLElement | null>(null)
+let typed: Typed
+
+onMounted(() => {
+  typed = new Typed(typedEl.value!, {
+    strings: [
+      "Développeur Full-Stack",
+      "Développeur IA",
+      "Product Owner",
+      "Scrum Master",
+    ],
+    typeSpeed: 50,
+    backSpeed: 30,
+    backDelay: 1200,
+    loop: true,
+    smartBackspace: true,
+  })
+})
+
+onUnmounted(() => {
+  typed.destroy()
+})
+
+
+// align IDs with Supabase UUIDs (string)
+interface Experience {
+  id: string;
+  position: string;
+  company_name: string;
+  start_date: string;
+  end_date: string | null;
 }
+
+interface Education {
+  id: string;
+  degree: string;
+  institution: string;
+  start_date: string;
+  end_date: string | null;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  end_date: string | null;
+  technologies: string[];
+}
+
+interface Service {
+  id: string;
+  title: string;
+  description: string;
+  solutions: string[];
+}
+
+// Fetch data from database using Nuxt's useAsyncData so it's SSR-friendly
+const { data: projectsData } = await useAsyncData<Project[]>(
+  "projects",
+  async () => {
+    const { data, error } = await db.projects.getFeatured();
+
+    if (error) {
+      // keep console logging for now; consider reporting to a monitoring service later
+      console.error("Error fetching featured projects:", error);
+      return [];
+    }
+
+    return data ?? [];
+  },
+);
+
+const { data: experiencesData } = await useAsyncData<Experience[]>(
+  "experiences",
+  async () => {
+    const { data, error } = await db.experience.getAll();
+
+    if (error) {
+      console.error("Error fetching experiences:", error);
+      return [];
+    }
+
+    return data ?? [];
+  },
+);
+
+const { data: educationData } = await useAsyncData<Education[]>(
+  "education",
+  async () => {
+    const { data, error } = await db.education.getAll();
+
+    if (error) {
+      console.error("Error fetching education:", error);
+      return [];
+    }
+
+    return data ?? [];
+  },
+);
+
+const { data: servicesData } = await useAsyncData<Service[]>(
+  "services",
+  async () => {
+    // use getActive to fetch all services with status 'active' (not only featured)
+    const { data, error } = await db.services.getActive();
+
+    if (error) {
+      console.error("Error fetching services:", error);
+      return [];
+    }
+
+    return data ?? [];
+  },
+);
+
+const recentProjects = computed<Project[]>(
+  () => projectsData.value?.slice(0, 4) ?? [],
+);
+
+const experiences = computed<Experience[]>(() => experiencesData.value ?? []);
+
+const educations = computed<Education[]>(() => educationData.value ?? []);
+
+const services = computed<Service[]>(() => servicesData.value ?? []);
+
+// Helper functions
+const formatDate = (dateString: string | null) => {
+  if (!dateString) return "En cours";
+  const date = new Date(dateString);
+  return date.toLocaleDateString("fr-FR", { year: "numeric", month: "short" });
+};
+
+const formatYear = (startDate: string, endDate: string | null) => {
+  const start = new Date(startDate).getFullYear();
+  const end = endDate ? new Date(endDate).getFullYear() : "En cours";
+  return `${start} — ${end}`;
+};
+
+const showContact = ref(false);
 </script>

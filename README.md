@@ -35,50 +35,64 @@ bun install
 
 ### 2. Configure Supabase
 
-1. Create a Supabase account at [supabase.com](https://supabase.com)
-2. Create a new project
-3. Copy `.env.example` to `.env` and fill in your Supabase credentials:
+You have three options for running the application:
 
+#### Option A: With Mock Data Only (Quickest - No Setup Required)
+
+The application will work immediately without any Supabase configuration. It will use mock data for all content. Simply skip creating a `.env` file and proceed to step 3.
+
+#### Option B: With Local Supabase (Recommended for Development)
+
+1. Install Supabase CLI:
+```bash
+npm install -g supabase
+```
+
+2. Start local Supabase instance:
+```bash
+# This will start Supabase on http://127.0.0.1:54321
+supabase start
+```
+
+3. Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env`:
+4. Edit `.env` and uncomment the local Supabase configuration:
+```env
+SUPABASE_URL=http://127.0.0.1:54321
+SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+```
+
+5. Apply migrations and seed data:
+```bash
+supabase db reset
+```
+
+#### Option C: With Remote Supabase (Production/Staging)
+
+1. Create a Supabase account at [supabase.com](https://supabase.com)
+2. Create a new project
+3. Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
+
+4. Get your credentials from [Supabase Dashboard](https://app.supabase.com) → Project Settings → API
+
+5. Edit `.env` and uncomment the remote Supabase configuration:
 ```env
 SUPABASE_URL=https://your-project-ref.supabase.co
 SUPABASE_KEY=your-anon-key-here
 ```
 
-### 3. Set Up Database
-
-#### Option A: Using Supabase Dashboard (Recommended for Production)
-
-1. Go to your Supabase project dashboard
-2. Navigate to SQL Editor
-3. Run the migrations in order:
+6. Run migrations via the Supabase Dashboard SQL Editor:
    - First: `supabase/migrations/20260105000001_initial_schema.sql`
    - Second: `supabase/migrations/20260105000002_rls_policies.sql`
-4. (Optional) Run `supabase/seed.sql` for sample data
+7. (Optional) Run `supabase/seed.sql` for sample data
 
-#### Option B: Using Supabase CLI (Recommended for Local Development)
-
-```bash
-# Install Supabase CLI
-npm install -g supabase
-
-# Start local Supabase (includes PostgreSQL, Auth, Storage, etc.)
-supabase start
-
-# Apply migrations
-supabase db reset
-
-# Load seed data (optional)
-psql -h localhost -p 54322 -U postgres -d postgres -f supabase/seed.sql
-```
-
-See [supabase/README.md](./supabase/README.md) for detailed database documentation.
-
-## Development Server
+### 3. Development Server
 
 Start the development server on `http://localhost:3000`:
 

@@ -16,3 +16,21 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   }
 }
+
+/* Light mode overrides when html has class 'light' */
+@layer base {
+  .light body {
+    background: #FFFFFF;
+    color: #0E0E10;
+  }
+
+  /* key utility overrides used across the app */
+  .light .bg-background { background-color: #FFFFFF !important; }
+  .light .bg-surface { background-color: #F5F5F6 !important; }
+  .light .text-text-primary { color: #0E0E10 !important; }
+  .light .text-text-secondary { color: #6B6B6B !important; }
+  .light .border-border-light { border-color: rgba(0,0,0,0.06) !important; }
+  .light .bg-hover { background-color: #F0F0F0 !important; }
+  .light .bg-accent-blue { background-color: #3B82F6 !important; }
+  .light .bg-surface\/bg-opacity-30 { background-color: rgba(245,245,246,0.3) !important; }
+}
