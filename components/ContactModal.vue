@@ -124,10 +124,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="mt-2 text-sm text-text-secondary">
-              Ou envoyez un message via le formulaire (bientôt).
-            </div>
           </div>
         </div>
       </div>

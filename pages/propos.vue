@@ -40,9 +40,9 @@
                 @click="showContact = true"
                 >Me contacter</Button
               >
-              <Button variant="outline" icon="download" size="md"
-                >Télécharger mon CV</Button
-              >
+              <a href="../public/pdf/" download="Jeobran_Kombou_CV.pdf" class="inline-block" aria-label="Télécharger le CV">
+                <Button variant="outline" icon="download" disabled size="md">Télécharger mon CV</Button>
+              </a>
             </div>
           </div>
 
@@ -451,7 +451,9 @@
                     />
                   </svg>
                 </div>
-                <span class="text-text-secondary">jeobran@example.com</span>
+                <a href="mailto:jeobrannathanael@gmail.com" class="text-text-secondary" aria-label="Envoyer un email à Jeobran Nathanael">
+                  jeobrannathanael@gmail.com
+                </a>
               </div>
 
               <!-- GitHub -->
@@ -472,7 +474,15 @@
                     />
                   </svg>
                 </div>
-                <span class="text-text-secondary">github.com/jeobran</span>
+                <a
+                  href="https://github.com/jeobran69367"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-text-secondary"
+                  aria-label="Ouvrir le profil GitHub de Jeobran"
+                >
+                  https://github.com/jeobran69367
+                </a>
               </div>
 
               <!-- WhatsApp -->
@@ -493,7 +503,15 @@
                     />
                   </svg>
                 </div>
-                <span class="text-text-secondary">+33 7 69 10 96 26</span>
+                <a
+                  href="https://wa.me/33769109626"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-text-secondary"
+                  aria-label="Ouvrir WhatsApp pour +33 7 69 10 96 26"
+                >
+                  +33 7 69 10 96 26
+                </a>
               </div>
 
               <!-- LinkedIn -->
@@ -514,13 +532,46 @@
                     />
                   </svg>
                 </div>
-                <span class="text-text-secondary">linkedin.com/in/jeobran</span>
+                <a
+                  href="https://www.linkedin.com/in/jeobran-nathanaël-kombou-14a563230/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-text-secondary"
+                  aria-label="Ouvrir le profil LinkedIn de Jeobran"
+                >
+                  https://www.linkedin.com/in/jeobran-nathanaël-kombou-14a563230/
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- CTA Section -->
+    <section class="py-40 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div
+          class="bg-surface border border-border-light rounded-3xl p-12 text-center"
+        >
+          <h2 class="text-4xl font-bold text-text-primary mb-4">
+            Travaillons ensemble
+          </h2>
+          <p class="text-text-secondary mb-8">
+            Disponible pour projets, missions et collaborations.
+          </p>
+          <Button
+            variant="primary"
+            @click="showContact = true"
+            icon="arrow"
+            size="lg"
+            >Me contacter</Button
+          >
+        </div>
+      </div>
     </section>
+    </section>
+
+    
 
     <Footer />
     <ContactModal v-model="showContact" />
