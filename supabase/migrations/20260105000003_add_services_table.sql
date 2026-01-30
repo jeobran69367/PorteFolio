@@ -2,7 +2,7 @@
 
 -- Services table - professional services offered
 CREATE TABLE IF NOT EXISTS services (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     slug VARCHAR(255) UNIQUE NOT NULL,
     category VARCHAR(100) NOT NULL,
