@@ -1,11 +1,13 @@
 -- Create tables for portfolio database
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Projects table - showcase portfolio projects
 CREATE TABLE IF NOT EXISTS projects (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     long_description TEXT,
@@ -25,7 +27,7 @@ CREATE TABLE IF NOT EXISTS projects (
 
 -- Skills table - technical skills
 CREATE TABLE IF NOT EXISTS skills (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     category VARCHAR(100) NOT NULL,
     proficiency_level INTEGER CONSTRAINT chk_skills_proficiency_level CHECK (proficiency_level >= 1 AND proficiency_level <= 5),
@@ -38,7 +40,7 @@ CREATE TABLE IF NOT EXISTS skills (
 
 -- Experience table - work experience
 CREATE TABLE IF NOT EXISTS experience (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     company_name VARCHAR(255) NOT NULL,
     position VARCHAR(255) NOT NULL,
     description TEXT,
@@ -56,7 +58,7 @@ CREATE TABLE IF NOT EXISTS experience (
 
 -- Education table - educational background
 CREATE TABLE IF NOT EXISTS education (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     institution VARCHAR(255) NOT NULL,
     degree VARCHAR(255) NOT NULL,
     field_of_study VARCHAR(255),
@@ -74,7 +76,7 @@ CREATE TABLE IF NOT EXISTS education (
 
 -- Contact messages table - for contact form submissions
 CREATE TABLE IF NOT EXISTS contact_messages (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     subject VARCHAR(255),
