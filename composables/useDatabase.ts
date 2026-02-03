@@ -235,8 +235,14 @@ export const useDatabase = () => {
       },
       
       deleteProjectImage: async (path: string) => {
-        // Extract the path after 'project-images/'
-        const filePath = path.replace(/.*project-images\//, '')
+        // Extract the file path from the URL or use as-is if it's already a path
+        let filePath = path
+        
+        // If it's a full URL, extract just the path
+        if (path.includes('project-images/')) {
+          filePath = path.substring(path.indexOf('project-images/') + 'project-images/'.length)
+        }
+        
         return await client.storage
           .from('project-images')
           .remove([filePath])
