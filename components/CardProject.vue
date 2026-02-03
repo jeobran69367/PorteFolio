@@ -11,7 +11,7 @@
     </div>
     
     <!-- Image placeholder -->
-  <div v-if="hasImage" class="w-full h-48 bg-background rounded-xl mb-4 overflow-hidden">
+  <div v-if="hasImage" class="w-full h-80 bg-background rounded-xl mb-4 overflow-hidden">
       <slot name="image" />
     </div>
     

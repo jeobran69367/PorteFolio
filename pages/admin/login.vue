@@ -43,7 +43,7 @@
           <button
             type="submit"
             :disabled="loading"
-            class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark transition disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full text-white py-3 rounded-lg font-medium hover:bg-primary-dark transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {{ loading ? 'Connexion...' : 'Se connecter' }}
           </button>

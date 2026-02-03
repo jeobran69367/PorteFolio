@@ -12,8 +12,8 @@
                 <NuxtLink :to="{ path: `/projets/view/${project.id}` }" class="block no-underline">
                   <CardProject :date="formatDate(project.end_date)" date-variant="primary">
                     <template #image>
-                      <div v-if="project.image_url" class="w-full h-full overflow-hidden">
-                        <img :src="project.image_url" :alt="project.title" class="w-full h-full object-cover" />
+                      <div v-if="project.image_urls" class="w-full h-full overflow-hidden">
+                        <img :src="project.image_urls[0]" :alt="project.title" class="w-full h-full object-cover" />
                       </div>
                       <div v-else class="w-full h-full bg-background flex items-center justify-center">
                         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" class="text-text-muted">
@@ -56,6 +56,7 @@ const recentProjects = computed<Project[]>(
 );
 
 interface Project {
+	image_urls: any
 	id: string
 	title: string
 	description: string

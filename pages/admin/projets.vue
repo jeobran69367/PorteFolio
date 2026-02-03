@@ -6,7 +6,7 @@
         <div class="flex gap-4">
           <button
             @click="showForm = true; editingProject = null"
-            class="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-dark transition"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600-dark transition"
           >
             + Nouveau Projet
           </button>
@@ -37,9 +37,9 @@
             :key="project.id"
             class="bg-white rounded-lg shadow-md p-6 flex gap-6"
           >
-            <div v-if="project.image_url" class="flex-shrink-0">
+            <div v-if="(project.image_urls && project.image_urls.length) || project.image_url" class="flex-shrink-0">
               <img
-                :src="project.image_url"
+                :src="(project.image_urls && project.image_urls.length) ? project.image_urls[0] : project.image_url"
                 :alt="project.title"
                 class="w-32 h-32 object-cover rounded-lg"
               />
@@ -55,7 +55,7 @@
                 <span
                   v-for="tech in project.technologies"
                   :key="tech"
-                  class="bg-primary/10 text-primary px-2 py-1 rounded text-sm"
+                  class="bg-blue-600/10 text-primary px-2 py-1 rounded text-sm"
                 >
                   {{ tech }}
                 </span>
@@ -104,23 +104,22 @@
             <label class="block text-sm font-medium text-text-primary mb-2">
               Image du projet
             </label>
-            <div v-if="form.image_url || imagePreview" class="mb-4">
-              <img
-                :src="imagePreview || form.image_url"
-                alt="Preview"
-                class="w-full max-w-md h-48 object-cover rounded-lg"
-              />
-              <button
-                type="button"
-                @click="removeImage"
-                class="mt-2 text-red-500 text-sm hover:text-red-700"
-              >
-                Supprimer l'image
-              </button>
+            <div v-if="form.image_urls || imagePreviews.length" class="mb-4">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div v-for="(src, i) in imagePreviews" :key="i" class="relative">
+                  <img :src="src" :alt="`Preview ${i+1}`" class="w-full h-48 object-cover rounded-lg" />
+                  <button type="button" @click="removeImage(i)" class="absolute top-2 right-2 bg-white/80 rounded-full p-1 text-red-600">✕</button>
+                </div>
+                <div v-if="!imagePreviews.length && ((Array.isArray(form.image_urls) && form.image_urls.length) || form.image_url)" class="relative">
+                  <img :src="(Array.isArray(form.image_urls) && form.image_urls.length) ? form.image_urls[0] : (form.image_url || '')" alt="Preview" class="w-full h-48 object-cover rounded-lg" />
+                  <button type="button" @click="removeImage()" class="absolute top-2 right-2 bg-white/80 rounded-full p-1 text-red-600">✕</button>
+                </div>
+              </div>
             </div>
             <input
               ref="fileInput"
               type="file"
+              multiple
               accept="image/*"
               @change="handleFileChange"
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
@@ -305,7 +304,7 @@
             <button
               type="submit"
               :disabled="submitting"
-              class="flex-1 bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark transition disabled:opacity-50 disabled:cursor-not-allowed"
+              class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-600-dark transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ submitting ? 'Enregistrement...' : 'Enregistrer' }}
             </button>
@@ -314,7 +313,7 @@
               @click="cancelForm"
               class="px-6 bg-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-400 transition"
             >
-              Annuler
+              Annuler yg
             </button>
           </div>
         </form>
@@ -379,7 +378,8 @@ const form = ref({
   long_description: '',
   objectif: [] as string[],
   solution: [] as string[],
-  image_url: '',
+  image_urls: [] as string[] | null,
+  image_url: '' as string | null,
   project_url: '',
   github_url: '',
   technologies: [] as string[],
@@ -394,8 +394,8 @@ const form = ref({
 const technologiesInput = ref('')
 const objectifsInput = ref('')
 const solutionsInput = ref('')
-const selectedFile = ref<File | null>(null)
-const imagePreview = ref<string | null>(null)
+const selectedFiles = ref<File[]>([])
+const imagePreviews = ref<string[]>([])
 const fileInput = ref<HTMLInputElement | null>(null)
 const oldImageUrl = ref<string | null>(null)
 
@@ -411,28 +411,62 @@ const loadProjects = async () => {
   loading.value = false
 }
 
-// Handle file selection
+// Handle file selection (multiple)
 const handleFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement
-  const file = target.files?.[0]
-  
-  if (file) {
-    selectedFile.value = file
-    
-    // Create preview
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      imagePreview.value = e.target?.result as string
-    }
-    reader.readAsDataURL(file)
+  const files = Array.from(target.files || []) as File[]
+
+  if (files.length > 0) {
+    selectedFiles.value = files
+    imagePreviews.value = []
+
+    files.forEach((file) => {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        imagePreviews.value.push(e.target?.result as string)
+      }
+      reader.readAsDataURL(file)
+    })
+  } else {
+    selectedFiles.value = []
+    imagePreviews.value = []
   }
 }
 
-// Remove image
-const removeImage = () => {
-  selectedFile.value = null
-  imagePreview.value = null
-  form.value.image_url = ''
+// Sanitize filename to avoid invalid storage keys (remove accents, quotes, spaces, special chars)
+const sanitizeFileName = (name: string) => {
+  // extract extension
+  const idx = name.lastIndexOf('.')
+  const ext = idx !== -1 ? name.slice(idx + 1) : ''
+  const base = idx !== -1 ? name.slice(0, idx) : name
+
+  // normalize accents, replace spaces and remove invalid chars
+  const slug = base
+    .normalize('NFD') // separate accents
+    .replace(/\p{Diacritic}/gu, '') // remove diacritics (use Unicode property)
+    .replace(/[^\w\- ]+/g, '') // remove non word chars except space and hyphen
+    .trim()
+    .replace(/\s+/g, '-') // spaces -> dashes
+    .replace(/_+/g, '-')
+    .toLowerCase()
+
+  const safe = `${Date.now()}-${slug}${ext ? '.' + ext : ''}`
+  return safe
+}
+
+// Remove image(s)
+const removeImage = (index?: number) => {
+  if (typeof index === 'number') {
+    // remove a single preview/file
+    selectedFiles.value.splice(index, 1)
+    imagePreviews.value.splice(index, 1)
+  } else {
+    // remove all
+    selectedFiles.value = []
+    imagePreviews.value = []
+    form.value.image_urls = []
+  }
+
   if (fileInput.value) {
     fileInput.value.value = ''
   }
@@ -447,8 +481,9 @@ const editProject = (project: any) => {
     long_description: project.long_description || '',
     objectif: project.objectif || [],
     solution: project.solution || [],
-    image_url: project.image_url || '',
-    project_url: project.project_url || '',
+    image_urls: project.image_urls || [],
+  image_url: (Array.isArray(project.image_urls) && project.image_urls.length) ? project.image_urls[0] : (project.image_url || ''),
+  project_url: project.project_url || '',
     github_url: project.github_url || '',
     technologies: project.technologies || [],
     category: project.category || '',
@@ -461,7 +496,7 @@ const editProject = (project: any) => {
   technologiesInput.value = (project.technologies || []).join(', ')
   objectifsInput.value = (project.objectif || []).join('\n')
   solutionsInput.value = (project.solution || []).join('\n')
-  oldImageUrl.value = project.image_url
+  oldImageUrl.value = project.image_urls
   showForm.value = true
 }
 
@@ -480,7 +515,8 @@ const resetForm = () => {
     long_description: '',
     objectif: [],
     solution: [],
-    image_url: '',
+  image_urls: [],
+  image_url: '',
     project_url: '',
     github_url: '',
     technologies: [],
@@ -494,8 +530,8 @@ const resetForm = () => {
   technologiesInput.value = ''
   objectifsInput.value = ''
   solutionsInput.value = ''
-  selectedFile.value = null
-  imagePreview.value = null
+  selectedFiles.value = []
+  imagePreviews.value = []
   oldImageUrl.value = null
   formError.value = ''
   if (fileInput.value) {
@@ -507,6 +543,7 @@ const resetForm = () => {
 const handleSubmit = async () => {
   formError.value = ''
   submitting.value = true
+  console.debug('[admin] handleSubmit start', { editing: editingProject.value })
 
   try {
     // Parse technologies
@@ -527,34 +564,78 @@ const handleSubmit = async () => {
       .map(s => s.trim())
       .filter(s => s.length > 0)
 
-    // Upload new image if selected
-    if (selectedFile.value) {
-      const { data: uploadData, error: uploadError } = await db.storage.uploadProjectImage(selectedFile.value)
-      
-      if (uploadError) {
-        formError.value = 'Erreur lors du téléchargement de l\'image'
-        return
-      }
-      
-      // Delete old image if exists and is different
-      if (oldImageUrl.value && oldImageUrl.value !== form.value.image_url) {
-        await db.storage.deleteProjectImage(oldImageUrl.value)
-      }
-      
-      form.value.image_url = uploadData?.url || ''
-    }
+      // Upload new images if selected (support multiple)
+      if (selectedFiles.value.length > 0) {
+        const uploadedUrls: string[] = []
 
-    // Create or update project
+        for (const original of selectedFiles.value) {
+          const safeName = sanitizeFileName(original.name)
+          const safeFile = new File([original], safeName, { type: original.type })
+
+          const { data: uploadData, error: uploadError } = await db.storage.uploadProjectImage(safeFile)
+
+              if (uploadError) {
+                console.error('[admin] upload error', uploadError)
+                formError.value = 'Erreur lors du téléchargement de l\'image: ' + (uploadError.message || JSON.stringify(uploadError))
+                submitting.value = false
+                return
+              }
+
+          if (uploadData?.url) uploadedUrls.push(uploadData.url)
+        }
+
+        // Delete old image if exists and is different from the first new one
+        if (oldImageUrl.value && uploadedUrls[0] && oldImageUrl.value !== uploadedUrls[0]) {
+          await db.storage.deleteProjectImage(oldImageUrl.value)
+        }
+
+        // Save first image for backward compatibility and full gallery in `image_urls`
+        form.value.image_url = uploadedUrls[0] || null
+        form.value.image_urls = uploadedUrls
+        console.debug('[admin] uploadedUrls =', uploadedUrls)
+      }
+
+  // Normalize empty date strings to null so Postgres "date" columns don't receive "" which causes 22007
+  if (form.value.start_date === '') form.value.start_date = null as any
+  if (form.value.end_date === '') form.value.end_date = null as any
+
+    // Create or update project. Use a payload copy and retry without image_urls if the DB doesn't have the column yet.
+  const payload: any = JSON.parse(JSON.stringify(form.value))
+  console.debug('[admin] project payload =', payload)
+
     if (editingProject.value) {
-      const { error } = await db.projects.update(editingProject.value.id, form.value)
-      if (error) {
-        formError.value = 'Erreur lors de la mise à jour du projet'
+      console.debug('[admin] calling update for id', editingProject.value.id)
+      let res = await db.projects.update(editingProject.value.id, payload)
+      console.debug('[admin] update response =', res)
+      if (res?.error) {
+        console.error('[admin] update error initial:', res.error)
+        // If PostgREST reports missing column, retry without `image_urls` to remain compatible
+        if ((res.error as any).code === 'PGRST204' || (res.error as any).message?.includes("Could not find the 'image_urls'")) {
+          delete payload.image_urls
+          res = await db.projects.update(editingProject.value.id, payload)
+        }
+      }
+
+      if (res?.error) {
+        console.error('[admin] update final error:', res.error)
+        formError.value = (res.error as any).message || JSON.stringify(res.error)
         return
       }
     } else {
-      const { error } = await db.projects.create(form.value)
-      if (error) {
-        formError.value = 'Erreur lors de la création du projet'
+      console.debug('[admin] calling create')
+      let res = await db.projects.create(payload)
+      console.debug('[admin] create response =', res)
+      if (res?.error) {
+        console.error('[admin] create error initial:', res.error)
+        if ((res.error as any).code === 'PGRST204' || (res.error as any).message?.includes("Could not find the 'image_urls'")) {
+          delete payload.image_urls
+          res = await db.projects.create(payload)
+        }
+      }
+
+      if (res?.error) {
+        console.error('[admin] create final error:', res.error)
+        formError.value = (res.error as any).message || JSON.stringify(res.error)
         return
       }
     }
@@ -583,8 +664,13 @@ const handleDelete = async () => {
   
   try {
     // Delete image if exists
-    if (deleteConfirm.value.image_url) {
-      await db.storage.deleteProjectImage(deleteConfirm.value.image_url)
+    if (deleteConfirm.value.image_urls && Array.isArray(deleteConfirm.value.image_urls)) {
+      // remove each image path/url
+      for (const img of deleteConfirm.value.image_urls) {
+        try { await db.storage.deleteProjectImage(img) } catch (e) { /* ignore */ }
+      }
+    } else if (deleteConfirm.value.image_url) {
+      try { await db.storage.deleteProjectImage(deleteConfirm.value.image_url) } catch (e) { /* ignore */ }
     }
     
     // Delete project

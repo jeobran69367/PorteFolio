@@ -170,38 +170,50 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <CardProject
               v-for="project in recentProjects"
-              :key="project.id"
               :date="formatDate(project.end_date)"
               date-variant="primary"
             >
+              
               <template #image>
-                <div
-                  class="w-full h-full bg-background flex items-center justify-center"
-                >
-                  <svg
-                    width="80"
-                    height="80"
-                    viewBox="0 0 80 80"
-                    fill="none"
-                    class="text-text-muted"
-                  >
-                    <rect
-                      width="80"
-                      height="80"
-                      fill="currentColor"
-                      opacity="0.1"
-                    />
-                    <path
-                      d="M30 35L40 45L30 55M45 50H55"
-                      stroke="currentColor"
-                      opacity="0.3"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              </template>
+                      <div v-if="project.image_urls && project.image_urls.length" class="w-full h-full relative overflow-hidden">
+                        <!-- stacked slides: only the checked radio's image becomes visible via Tailwind peer utilities -->
+                        <div
+                          v-for="(url, idx) in project.image_urls"
+                          :key="idx"
+                          class="absolute inset-0"
+                        >
+                          <input
+                            :id="`p-${project.id}-img-${idx}`"
+                            :name="`p-${project.id}-carousel`"
+                            type="radio"
+                            class="peer sr-only"
+                            :checked="idx === 0"
+                          />
+                          <img
+                            :src="url"
+                            :alt="project.title"
+                            class="absolute inset-0 w-full h-full object-cover opacity-0 peer-checked:opacity-100 transition-opacity duration-500"
+                          />
+                        </div>
+
+                        <!-- dots controls -->
+                        <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-10">
+                          <label
+                            v-for="(url, idx) in project.image_urls"
+                            :key="'dot-' + idx"
+                            :for="`p-${project.id}-img-${idx}`"
+                            class="w-3 h-3 rounded-full bg-white bg-opacity-40 hover:bg-opacity-80 cursor-pointer ring-1 ring-white"
+                          ></label>
+                        </div>
+                      </div>
+
+                      <div v-else class="w-full h-full bg-background flex items-center justify-center">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" class="text-text-muted">
+                          <rect width="80" height="80" fill="currentColor" opacity="0.1" />
+                          <path d="M30 35L40 45L30 55M45 50H55" stroke="currentColor" opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </div>
+                    </template>
 
               <template #title>{{ project.title }}</template>
 
@@ -223,7 +235,7 @@
           <div
             class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-30"
           >
-            <Button variant="primary" icon="arrow"
+            <Button variant="primary" icon="arrow" @click="$router.push('/projets')"
               >Voir d'autres projets</Button
             >
           </div>
@@ -407,6 +419,10 @@ interface Education {
 }
 
 interface Project {
+  [x: string]:
+  /// <reference types="../../../../../.vscode/extensions/vue.volar-3.2.4/types/template-helpers.d.ts" />
+  /// <reference types="../../../../../.vscode/extensions/vue.volar-3.2.4/types/props-fallback.d.ts" />
+  any;
   id: string;
   title: string;
   description: string;
