@@ -168,6 +168,32 @@
             />
           </div>
 
+          <!-- Objectifs -->
+          <div>
+            <label class="block text-sm font-medium text-text-primary mb-2">
+              Objectifs (un par ligne)
+            </label>
+            <textarea
+              v-model="objectifsInput"
+              rows="4"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+              placeholder="Objectif 1&#10;Objectif 2&#10;Objectif 3"
+            />
+          </div>
+
+          <!-- Solutions -->
+          <div>
+            <label class="block text-sm font-medium text-text-primary mb-2">
+              Solutions (un par ligne)
+            </label>
+            <textarea
+              v-model="solutionsInput"
+              rows="4"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+              placeholder="Solution 1&#10;Solution 2&#10;Solution 3"
+            />
+          </div>
+
           <!-- Technologies -->
           <div>
             <label class="block text-sm font-medium text-text-primary mb-2">
@@ -351,6 +377,8 @@ const form = ref({
   title: '',
   description: '',
   long_description: '',
+  objectif: [] as string[],
+  solution: [] as string[],
   image_url: '',
   project_url: '',
   github_url: '',
@@ -364,6 +392,8 @@ const form = ref({
 })
 
 const technologiesInput = ref('')
+const objectifsInput = ref('')
+const solutionsInput = ref('')
 const selectedFile = ref<File | null>(null)
 const imagePreview = ref<string | null>(null)
 const fileInput = ref<HTMLInputElement | null>(null)
@@ -415,6 +445,8 @@ const editProject = (project: any) => {
     title: project.title,
     description: project.description,
     long_description: project.long_description || '',
+    objectif: project.objectif || [],
+    solution: project.solution || [],
     image_url: project.image_url || '',
     project_url: project.project_url || '',
     github_url: project.github_url || '',
@@ -427,6 +459,8 @@ const editProject = (project: any) => {
     order_index: project.order_index || 0
   }
   technologiesInput.value = (project.technologies || []).join(', ')
+  objectifsInput.value = (project.objectif || []).join('\n')
+  solutionsInput.value = (project.solution || []).join('\n')
   oldImageUrl.value = project.image_url
   showForm.value = true
 }
@@ -444,6 +478,8 @@ const resetForm = () => {
     title: '',
     description: '',
     long_description: '',
+    objectif: [],
+    solution: [],
     image_url: '',
     project_url: '',
     github_url: '',
@@ -456,6 +492,8 @@ const resetForm = () => {
     order_index: 0
   }
   technologiesInput.value = ''
+  objectifsInput.value = ''
+  solutionsInput.value = ''
   selectedFile.value = null
   imagePreview.value = null
   oldImageUrl.value = null
@@ -476,6 +514,18 @@ const handleSubmit = async () => {
       .split(',')
       .map(t => t.trim())
       .filter(t => t.length > 0)
+    
+    // Parse objectifs
+    form.value.objectif = objectifsInput.value
+      .split('\n')
+      .map(o => o.trim())
+      .filter(o => o.length > 0)
+    
+    // Parse solutions
+    form.value.solution = solutionsInput.value
+      .split('\n')
+      .map(s => s.trim())
+      .filter(s => s.length > 0)
 
     // Upload new image if selected
     if (selectedFile.value) {

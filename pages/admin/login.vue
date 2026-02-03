@@ -57,7 +57,7 @@
 const email = ref('')
 const password = ref('')
 const error = ref('')
-const loading = ref('')
+const loading = ref(false)
 
 const client = useSupabaseClient()
 const router = useRouter()
