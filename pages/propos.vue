@@ -3,12 +3,12 @@
     <Header @open-contact="showContact = true" />
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6">
+    <section class="pt-32 pb-20 px-4 sm:px-6">
       <div class="max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <!-- Left Column - Text Content -->
           <div>
-            <h1 class="text-5xl font-bold text-text-primary mb-6">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
               Hey, je suis
               <span class="text-text-secondary block mt-2"
                 >Jeobran Nathanael</span
@@ -32,7 +32,7 @@
               </p>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <Button
                 variant="primary"
                 icon="arrow"
@@ -48,7 +48,7 @@
 
           <!-- Right Column - Image Placeholder -->
           <div
-            class="relative bg-surface border border-border-light rounded-3xl p-8 flex items-center justify-center min-h-[400px]"
+            class="relative bg-surface border border-border-light rounded-2xl sm:rounded-3xl p-8 flex items-center justify-center min-h-[300px] sm:min-h-[400px]"
           >
             <div class="text-center">
               <svg
@@ -85,10 +85,10 @@
     </section>
 
     <!-- Professional Experience Section -->
-    <section class="py-20 px-6">
+    <section class="py-20 px-4 sm:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="mb-12">
-          <h2 class="text-4xl font-bold text-text-primary mb-4">
+          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Expériences professionnelles
           </h2>
           <p class="text-text-secondary">
@@ -101,16 +101,16 @@
           <div
             v-for="exp in experiences"
             :key="exp.id"
-            class="bg-surface border border-border-light rounded-xl p-6 hover:border-border-strong transition-all"
+            class="bg-surface border border-border-light rounded-xl p-4 sm:p-6 hover:border-border-strong transition-all"
           >
-            <div class="flex justify-between items-start">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
               <div class="flex-1">
-                <h3 class="text-xl font-bold text-text-primary mb-2">
+                <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2">
                   {{ exp.position }}
                 </h3>
                 <p class="text-text-secondary mb-2">{{ exp.company_name }}</p>
               </div>
-              <span class="text-text-secondary">{{
+              <span class="text-text-secondary text-sm sm:text-base">{{
                 formatYear(exp.start_date, exp.end_date)
               }}</span>
             </div>
@@ -120,10 +120,10 @@
     </section>
 
     <!-- Certifications Section -->
-    <section class="py-20 px-6 bg-surface bg-opacity-30">
+    <section class="py-20 px-4 sm:px-6 bg-surface bg-opacity-30">
       <div class="max-w-6xl mx-auto">
         <div class="mb-12">
-          <h2 class="text-4xl font-bold text-text-primary mb-4">
+          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Certifications
           </h2>
           <p class="text-text-secondary">
@@ -137,16 +137,16 @@
           <div
             v-for="edu in educations"
             :key="edu.id"
-            class="bg-surface border border-border-light rounded-xl p-6 hover:border-border-strong transition-all"
+            class="bg-surface border border-border-light rounded-xl p-4 sm:p-6 hover:border-border-strong transition-all"
           >
-            <div class="flex justify-between items-start">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
               <div class="flex-1">
-                <h3 class="text-xl font-bold text-text-primary mb-2">
+                <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2">
                   {{ edu.degree }}
                 </h3>
                 <p class="text-text-secondary mb-2">{{ edu.institution }}</p>
               </div>
-              <span class="text-text-secondary">{{
+              <span class="text-text-secondary text-sm sm:text-base">{{
                 formatYear(edu.start_date, edu.end_date)
               }}</span>
             </div>
@@ -156,16 +156,16 @@
     </section>
 
     <!-- Stacks & Outils Section -->
-    <section class="py-20 px-6">
+    <section class="py-20 px-4 sm:px-6">
       <div class="max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <!-- Left Column - Stacks & Outils -->
           <div>
-            <h2 class="text-3xl font-bold text-text-primary mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-8">
               Stacks & Outils
             </h2>
 
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <!-- React -->
               <div
                 class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
@@ -417,7 +417,7 @@
 
           <!-- Right Column - Contacts & Réseaux sociaux -->
           <div>
-            <h2 class="text-3xl font-bold text-text-primary mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-8">
               Contacts & Réseaux sociaux
             </h2>
 
@@ -425,7 +425,7 @@
               <!-- Email -->
               <div class="flex items-center gap-4">
                 <div
-                  class="w-12 h-12 bg-surface border border-border-light rounded-xl flex items-center justify-center"
+                  class="w-12 h-12 bg-surface border border-border-light rounded-xl flex items-center justify-center flex-shrink-0"
                 >
                   <svg
                     width="24"
@@ -451,7 +451,7 @@
                     />
                   </svg>
                 </div>
-                <a href="mailto:jeobrannathanael@gmail.com" class="text-text-secondary" aria-label="Envoyer un email à Jeobran Nathanael">
+                <a href="mailto:jeobrannathanael@gmail.com" class="text-text-secondary text-sm sm:text-base break-all" aria-label="Envoyer un email à Jeobran Nathanael">
                   jeobrannathanael@gmail.com
                 </a>
               </div>
@@ -459,7 +459,7 @@
               <!-- GitHub -->
               <div class="flex items-center gap-4">
                 <div
-                  class="w-12 h-12 bg-surface border border-border-light rounded-xl flex items-center justify-center"
+                  class="w-12 h-12 bg-surface border border-border-light rounded-xl flex items-center justify-center flex-shrink-0"
                 >
                   <svg
                     width="24"
@@ -478,17 +478,17 @@
                   href="https://github.com/jeobran69367"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-text-secondary"
+                  class="text-text-secondary text-sm sm:text-base break-all"
                   aria-label="Ouvrir le profil GitHub de Jeobran"
                 >
-                  https://github.com/jeobran69367
+                  github.com/jeobran69367
                 </a>
               </div>
 
               <!-- WhatsApp -->
               <div class="flex items-center gap-4">
                 <div
-                  class="w-12 h-12 bg-surface border border-border-light rounded-xl flex items-center justify-center"
+                  class="w-12 h-12 bg-surface border border-border-light rounded-xl flex items-center justify-center flex-shrink-0"
                 >
                   <svg
                     width="24"
@@ -507,7 +507,7 @@
                   href="https://wa.me/33769109626"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-text-secondary"
+                  class="text-text-secondary text-sm sm:text-base"
                   aria-label="Ouvrir WhatsApp pour +33 7 69 10 96 26"
                 >
                   +33 7 69 10 96 26
@@ -517,7 +517,7 @@
               <!-- LinkedIn -->
               <div class="flex items-center gap-4">
                 <div
-                  class="w-12 h-12 bg-surface border border-border-light rounded-xl flex items-center justify-center"
+                  class="w-12 h-12 bg-surface border border-border-light rounded-xl flex items-center justify-center flex-shrink-0"
                 >
                   <svg
                     width="24"
@@ -536,10 +536,10 @@
                   href="https://www.linkedin.com/in/jeobran-nathanaël-kombou-14a563230/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-text-secondary"
+                  class="text-text-secondary text-sm sm:text-base break-all"
                   aria-label="Ouvrir le profil LinkedIn de Jeobran"
                 >
-                  https://www.linkedin.com/in/jeobran-nathanaël-kombou-14a563230/
+                  linkedin.com/in/jeobran-nathanaël-kombou
                 </a>
               </div>
             </div>
@@ -548,12 +548,12 @@
       </div>
 
       <!-- CTA Section -->
-    <section class="py-40 px-6">
+    <section class="py-20 sm:py-40 px-4 sm:px-6">
       <div class="max-w-4xl mx-auto">
         <div
-          class="bg-surface border border-border-light rounded-3xl p-12 text-center"
+          class="bg-surface border border-border-light rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center"
         >
-          <h2 class="text-4xl font-bold text-text-primary mb-4">
+          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Travaillons ensemble
           </h2>
           <p class="text-text-secondary mb-8">

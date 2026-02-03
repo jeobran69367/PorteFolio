@@ -2,21 +2,21 @@
   <div class="min-h-screen bg-background font-sans">
     <Header @open-contact="showContact = true" />
 
-    <main class="pt-32 pb-20 px-6 max-w-6xl mx-auto space-y-24">
+    <main class="pt-32 pb-20 px-4 sm:px-6 max-w-6xl mx-auto space-y-24">
       
       <section class="text-center space-y-6 max-w-3xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-text-primary">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary">
           Mes services pour concevoir et déployer des <span class="text-text-secondary">solutions digitales performantes</span>
         </h1>
-        <p class="text-text-secondary text-lg leading-relaxed">
+        <p class="text-text-secondary text-base sm:text-lg leading-relaxed">
           Développeur Full-Stack spécialisé en IA, automatisation et applications web, j'accompagne vos projets de l'idée à la mise en production.
         </p>
       </section>
 
       <div v-if="pending" class="text-center opacity-50">Chargement des services...</div>
-      <section v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <div v-for="service in services" :key="service.id" 
-             class="group p-8 rounded-3xl bg-surface border border-border-light hover:border-border-strong transition-all duration-300">
+             class="group p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-surface border border-border-light hover:border-border-strong transition-all duration-300">
           
           <div class="w-12 h-12 rounded-xl bg-hover border border-border-light flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
              <span class="text-text-secondary text-xl font-mono">/</span>
@@ -65,8 +65,8 @@
 
     <section class="space-y-12">
       <div v-for="sec in sections" :key="sec" class="space-y-6">
-        <h2 class="text-3xl font-bold">{{ sectionTitles[sec] ?? humanize(sec) }}</h2>
-        <div class="bg-surface border border-border-light rounded-[40px] p-10 md:p-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+        <h2 class="text-2xl sm:text-3xl font-bold">{{ sectionTitles[sec] ?? humanize(sec) }}</h2>
+        <div class="bg-surface border border-border-light rounded-[24px] sm:rounded-[40px] p-6 sm:p-10 lg:p-16 grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12">
           <div v-for="col in columnsFor(sec)" :key="col">
             <div class="mb-4 text-sm text-text-secondary"></div>
             <FeatureColumn

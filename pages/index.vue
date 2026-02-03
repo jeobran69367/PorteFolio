@@ -3,19 +3,19 @@
     <Header @open-contact="showContact = true" />
 
     <!-- Hero Section -->
-    <section id="accueil" class="pt-32 pb-20 px-6">
+    <section id="accueil" class="pt-32 pb-20 px-4 sm:px-6">
       <div class="max-w-4xl mx-auto">
         <div class="flex flex-col items-center text-center mb-12">
           <!-- Profile Image Placeholder -->
           <div
-            class="w-32 h-32 rounded-full bg-surface border-4 border-border-light mb-8 flex items-center justify-center overflow-hidden"
+            class="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-surface border-4 border-border-light mb-6 sm:mb-8 flex items-center justify-center overflow-hidden"
           >
             <svg
-              width="64"
-              height="64"
+              width="48"
+              height="48"
               viewBox="0 0 64 64"
               fill="none"
-              class="text-text-muted"
+              class="text-text-muted sm:w-16 sm:h-16"
             >
               <rect width="64" height="64" fill="currentColor" opacity="0.1" />
               <path
@@ -31,39 +31,39 @@
             </svg>
           </div>
 
-          <h1 class="text-5xl font-bold text-text-primary mb-4">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary mb-4 px-4">
             Hey, je suis
-            <span class="text-text-secondary">Jeobran Nathanael Kombou</span>
+            <span class="text-text-secondary block mt-1">Jeobran Nathanael Kombou</span>
           </h1>
 
-          <div class="flex items-center gap-4 mb-6">
-            <h2 class="text-4xl font-bold text-text-primary">
+          <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary">
               <span ref="typedEl"></span>
             </h2>
 
             <!-- Overlapping tech badges matching design -->
             <div class="flex items-center -space-x-4">
               <div
-                class="w-12 h-12 rounded-xl shadow-md transform -rotate-6 bg-center bg-no-repeat bg-contain"
+                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform -rotate-6 bg-center bg-no-repeat bg-contain"
                 style="background-image: url(&quot;/img/code.png&quot;)"
               ></div>
               <div
-                class="w-12 h-12 rounded-xl shadow-md transform rotate-2 bg-center bg-no-repeat bg-contain"
+                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform rotate-2 bg-center bg-no-repeat bg-contain"
                 style="background-image: url(&quot;/img/ia.png&quot;)"
               ></div>
               <div
-                class="w-12 h-12 rounded-xl shadow-md transform rotate-6 bg-center bg-no-repeat bg-contain"
+                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform rotate-6 bg-center bg-no-repeat bg-contain"
                 style="background-image: url(&quot;/img/po.png&quot;)"
               ></div>
             </div>
           </div>
 
-          <p class="text-lg text-text-secondary mb-8 max-w-2xl">
+          <p class="text-base sm:text-lg text-text-secondary mb-8 max-w-2xl px-4">
             Construire, encadrer et innover : je mets la technologie au service
             de vos projets pour créer des solutions fiables et performantes.
           </p>
 
-          <div class="flex items-center gap-4">
+          <div class="flex flex-col sm:flex-row items-center gap-4 px-4">
             <Button
               variant="primary"
               icon="arrow"
@@ -71,7 +71,7 @@
               @click="showContact = true"
               >Me contacter</Button
             >
-            <Badge type="availability" class="text-xl px-6 py-4"
+            <Badge type="availability" class="text-base sm:text-xl px-4 py-3 sm:px-6 sm:py-4"
               >Disponible pour un appel</Badge
             >
           </div>
@@ -80,10 +80,10 @@
     </section>
 
     <!-- Professional Experience Section -->
-    <section id="apropos" class="py-20 px-6">
+    <section id="apropos" class="py-20 px-4 sm:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="mb-12">
-          <h2 class="text-4xl font-bold text-text-primary mb-4">
+          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Expériences professionnelles
           </h2>
           <p class="text-text-secondary">
@@ -96,16 +96,16 @@
           <div
             v-for="exp in experiences"
             :key="exp.id"
-            class="bg-surface border border-border-light rounded-xl p-6 hover:border-border-strong transition-all"
+            class="bg-surface border border-border-light rounded-xl p-4 sm:p-6 hover:border-border-strong transition-all"
           >
-            <div class="flex justify-between items-start">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
               <div class="flex-1">
-                <h3 class="text-xl font-bold text-text-primary mb-2">
+                <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2">
                   {{ exp.position }}
                 </h3>
                 <p class="text-text-secondary mb-2">{{ exp.company_name }}</p>
               </div>
-              <span class="text-text-secondary">{{
+              <span class="text-text-secondary text-sm sm:text-base">{{
                 formatYear(exp.start_date, exp.end_date)
               }}</span>
             </div>
@@ -115,10 +115,10 @@
     </section>
 
     <!-- Certifications Section -->
-    <section class="py-20 px-6 bg-surface bg-opacity-30">
+    <section class="py-20 px-4 sm:px-6 bg-surface bg-opacity-30">
       <div class="max-w-6xl mx-auto">
         <div class="mb-12">
-          <h2 class="text-4xl font-bold text-text-primary mb-4">
+          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Certifications
           </h2>
           <p class="text-text-secondary">
@@ -132,16 +132,16 @@
           <div
             v-for="edu in educations"
             :key="edu.id"
-            class="bg-surface border border-border-light rounded-xl p-6 hover:border-border-strong transition-all"
+            class="bg-surface border border-border-light rounded-xl p-4 sm:p-6 hover:border-border-strong transition-all"
           >
-            <div class="flex justify-between items-start">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
               <div class="flex-1">
-                <h3 class="text-xl font-bold text-text-primary mb-2">
+                <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2">
                   {{ edu.degree }}
                 </h3>
                 <p class="text-text-secondary mb-2">{{ edu.institution }}</p>
               </div>
-              <span class="text-text-secondary">{{
+              <span class="text-text-secondary text-sm sm:text-base">{{
                 formatYear(edu.start_date, edu.end_date)
               }}</span>
             </div>
@@ -151,23 +151,23 @@
     </section>
 
     <!-- Recent Projects Section -->
-    <section id="projets" class="py-20 px-6">
+    <section id="projets" class="py-20 px-4 sm:px-6">
       <div class="max-w-7xl mx-auto">
         <!-- Card wrapper to match CTA style (slightly larger) -->
         <div
-          class="bg-surface border border-border-light rounded-3xl pt-16 px-16 pb-24 relative"
+          class="bg-surface border border-border-light rounded-2xl sm:rounded-3xl pt-12 sm:pt-16 px-4 sm:px-8 lg:px-16 pb-20 sm:pb-24 relative"
         >
           <div class="mb-12 text-center">
-            <h2 class="text-5xl font-bold text-text-primary mb-4">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
               Projets récents
             </h2>
-            <p class="text-text-secondary text-lg max-w-2xl mx-auto">
+            <p class="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto px-4">
               Une sélection de travaux réalisés qui illustrent ma façon
               d'aborder le design et la création de produits digitaux.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8">
             <CardProject
               v-for="project in recentProjects"
               :date="formatDate(project.end_date)"
@@ -233,9 +233,9 @@
           </div>
           <!-- Floating centered button overlapping the bottom of the card -->
           <div
-            class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-30"
+            class="absolute -bottom-5 sm:-bottom-6 left-1/2 transform -translate-x-1/2 z-30"
           >
-            <Button variant="primary" icon="arrow" @click="$router.push('/projets')"
+            <Button variant="primary" icon="arrow" size="md" @click="$router.push('/projets')"
               >Voir d'autres projets</Button
             >
           </div>
@@ -244,16 +244,16 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 px-6 bg-surface bg-opacity-30">
+    <section id="services" class="py-20 px-4 sm:px-6 bg-surface bg-opacity-30">
       <div class="max-w-6xl mx-auto">
         <div class="mb-12 text-center">
-          <h2 class="text-4xl font-bold text-text-primary mb-4">
+          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Des services techniques pensés
           </h2>
-          <h3 class="text-3xl font-bold text-text-primary mb-4">
+          <h3 class="text-2xl sm:text-3xl font-bold text-text-primary mb-4">
             pour des projets solides et évolutifs
           </h3>
-          <p class="text-text-secondary max-w-3xl mx-auto">
+          <p class="text-text-secondary max-w-3xl mx-auto px-4">
             Du développement à la gestion de projet, j'accompagne les équipes et
             les entreprises dans la conception, la mise en œuvre et
             l'optimisation de solutions numériques.
@@ -262,11 +262,11 @@
           <div class="flex justify-center mt-8"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <div
             v-for="service in services"
             :key="service.id"
-            class="bg-surface border border-border-light rounded-xl p-8 hover:border-border-strong transition-all group"
+            class="bg-surface border border-border-light rounded-xl p-6 sm:p-8 hover:border-border-strong transition-all group"
           >
             <div
               class="w-16 h-16 bg-hover border border-border-light rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
@@ -340,12 +340,12 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 px-6">
+    <section class="py-20 px-4 sm:px-6">
       <div class="max-w-4xl mx-auto">
         <div
-          class="bg-surface border border-border-light rounded-3xl p-12 text-center"
+          class="bg-surface border border-border-light rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center"
         >
-          <h2 class="text-4xl font-bold text-text-primary mb-4">
+          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Travaillons ensemble
           </h2>
           <p class="text-text-secondary mb-8">
