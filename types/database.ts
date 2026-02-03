@@ -33,6 +33,11 @@ export interface Database {
         Insert: ServiceInsert
         Update: ServiceUpdate
       }
+      features: {
+        Row: Feature
+        Insert: FeatureInsert
+        Update: FeatureUpdate
+      }
     }
   }
 }
@@ -337,5 +342,41 @@ export interface ServiceUpdate {
   featured?: boolean
   order_index?: number
   metadata?: Record<string, any>
+  updated_at?: string
+}
+
+// Feature types for the new features table (columns used on services page)
+export interface Feature {
+  id: string
+  service_id: string | null
+  section: string
+  column: string
+  text: string
+  italic: boolean
+  order_index: number
+  created_at: string
+  updated_at: string
+}
+
+export interface FeatureInsert {
+  id?: string
+  service_id?: string | null
+  section: string
+  column: string
+  text: string
+  italic?: boolean
+  order_index?: number
+  created_at?: string
+  updated_at?: string
+}
+
+export interface FeatureUpdate {
+  id?: string
+  service_id?: string | null
+  section?: string
+  column?: string
+  text?: string
+  italic?: boolean
+  order_index?: number
   updated_at?: string
 }

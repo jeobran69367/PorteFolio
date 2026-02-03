@@ -34,3 +34,22 @@
   .light .bg-accent-blue { background-color: #3B82F6 !important; }
   .light .bg-surface\/bg-opacity-30 { background-color: rgba(245,245,246,0.3) !important; }
 }
+
+/* Dark mode overrides when html has class 'dark' */
+@layer base {
+  .dark body {
+    background: #000000;
+    color: #FFFFFF;
+  }
+
+  /* key utility overrides used across the app */
+  .dark .bg-background { background-color: #000000 !important; }
+  /* surface slightly lighter than background for cards/containers */
+  .dark .bg-surface { background-color: #050505 !important; }
+  .dark .text-text-primary { color: #FFFFFF !important; }
+  .dark .text-text-secondary { color: #DADADA !important; }
+  .dark .border-border-light { border-color: rgba(255,255,255,0.06) !important; }
+  .dark .bg-hover { background-color: #0B0B0C !important; }
+  .dark .bg-accent-blue { background-color: #3B82F6 !important; }
+  .dark .bg-surface\/bg-opacity-30 { background-color: rgba(20,20,22,0.3) !important; }
+}
