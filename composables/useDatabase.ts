@@ -186,5 +186,31 @@ export const useDatabase = () => {
           .order('order_index', { ascending: true })
       }
     }
+    ,
+    // Features (for modular lists on pages)
+    features: {
+      getAll: async () => {
+        return await client
+          .from('features')
+          .select('*')
+          .order('order_index', { ascending: true })
+      },
+
+      getBySection: async (section: string) => {
+        return await client
+          .from('features')
+          .select('*')
+          .eq('section', section)
+          .order('order_index', { ascending: true })
+      },
+
+      getByService: async (serviceId: string) => {
+        return await client
+          .from('features')
+          .select('*')
+          .eq('service_id', serviceId)
+          .order('order_index', { ascending: true })
+      }
+    }
   }
 }
