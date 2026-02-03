@@ -51,6 +51,30 @@ export const useDatabase = () => {
           .select('*')
           .eq('id', id)
           .single()
+      },
+      
+      create: async (project: any) => {
+        return await client
+          .from('projects')
+          .insert([project])
+          .select()
+          .single()
+      },
+      
+      update: async (id: string, updates: any) => {
+        return await client
+          .from('projects')
+          .update(updates)
+          .eq('id', id)
+          .select()
+          .single()
+      },
+      
+      delete: async (id: string) => {
+        return await client
+          .from('projects')
+          .delete()
+          .eq('id', id)
       }
     },
     
@@ -184,6 +208,38 @@ export const useDatabase = () => {
           .select('*')
           .eq('category', category)
           .order('order_index', { ascending: true })
+      }
+    },
+    
+    // Storage
+    storage: {
+      uploadProjectImage: async (file: File, path?: string) => {
+        const fileName = path || `${Date.now()}-${file.name}`
+        const filePath = `projects/${fileName}`
+        
+        const { data, error } = await client.storage
+          .from('project-images')
+          .upload(filePath, file, {
+            cacheControl: '3600',
+            upsert: false
+          })
+        
+        if (error) return { data: null, error }
+        
+        // Get public URL
+        const { data: { publicUrl } } = client.storage
+          .from('project-images')
+          .getPublicUrl(filePath)
+        
+        return { data: { path: filePath, url: publicUrl }, error: null }
+      },
+      
+      deleteProjectImage: async (path: string) => {
+        // Extract the path after 'project-images/'
+        const filePath = path.replace(/.*project-images\//, '')
+        return await client.storage
+          .from('project-images')
+          .remove([filePath])
       }
     }
   }
