@@ -39,6 +39,7 @@ export interface Database {
 
 // Project types
 export interface Project {
+  project_url: any
   id: string
   title: string
   description: string
@@ -46,7 +47,7 @@ export interface Project {
   solution: string[]
   long_description: string | null
   image_url: string | null
-  project_url: string | null
+  image_urls: string[] | null
   github_url: string | null
   technologies: string[]
   category: string | null
@@ -67,6 +68,7 @@ export interface ProjectInsert {
   solution?: string[]
   long_description?: string | null
   image_url?: string | null
+  image_urls?: string[] | null
   project_url?: string | null
   github_url?: string | null
   technologies?: string[]
@@ -88,6 +90,7 @@ export interface ProjectUpdate {
   solution?: string[]
   long_description?: string | null
   image_url?: string | null
+  image_urls?: string[] | null
   project_url?: string | null
   github_url?: string | null
   technologies?: string[]

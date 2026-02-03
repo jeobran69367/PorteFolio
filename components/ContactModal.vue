@@ -153,7 +153,12 @@ const emit = defineEmits(["update:modelValue"]);
 const close = () => emit("update:modelValue", false);
 
 const openWhatsApp = () => {
-  window.open("https://wa.me/", "_blank");
+  const phoneNumber = "33769109626";
+
+  const text = encodeURIComponent("Bonjour, je souhaite discuter de mon projet.");
+
+  const url = `https://wa.me/${phoneNumber}?text=${text}`;
+  window.open(url, "_blank");
 };
 
 const openMeet = () => {

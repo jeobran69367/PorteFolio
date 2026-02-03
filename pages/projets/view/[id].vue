@@ -79,9 +79,21 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div v-for="n in 4" :key="n" class="aspect-video bg-surface rounded-3xl border border-border-light/10 flex items-center justify-center text-text-secondary/10">
-            Image additionnelle {{ n }}
-          </div>
+          <template v-if="project.image_urls && project.image_urls.length">
+            <div v-for="(src, i) in project.image_urls.slice(0,4)" :key="i" class="aspect-video bg-surface rounded-3xl border border-border-light/10 overflow-hidden">
+              <img :src="src" class="w-full h-full object-cover" :alt="`Image ${i+1} - ${project.title}`" />
+            </div>
+          </template>
+          <template v-else-if="project.image_url">
+            <div class="aspect-video bg-surface rounded-3xl border border-border-light/10 overflow-hidden">
+              <img :src="project.image_url" class="w-full h-full object-cover" alt="Image additionnelle" />
+            </div>
+          </template>
+          <template v-else>
+            <div v-for="n in 4" :key="n" class="aspect-video bg-surface rounded-3xl border border-border-light/10 flex items-center justify-center text-text-secondary/10">
+              Aperçu image {{ n }}
+            </div>
+          </template>
         </div>
 
         <!-- Recent Projects Section -->
