@@ -89,9 +89,9 @@
                 <Button
                   variant="primary"
                   @click="openMeet"
-                  aria-label="Google Meet"
+                  aria-label="Calendly"
                 >
-                  <span>Google Meet</span>
+                  <span>calendly</span>
                   <template v-if="IconComponent">
                     <component
                       :is="IconComponent"
