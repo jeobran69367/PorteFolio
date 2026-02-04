@@ -33,10 +33,17 @@
             </button>
           </div>
 
-          <button :class="['w-10 h-10 md:w-11 md:h-11 rounded-md flex items-center justify-center flex-shrink-0', isDark ? 'bg-[#0B0B0C]' : 'bg-[#E5E5E5]']" @click="toggleTheme" aria-label="Toggle theme">
-            <svg v-if="!isDark" width="16" height="16" viewBox="0 0 20 20" fill="none" :class="isDark ? 'text-white' : 'text-[#0E0E10]'"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/></svg>
-            <svg v-else width="16" height="16" viewBox="0 0 20 20" fill="none" :class="isDark ? 'text-white' : 'text-[#0E0E10]'"><path d="M14.53 15.47A7 7 0 0 1 8.53 3.47 7 7 0 1 0 14.53 15.47z" stroke="currentColor" stroke-width="1.2" fill="currentColor" opacity="0.06"/></svg>
-          </button>
+            <button :class="['w-10 h-10 md:w-11 md:h-11 rounded-md flex items-center justify-center flex-shrink-0', isDark ? 'bg-[#0B0B0C]' : 'bg-[#E5E5E5]']" @click="toggleTheme" aria-label="Toggle theme">
+            <!-- Sun icon (light mode) - filled so it's more visible on light backgrounds -->
+            <svg v-if="!isDark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" :class="isDark ? 'text-white' : 'text-[#0E0E10]'" aria-hidden="true">
+              <path d="M12 4a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V5a1 1 0 0 1 1-1zm0 13a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zM4 12a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1zm13 0a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1zM6.34 6.34a1 1 0 0 1 1.41 0l0.71 0.71a1 1 0 1 1-1.41 1.41L6.34 7.75a1 1 0 0 1 0-1.41zm10.9 10.9a1 1 0 0 1 1.41 0l0.71 0.71a1 1 0 1 1-1.41 1.41l-0.71-0.71a1 1 0 0 1 0-1.41zM6.34 17.66a1 1 0 0 1 0 1.41l-0.71 0.71a1 1 0 1 1-1.41-1.41l0.71-0.71a1 1 0 0 1 1.41 0zM17.66 6.34a1 1 0 0 1 0 1.41l-0.71 0.71a1 1 0 1 1-1.41-1.41l0.71-0.71a1 1 0 0 1 1.41 0zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+            </svg>
+
+            <!-- Moon icon (dark mode) -->
+            <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="currentColor" :class="isDark ? 'text-white' : 'text-[#0E0E10]'" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            </button>
 
           <button :class="['lg:hidden p-2 rounded-lg flex-shrink-0', isDark ? 'text-white' : 'text-[#0E0E10]']" @click="showMenu = !showMenu" aria-label="Open menu">
             <svg v-if="!showMenu" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
