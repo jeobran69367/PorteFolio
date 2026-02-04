@@ -2,12 +2,12 @@
 	<div class="min-h-screen bg-background">
 		<Header @open-contact="showContact = true" />
 
-		<main class="pt-28 pb-16 px-6 max-w-7xl mx-auto">
+		<main class="pt-28 pb-16 px-4 sm:px-6 max-w-7xl mx-auto">
 			<div class="mb-12 text-center">
-				<h1 class="text-4xl font-bold text-text-primary">Projets</h1>
+				<h1 class="text-3xl sm:text-4xl font-bold text-text-primary">Projets</h1>
 				<p class="text-text-secondary mt-2">Une galerie de projets récents — cliquez pour en savoir plus.</p>
 			</div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8">
               <div v-for="project in recentProjects" :key="project.id">
                 <NuxtLink :to="{ path: `/projets/view/${project.id}` }" class="block no-underline">
                   <CardProject :date="formatDate(project.end_date)" date-variant="primary">

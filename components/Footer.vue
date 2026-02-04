@@ -7,9 +7,9 @@
   >
     <h2 id="footer-heading" class="sr-only">Pied de page</h2>
     <div class="max-w-6xl mx-auto relative z-10">
-      <div class="grid grid-cols-3 items-center gap-4 mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6 md:gap-4 mb-12">
         <!-- Left: logo -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 justify-center md:justify-start">
           <div
             class="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center"
           >
@@ -23,8 +23,8 @@
         </div>
 
         <!-- Center: nav -->
-        <nav class="flex justify-center">
-          <div class="flex items-center gap-8">
+        <nav class="flex justify-center order-last md:order-none">
+          <div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">
             <a
               href="#accueil"
               class="text-text-secondary hover:text-text-primary transition-colors"
@@ -44,7 +44,7 @@
         </nav>
 
         <!-- Right: credit -->
-        <div class="text-right text-text-secondary text-sm">
+        <div class="text-center md:text-right text-text-secondary text-sm">
           <p>Développé par : Jeobran Nathanael Kombou</p>
           <p>Designé par : Romaric Njollo</p>
         </div>
@@ -56,7 +56,7 @@
       class="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center z-0 overflow-hidden"
     >
       <div
-        class="footer-bg select-none whitespace-nowrap text-[200px] font-bold text-text-muted leading-[0.7]"
+        class="footer-bg select-none whitespace-nowrap text-[80px] sm:text-[120px] md:text-[160px] lg:text-[200px] font-bold text-text-muted leading-[0.7]"
       >
         Jeobran k
       </div>
@@ -112,9 +112,5 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85));
 }
 
-@media (max-width: 768px) {
-  .footer-bg {
-    font-size: 96px;
-  }
-}
+/* Responsive sizing is now handled via Tailwind classes in the template */
 </style>
