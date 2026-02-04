@@ -3,9 +3,11 @@ name: Deploy Supabase migrations
 on:
   push:
     branches:
-      - main
+    - main
+    - master
     paths:
       - 'supabase/**'
+  workflow_dispatch:
 
 jobs:
   migrate:
