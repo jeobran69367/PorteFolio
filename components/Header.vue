@@ -32,7 +32,6 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </div>
-
           <button :class="['w-10 h-10 md:w-11 md:h-11 rounded-md flex items-center justify-center flex-shrink-0', isDark ? 'bg-[#0B0B0C]' : 'bg-[#E5E5E5]']" @click="toggleTheme" aria-label="Toggle theme">
             <!-- Sun icon (light mode) - filled so it's more visible on light backgrounds -->
             <svg v-if="!isDark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" :class="isDark ? 'text-white' : 'text-[#0E0E10]'" aria-hidden="true">
@@ -44,6 +43,12 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
             </button>
+
+          
+          <button :class="['lg:hidden p-2 rounded-lg flex-shrink-0', isDark ? 'text-white' : 'text-[#0E0E10]']" @click="showMenu = !showMenu" aria-label="Open menu">
+            <svg v-if="!showMenu" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </div>
     </div>
