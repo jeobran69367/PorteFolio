@@ -162,6 +162,6 @@ const openWhatsApp = () => {
 };
 
 const openMeet = () => {
-  window.open("https://meet.google.com", "_blank");
+  window.open("https://calendly.com/jeobrannathanael/new-meeting", "_blank");
 };
 </script>
