@@ -46,40 +46,26 @@
             </div>
           </div>
 
-          <!-- Right Column - Image Placeholder -->
-          <div
-            class="relative bg-surface border border-border-light rounded-2xl sm:rounded-3xl p-8 flex items-center justify-center min-h-[300px] sm:min-h-[400px]"
-          >
-            <div class="text-center">
-              <svg
-                width="120"
-                height="120"
-                viewBox="0 0 120 120"
-                fill="none"
-                class="text-text-muted mx-auto mb-4"
+          <!-- Right Column - Photo -->
+            <div 
               >
-                <rect
-                  width="120"
-                  height="120"
-                  fill="currentColor"
-                  opacity="0.1"
+              <figure class="flex items-center justify-center p-8 sm:p-6">
+              <picture>
+                <source srcset="../public/img/moi.png" type="image/webp" />
+                <img
+                src="../public/img/moi.png"
+                alt="Portrait professionnel de Jeobran Nathanael Kombou Tchounga"
+                loading="lazy"
+                decoding="async"
+                class="w-full max-w-[450px] h-auto object-contain rounded-2xl"
+                sizes="(min-width:1024px) 320px, 60vw"
                 />
-                <path
-                  d="M60 60C71.0457 60 80 51.0457 80 40C80 28.9543 71.0457 20 60 20C48.9543 20 40 28.9543 40 40C40 51.0457 48.9543 60 60 60Z"
-                  fill="currentColor"
-                  opacity="0.3"
-                />
-                <path
-                  d="M100 100C100 78.9543 82.0914 62 60 62C37.9086 62 20 78.9543 20 100"
-                  fill="currentColor"
-                  opacity="0.3"
-                />
-              </svg>
-              <Badge type="availability" class="text-sm"
-                >Disponible pour un appel</Badge
-              >
+              </picture>
+              <figcaption class="sr-only">
+                Jeobran Nathanael Kombou Tchounga — Développeur Full‑Stack
+              </figcaption>
+              </figure>
             </div>
-          </div>
         </div>
       </div>
     </section>
@@ -165,254 +151,27 @@
               Stacks & Outils
             </h2>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              <!-- React -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-[#61DAFB]"
-                >
-                  <circle cx="24" cy="24" r="4" fill="currentColor" />
-                  <ellipse
-                    cx="24"
-                    cy="24"
-                    rx="18"
-                    ry="7"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                  <ellipse
-                    cx="24"
-                    cy="24"
-                    rx="18"
-                    ry="7"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    transform="rotate(60 24 24)"
-                  />
-                  <ellipse
-                    cx="24"
-                    cy="24"
-                    rx="18"
-                    ry="7"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    transform="rotate(120 24 24)"
-                  />
-                </svg>
-              </div>
+                      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <template v-if="techs.length === 0">
+                          <p class="text-text-secondary">Aucune technologie trouvée.</p>
+                        </template>
+                        <template v-else>
+                          <div
+                            v-for="(tech, idx) in visibleTechs"
+                            :key="tech"
+                            class="bg-surface border border-border-light rounded-xl p-4 flex items-center justify-center hover:border-border-strong transition-all"
+                          >
+                            <Badge type="tech" class="text-sm">{{ tech }}</Badge>
+                          </div>
 
-              <!-- JavaScript -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-[#F7DF1E]"
-                >
-                  <rect
-                    x="8"
-                    y="8"
-                    width="32"
-                    height="32"
-                    rx="4"
-                    fill="currentColor"
-                  />
-                  <text
-                    x="24"
-                    y="32"
-                    text-anchor="middle"
-                    font-size="24"
-                    font-weight="bold"
-                    fill="#0E0E10"
-                  >
-                    JS
-                  </text>
-                </svg>
-              </div>
-
-              <!-- GraphQL / Angular -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-[#E535AB]"
-                >
-                  <polygon
-                    points="24,8 40,16 40,32 24,40 8,32 8,16"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                  <circle cx="24" cy="24" r="6" fill="currentColor" />
-                </svg>
-              </div>
-
-              <!-- Vue.js -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-[#42B883]"
-                >
-                  <path
-                    d="M8 12L24 36L40 12H32L24 24L16 12H8Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M16 12L24 24L32 12H28L24 18L20 12H16Z"
-                    fill="currentColor"
-                    opacity="0.6"
-                  />
-                </svg>
-              </div>
-
-              <!-- Nuxt.js / Vercel -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-[#00DC82]"
-                >
-                  <path
-                    d="M24 8L40 36H8L24 8Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                  <path
-                    d="M24 18L32 32H16L24 18Z"
-                    fill="currentColor"
-                    opacity="0.5"
-                  />
-                </svg>
-              </div>
-
-              <!-- Next.js / N -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-text-primary"
-                >
-                  <rect
-                    x="12"
-                    y="12"
-                    width="24"
-                    height="24"
-                    rx="4"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <text
-                    x="24"
-                    y="32"
-                    text-anchor="middle"
-                    font-size="20"
-                    font-weight="bold"
-                    fill="currentColor"
-                  >
-                    N
-                  </text>
-                </svg>
-              </div>
-
-              <!-- Tailwind CSS -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-[#06B6D4]"
-                >
-                  <path
-                    d="M24 14C20 14 17.5 16 16.5 20C18 18 19.75 17.25 21.75 17.75C22.82 18.03 23.58 18.81 24.41 19.66C25.87 21.17 27.57 23 31.5 23C35.5 23 38 21 39 17C37.5 19 35.75 19.75 33.75 19.25C32.68 18.97 31.92 18.19 31.09 17.34C29.63 15.83 27.93 14 24 14ZM16.5 23C12.5 23 10 25 9 29C10.5 27 12.25 26.25 14.25 26.75C15.32 27.03 16.08 27.81 16.91 28.66C18.37 30.17 20.07 32 24 32C28 32 30.5 30 31.5 26C30 28 28.25 28.75 26.25 28.25C25.18 27.97 24.42 27.19 23.59 26.34C22.13 24.83 20.43 23 16.5 23Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-
-              <!-- LLM / AI -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-text-primary"
-                >
-                  <rect
-                    x="8"
-                    y="8"
-                    width="32"
-                    height="32"
-                    rx="4"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <text
-                    x="24"
-                    y="32"
-                    text-anchor="middle"
-                    font-size="16"
-                    font-weight="bold"
-                    fill="currentColor"
-                  >
-                    LLM
-                  </text>
-                </svg>
-              </div>
-
-              <!-- GitHub -->
-              <div
-                class="bg-surface border border-border-light rounded-xl p-6 flex items-center justify-center hover:border-border-strong transition-all"
-              >
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  class="text-text-primary"
-                >
-                  <path
-                    d="M24 8C15.16 8 8 15.16 8 24C8 31.08 12.58 37.06 18.94 39.18C19.74 39.32 20.04 38.82 20.04 38.38C20.04 37.98 20.02 36.66 20.02 35.26C16 36.06 15 33.62 15 33.62C14.28 31.76 13.18 31.26 13.18 31.26C11.64 30.42 13.3 30.44 13.3 30.44C15 30.56 15.88 32.18 15.88 32.18C17.4 34.76 19.88 34.02 20.08 33.6C20.22 32.52 20.64 31.78 21.1 31.38C17.9 30.96 14.54 29.62 14.54 23.74C14.54 22.02 15.16 20.62 15.9 19.52C15.74 19.12 15.18 17.52 16.06 15.32C16.06 15.32 17.5 14.88 20 16.6C21.4 16.24 22.9 16.06 24.4 16.06C25.9 16.06 27.4 16.24 28.8 16.6C31.3 14.88 32.74 15.32 32.74 15.32C33.62 17.52 33.06 19.12 32.9 19.52C33.64 20.62 34.26 22.02 34.26 23.74C34.26 29.64 30.88 30.96 27.66 31.36C28.24 31.86 28.78 32.84 28.78 34.34C28.78 36.46 28.76 38.16 28.76 38.38C28.76 38.82 29.06 39.32 29.88 39.18C36.24 37.06 40.82 31.08 40.82 24C40.82 15.16 33.66 8 24.84 8"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-            </div>
+                          <!-- show toggle button when there are more -->
+                          <div v-if="techs.length > TECHS_VISIBLE_LIMIT" class="col-span-2 sm:col-span-3 flex justify-center mt-2">
+                            <Button variant="outline" size="sm" @click="showAllTechs = !showAllTechs">
+                              {{ showAllTechs ? 'Voir moins' : `+${techs.length - TECHS_VISIBLE_LIMIT} autres` }}
+                            </Button>
+                          </div>
+                        </template>
+                      </div>
           </div>
 
           <!-- Right Column - Contacts & Réseaux sociaux -->
@@ -546,6 +305,7 @@
           </div>
         </div>
       </div>
+    </section>
 
       <!-- CTA Section -->
     <section class="py-20 sm:py-40 px-4 sm:px-6">
@@ -568,8 +328,7 @@
           >
         </div>
       </div>
-    </section>
-    </section>
+  </section>
 
     
 
@@ -582,7 +341,9 @@
 import Header from "~/components/Header.vue";
 import ContactModal from "~/components/ContactModal.vue";
 import Footer from "~/components/Footer.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useAsyncData } from "nuxt/app";
+import { useDatabase } from "../composables/useDatabase";
 
 const db = useDatabase();
 
@@ -601,6 +362,11 @@ interface Education {
   institution: string;
   start_date: string;
   end_date: string | null;
+}
+
+interface services {
+  id: string;
+  tech_stack?: string | string[] | null;
 }
 
 // Fetch data from database
@@ -632,8 +398,108 @@ const { data: educationData } = await useAsyncData<Education[]>(
   }
 );
 
+// Fetch services so we can extract tech stacks
+const { data: servicesData } = await useAsyncData<services[]>(
+  "services",
+  async () => {
+    const { data, error } = await db.services.getActive();
+
+    if (error) {
+      console.error("Error fetching services:", error);
+      return [];
+    }
+
+    return data ?? [];
+  }
+);
+
 const experiences = computed<Experience[]>(() => experiencesData.value ?? []);
 const educations = computed<Education[]>(() => educationData.value ?? []);
+
+// Robust extraction of techs from services' tech_stack column and deduplicate (case-insensitive)
+const techs = computed<string[]>(() => {
+  const seen = new Map<string, string>(); // key: lowercased tech, value: original
+
+  const push = (raw: unknown) => {
+    if (raw == null) return;
+    const str = String(raw).trim();
+    if (!str) return;
+    const key = str.toLowerCase();
+    if (!seen.has(key)) seen.set(key, str);
+  };
+
+  const parsePossibleArray = (value: any) => {
+    if (value == null) return;
+    // If it's already an array
+    if (Array.isArray(value)) {
+      value.forEach((v) => v != null && push(v));
+      return;
+    }
+
+    // If it's an object (possibly JSON parsed), try to extract array-like fields
+    if (typeof value === 'object') {
+      // try common keys
+      if (Array.isArray((value as any).tech_stack)) {
+        (value as any).tech_stack.forEach((v: any) => push(v));
+        return;
+      }
+      // fallback: stringify and try to parse below
+      try {
+        const s = JSON.stringify(value);
+        splitAndPush(s);
+        return;
+      } catch (e) {
+        return;
+      }
+    }
+
+    // If it's a string, try to parse JSON first
+    if (typeof value === 'string') {
+      const trimmed = value.trim();
+      if (!trimmed) return;
+      // JSON array string
+      if ((trimmed.startsWith('[') && trimmed.endsWith(']')) || (trimmed.startsWith('{') && trimmed.endsWith('}'))) {
+        try {
+          const parsed = JSON.parse(trimmed);
+          if (Array.isArray(parsed)) {
+            parsed.forEach((v) => push(v));
+            return;
+          }
+          // if object, try to find array inside
+          if (typeof parsed === 'object' && parsed != null) {
+            if (Array.isArray((parsed as any).tech_stack)) {
+              (parsed as any).tech_stack.forEach((v: any) => push(v));
+              return;
+            }
+          }
+        } catch (e) {
+          // fall through to splitting
+        }
+      }
+
+      // Not JSON: split by common delimiters
+      splitAndPush(trimmed);
+    }
+  };
+
+  const splitAndPush = (s: string) => {
+    // split on comma, semicolon, pipe or newlines
+    const parts = s.split(/[,;|\n]+/).map(p => p.trim()).filter(Boolean);
+    parts.forEach(p => push(p));
+  };
+
+  (servicesData.value ?? []).forEach((s) => {
+    const ts = (s as any).tech_stack;
+    parsePossibleArray(ts);
+  });
+
+  // return in insertion order (first seen casing)
+  return Array.from(seen.values());
+});
+
+const TECHS_VISIBLE_LIMIT = 6;
+const showAllTechs = ref(false);
+const visibleTechs = computed(() => (showAllTechs.value ? techs.value : techs.value.slice(0, TECHS_VISIBLE_LIMIT)));
 
 // Helper functions
 const formatYear = (startDate: string, endDate: string | null) => {

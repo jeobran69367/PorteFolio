@@ -7,29 +7,22 @@
       <div class="max-w-4xl mx-auto">
         <div class="flex flex-col items-center text-center mb-12">
           <!-- Profile Image Placeholder -->
-          <div
-            class="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-surface border-4 border-border-light mb-6 sm:mb-8 flex items-center justify-center overflow-hidden"
-          >
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 64 64"
-              fill="none"
-              class="text-text-muted sm:w-16 sm:h-16"
+            <div
+            class="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full bg-surface border-4 border-border-light mb-6 sm:mb-8 flex items-center justify-center overflow-hidden"
             >
-              <rect width="64" height="64" fill="currentColor" opacity="0.1" />
-              <path
-                d="M32 32C37.5228 32 42 27.5228 42 22C42 16.4772 37.5228 12 32 12C26.4772 12 22 16.4772 22 22C22 27.5228 26.4772 32 32 32Z"
-                fill="currentColor"
-                opacity="0.3"
-              />
-              <path
-                d="M52 52C52 42.0589 42.9411 34 32 34C21.0589 34 12 42.0589 12 52"
-                fill="currentColor"
-                opacity="0.3"
-              />
-            </svg>
-          </div>
+            <img
+              src="../public/img/moi.png"
+              srcset="../public/img/moi.png 1x, ../public/img/moi@2x.png 2x"
+              sizes="(min-width: 768px) 224px, (min-width: 640px) 192px, 160px"
+              width="224"
+              height="224"
+              alt="Photo de Jeobran Nathanael"
+              class="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+            </div>
 
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary mb-4 px-4">
             Hey, je suis
@@ -71,9 +64,9 @@
               @click="showContact = true"
               >Me contacter</Button
             >
-            <Badge type="availability" class="text-base sm:text-xl px-4 py-3 sm:px-6 sm:py-4"
-              >Disponible pour un appel</Badge
-            >
+            <Badge type="availability" class="text-lg sm:text-sm">
+              Disponible pour un appel
+            </Badge>
           </div>
         </div>
       </div>
