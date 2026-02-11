@@ -7,8 +7,8 @@
       ]">
         <!-- Logo -->
         <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
-          <div class="w-7 h-7 md:w-8 md:h-8 rounded-lg overflow-hidden flex items-center justify-center">
-            <img src="../public/img/Vector.png" alt="logo" class="w-7 h-7 md:w-8 md:h-8 object-contain" />
+            <div class="w-7 h-7 md:w-8 md:h-8 rounded-lg overflow-hidden flex items-center justify-center">
+            <img src="/img/Vector.png" alt="logo" class="w-7 h-7 md:w-8 md:h-8 object-contain" />
           </div>
           <span :class="['text-lg md:text-[24px] font-semibold whitespace-nowrap', isDark ? 'text-white' : 'text-[#0E0E10]']">Jeobran k</span>
         </div>

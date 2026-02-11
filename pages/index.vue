@@ -11,8 +11,8 @@
             class="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full bg-surface border-4 border-border-light mb-6 sm:mb-8 flex items-center justify-center overflow-hidden"
             >
             <img
-              src="../public/img/moi.png"
-              srcset="../public/img/moi.png 1x, ../public/img/moi@2x.png 2x"
+              src="/img/moi.png"
+              srcset="/img/moi.png 1x, /img/moi@2x.png 2x"
               sizes="(min-width: 768px) 224px, (min-width: 640px) 192px, 160px"
               width="224"
               height="224"

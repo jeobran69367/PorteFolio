@@ -40,7 +40,7 @@
                 @click="showContact = true"
                 >Me contacter</Button
               >
-              <a href="../public/pdf/" download="Jeobran_Kombou_CV.pdf" class="inline-block" aria-label="Télécharger le CV">
+              <a href="/pdf/Jeobran_Kombou_CV.pdf" download="Jeobran_Kombou_CV.pdf" class="inline-block" aria-label="Télécharger le CV">
                 <Button variant="outline" icon="download" disabled size="md">Télécharger mon CV</Button>
               </a>
             </div>
@@ -51,9 +51,9 @@
               >
               <figure class="flex items-center justify-center p-8 sm:p-6">
               <picture>
-                <source srcset="../public/img/moi.png" type="image/webp" />
+                <source srcset="/img/moi.png" type="image/webp" />
                 <img
-                src="../public/img/moi.png"
+                src="/img/moi.png"
                 alt="Portrait professionnel de Jeobran Nathanael Kombou Tchounga"
                 loading="lazy"
                 decoding="async"
