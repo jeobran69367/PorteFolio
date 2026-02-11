@@ -12,7 +12,7 @@
             >
             <img
               src="/img/moi.png"
-              srcset="/img/moi.png 1x, /img/moi@2x.png 2x"
+              srcset="/img/moi.png"
               sizes="(min-width: 768px) 224px, (min-width: 640px) 192px, 160px"
               width="224"
               height="224"
