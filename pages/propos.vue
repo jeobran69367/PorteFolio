@@ -156,13 +156,11 @@
                           <p class="text-text-secondary">Aucune technologie trouvée.</p>
                         </template>
                         <template v-else>
-                          <div
+                          <TechBadge
                             v-for="(tech, idx) in visibleTechs"
                             :key="tech"
-                            class="bg-surface border border-border-light rounded-xl p-4 flex items-center justify-center hover:border-border-strong transition-all"
-                          >
-                            <Badge type="tech" class="text-sm">{{ tech }}</Badge>
-                          </div>
+                            :name="tech"
+                          />
 
                           <!-- show toggle button when there are more -->
                           <div v-if="techs.length > TECHS_VISIBLE_LIMIT" class="col-span-2 sm:col-span-3 flex justify-center mt-2">
@@ -341,6 +339,7 @@
 import Header from "~/components/Header.vue";
 import ContactModal from "~/components/ContactModal.vue";
 import Footer from "~/components/Footer.vue";
+import TechBadge from "~/components/TechBadge.vue";
 import { ref, computed } from "vue";
 import { useAsyncData } from "nuxt/app";
 import { useDatabase } from "../composables/useDatabase";
