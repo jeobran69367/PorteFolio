@@ -10,11 +10,11 @@
       <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6 md:gap-4 mb-12">
         <!-- Left: logo -->
         <div class="flex items-center gap-2 justify-center md:justify-start">
-          <div
+            <div
             class="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center"
           >
             <img
-              src="../public/img/Vector.png"
+              src="/img/Vector.png"
               alt="logo"
               class="w-8 h-8 object-contain"
             />

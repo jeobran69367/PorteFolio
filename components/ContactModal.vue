@@ -31,7 +31,7 @@
               class="w-12 h-12 rounded-lg overflow-hidden flex items-center justify-center"
             >
             <img
-                src="../public/img/Vector.png"
+                src="/img/Vector.png"
                 alt="logo"
                 class="w-16 h-16 object-contain"
             />

@@ -1,12 +1,18 @@
 <template>
   <span :class="badgeClasses">
-    <span v-if="type === 'availability'" class="w-2 h-2 rounded-full bg-success mr-2"></span>
-    <slot />
+    <template v-if="type === 'availability'">
+      <span :class="dotClasses"></span>
+      <span v-if="isUnavailable">indisponible pour le moment</span>
+      <span v-else><slot /></span>
+    </template>
+    <template v-else>
+      <slot />
+    </template>
   </span>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 
 interface Props {
   type?: 'availability' | 'tech' | 'date'
@@ -18,10 +24,36 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
 })
 
+const nowHour = ref<number>(new Date().getHours())
+
+let timer: ReturnType<typeof setInterval> | null = null
+onMounted(() => {
+  // keep the hour updated (minute resolution is enough)
+  timer = setInterval(() => { nowHour.value = new Date().getHours() }, 60_000)
+})
+onUnmounted(() => { if (timer) clearInterval(timer) })
+
+const isUnavailable = computed(() => {
+  // Unavailable from 23:00 (inclusive) to 07:00 (exclusive)
+  const h = nowHour.value
+  return h >= 23 || h < 7
+})
+
+const dotClasses = computed(() => {
+  const base = 'w-2 h-2 rounded-full mr-2'
+  return [base, isUnavailable.value ? 'bg-red-600' : 'bg-success'].join(' ')
+})
+
 const badgeClasses = computed(() => {
   const baseClasses = 'inline-flex items-center px-2 py-1 rounded-full text-xs font-medium transition-colors duration-200'
   
   if (props.type === 'availability') {
+      if (isUnavailable.value) {
+        return [
+          baseClasses,
+          'bg-red-600 bg-opacity-10 text-red-600 border border-red-600 border-opacity-30',
+        ].join(' ')
+      }
       return [
         baseClasses,
         'bg-success bg-opacity-10 text-success border border-success border-opacity-30',
