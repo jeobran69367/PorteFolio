@@ -294,6 +294,39 @@ export const useDatabase = () => {
       }
     }
     ,
+    // Certifications
+    certifications: {
+      getAll: async () => {
+        return await client
+          .from('certifications')
+          .select('*')
+          .order('date', { ascending: false })
+      },
+
+      create: async (payload: any) => {
+        return await supa
+          .from('certifications')
+          .insert([payload])
+          .select()
+          .single()
+      },
+
+      update: async (id: string, updates: any) => {
+        return await supa
+          .from('certifications')
+          .update(updates)
+          .eq('id', id)
+          .select()
+          .single()
+      },
+
+      delete: async (id: string) => {
+        return await supa
+          .from('certifications')
+          .delete()
+          .eq('id', id)
+      }
+    },
     // Features (for modular lists on pages)
     features: {
       getAll: async () => {

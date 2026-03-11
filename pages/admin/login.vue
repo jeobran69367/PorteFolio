@@ -78,7 +78,7 @@ const handleLogin = async () => {
     }
 
     // Redirect to admin projects page
-    await router.push('/admin/projets')
+    await router.push('/admin')
   } catch (e) {
     error.value = 'Une erreur est survenue'
     console.error(e)
@@ -91,7 +91,7 @@ const handleLogin = async () => {
 onMounted(async () => {
   const { data: { session } } = await client.auth.getSession()
   if (session) {
-    await router.push('/admin/projets')
+    await router.push('/admin')
   }
 })
 </script>
