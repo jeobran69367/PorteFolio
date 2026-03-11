@@ -6,20 +6,8 @@
         <p class="mt-1 text-sm text-gray-500">Panneau de contrôle — choisissez une section pour gérer le contenu.</p>
       </header>
 
-  <nav aria-label="Panneau d'administration" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <button
-          @click="goTo('/admin/certification')"
-          class="flex flex-col items-start gap-2 p-4 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-shadow shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          aria-label="Gérer les certifications"
-        >
-          <div class="flex items-center gap-3 w-full">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7 7h10v10H7z"></path>
-            </svg>
-            <span class="font-medium">Certifications</span>
-          </div>
-          <small class="text-indigo-100 text-xs">Ajouter, modifier ou supprimer des certifications</small>
-        </button>
+  <nav aria-label="Panneau d'administration" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
         <button
           @click="goTo('/admin/projets')"
           class="flex flex-col items-start gap-2 p-4 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-shadow shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
