@@ -47,18 +47,17 @@
           </div>
         </div>
 
-        <!-- Métadonnées: Période, localisation, mode de travail -->
-        <div class="flex flex-wrap items-center gap-x-5 gap-y-3 text-xs sm:text-sm text-text-secondary">
-          <span class="inline-flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="text-text-secondary/70">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-sm text-text-secondary">
+          <span class="inline-flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2" />
               <path d="M8 3V7M16 3V7M3 11H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
-            <span class="font-medium">{{ period }}</span>
+            {{ period }}
           </span>
 
-          <span v-if="experience.location" class="inline-flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="text-text-secondary/70">
+          <span v-if="experience.location" class="inline-flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
                 d="M12 21C15.5 17.5 19 14.4183 19 10.5C19 6.63401 15.866 3.5 12 3.5C8.13401 3.5 5 6.63401 5 10.5C5 14.4183 8.5 17.5 12 21Z"
                 stroke="currentColor"
@@ -66,41 +65,38 @@
               />
               <circle cx="12" cy="10.5" r="2.5" stroke="currentColor" stroke-width="2" />
             </svg>
-            <span>{{ experience.location }}</span>
+            {{ experience.location }}
           </span>
 
           <span
             v-if="workModeLabel"
-            class="inline-flex items-center gap-2 rounded-full border border-border-light/50 bg-background/50 px-2.5 py-1 text-[11px] sm:text-xs font-medium text-text-secondary"
+            class="inline-flex items-center rounded-full border border-border-light bg-background px-2 py-0.5 text-[11px] sm:text-xs text-text-secondary"
           >
-            <span class="inline-block w-1 h-1 rounded-full bg-text-secondary/50" />
             {{ workModeLabel }}
           </span>
         </div>
 
-        <!-- Technologies utilisées -->
         <div v-if="cleanedTechnologies.length" class="flex flex-wrap gap-2">
           <span
             v-for="(tech, idx) in cleanedTechnologies"
             :key="`tech-${idx}`"
-            class="inline-flex items-center rounded-full border border-border-light/60 bg-background/60 px-3 py-2 text-xs font-medium text-text-primary hover:border-border-light hover:bg-background transition-colors"
+            class="inline-flex items-center rounded-full border border-border-light bg-background px-2.5 py-1 text-[11px] sm:text-xs font-medium text-text-primary"
           >
             {{ tech }}
           </span>
         </div>
 
-        <!-- Points forts marquants -->
-        <div v-if="highlightAchievements.length" class="bg-background/40 rounded-xl border border-border-light/40 p-4 sm:p-5 backdrop-blur-sm">
-          <p class="text-xs font-bold uppercase tracking-wider text-text-primary mb-3 opacity-70">
-            💡 Impact concret
+        <div v-if="highlightAchievements.length" class="bg-background rounded-lg border border-border-light p-3 sm:p-4">
+          <p class="text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-text-primary mb-2">
+            Impact concret
           </p>
-          <ul class="space-y-2.5">
+          <ul class="space-y-1.5">
             <li
               v-for="(achievement, idx) in highlightAchievements"
               :key="`highlight-${idx}`"
-              class="text-text-secondary text-sm leading-relaxed flex items-start gap-3"
+              class="text-text-secondary text-sm leading-relaxed flex items-start gap-2"
             >
-              <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-text-primary shrink-0 opacity-70" aria-hidden="true" />
+              <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-text-primary shrink-0" aria-hidden="true" />
               <span>{{ achievement }}</span>
             </li>
           </ul>
@@ -111,87 +107,66 @@
     <transition
       enter-active-class="transition-all duration-300 ease-out"
       leave-active-class="transition-all duration-200 ease-in"
-      enter-from-class="opacity-0 -translate-y-2"
-      leave-to-class="opacity-0 -translate-y-2"
+      enter-from-class="opacity-0 -translate-y-1"
+      leave-to-class="opacity-0 -translate-y-1"
     >
-      <div v-if="isOpen" class="px-5 pb-6 sm:px-7 sm:pb-7 border-t border-border-light/40">
-        <div class="pt-5 sm:pt-6 space-y-5 sm:space-y-6">
-          <!-- Description générale -->
-          <p v-if="experience.description" class="text-text-secondary leading-relaxed text-sm sm:text-base">
-            {{ experience.description }}
-          </p>
+      <div v-if="isOpen" class="px-4 pb-5 sm:px-6 sm:pb-6">
+        <div class="h-px w-full bg-border-light mb-4" />
 
-          <!-- Réalisations détaillées -->
-          <div v-if="detailedAchievements.length">
-            <div class="flex items-center gap-2 mb-4">
-              <h4 class="text-base sm:text-lg font-bold text-text-primary">📈 Réalisations clés</h4>
-              <div class="flex-1 h-px bg-gradient-to-r from-border-light/50 to-transparent" />
-            </div>
-            <div class="bg-background/40 rounded-xl border border-border-light/40 p-4 sm:p-5 backdrop-blur-sm">
-              <ul class="space-y-3">
-                <li
-                  v-for="(achievement, idx) in detailedAchievements"
-                  :key="idx"
-                  class="text-text-secondary text-sm leading-relaxed flex items-start gap-3"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="shrink-0 mt-0.5 text-text-primary/60" aria-hidden="true">
-                    <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <span>{{ achievement }}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <p v-if="experience.description" class="text-text-secondary leading-relaxed mb-4">
+          {{ experience.description }}
+        </p>
 
-          <!-- Responsabilités -->
-          <div v-if="cleanedResponsibilities.length">
-            <div class="flex items-center gap-2 mb-4">
-              <h4 class="text-base sm:text-lg font-bold text-text-primary">🎯 Responsabilités</h4>
-              <div class="flex-1 h-px bg-gradient-to-r from-border-light/50 to-transparent" />
-            </div>
-            <div class="bg-background/40 rounded-xl border border-border-light/40 p-4 sm:p-5 backdrop-blur-sm">
-              <ul class="space-y-3">
-                <li
-                  v-for="(responsibility, idx) in cleanedResponsibilities"
-                  :key="`resp-${idx}`"
-                  class="text-text-secondary text-sm leading-relaxed flex items-start gap-3"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="shrink-0 mt-0.5 text-text-primary/60" aria-hidden="true">
-                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <span>{{ responsibility }}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div v-if="detailedAchievements.length" class="bg-background rounded-lg border border-border-light p-3 sm:p-4">
+          <p class="text-text-primary text-sm font-semibold mb-3">Détails des réalisations</p>
+          <ul class="space-y-2">
+            <li
+              v-for="(achievement, idx) in detailedAchievements"
+              :key="idx"
+              class="text-text-secondary text-sm leading-relaxed flex items-start gap-2"
+            >
+              <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-text-primary shrink-0" aria-hidden="true" />
+              <span>{{ achievement }}</span>
+            </li>
+          </ul>
+        </div>
 
-          <!-- Projets associés -->
-          <div v-if="cleanedProjectLinks.length">
-            <div class="flex items-center gap-2 mb-4">
-              <h4 class="text-base sm:text-lg font-bold text-text-primary">🔗 Projets associés</h4>
-              <div class="flex-1 h-px bg-gradient-to-r from-border-light/50 to-transparent" />
-            </div>
-            <div class="flex flex-wrap gap-3">
-              <a
-                v-for="(link, idx) in cleanedProjectLinks"
-                :key="`project-link-${idx}`"
-                :href="link.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 rounded-lg border border-border-light/60 px-4 py-2.5 text-sm font-medium text-text-primary hover:border-border-strong hover:bg-background/80 hover:shadow-sm transition-all duration-200"
-              >
-                <span>{{ link.label }}</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="group-hover:translate-x-0.5 transition-transform">
-                  <path
-                    d="M7 17L17 7M17 7H9M17 7V15"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </a>
-            </div>
+        <div v-if="cleanedResponsibilities.length" class="bg-background rounded-lg border border-border-light p-3 sm:p-4 mt-4">
+          <p class="text-text-primary text-sm font-semibold mb-3">Responsabilités clés</p>
+          <ul class="space-y-2">
+            <li
+              v-for="(responsibility, idx) in cleanedResponsibilities"
+              :key="`resp-${idx}`"
+              class="text-text-secondary text-sm leading-relaxed flex items-start gap-2"
+            >
+              <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-text-primary shrink-0" aria-hidden="true" />
+              <span>{{ responsibility }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div v-if="cleanedProjectLinks.length" class="mt-4">
+          <p class="text-text-primary text-sm font-semibold mb-3">Projets associés</p>
+          <div class="flex flex-wrap gap-2">
+            <a
+              v-for="(link, idx) in cleanedProjectLinks"
+              :key="`project-link-${idx}`"
+              :href="link.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-lg border border-border-light px-3 py-1.5 text-xs sm:text-sm text-text-primary hover:border-border-strong transition-colors"
+            >
+              <span>{{ link.label }}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M7 17L17 7M17 7H9M17 7V15"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
           </div>
         </div>
       </div>
