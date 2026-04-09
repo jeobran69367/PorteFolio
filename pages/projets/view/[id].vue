@@ -10,8 +10,15 @@
       <div v-else class="space-y-16">
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <div class="aspect-video lg:aspect-square bg-surface rounded-3xl overflow-hidden border border-border-light/10">
-            <img v-if="project.image_url" :src="project.image_url" class="w-full h-full object-cover" alt="Hero image">
+          <div class="aspect-video lg:aspect-square bg-surface rounded-3xl overflow-hidden border border-border-light/10 p-3">
+            <img
+              v-if="project.image_url"
+              :src="project.image_url"
+              class="w-full h-full object-contain object-center"
+              alt="Hero image"
+              loading="eager"
+              decoding="async"
+            >
             <div v-else class="w-full h-full flex items-center justify-center text-text-secondary/20 italic">Aperçu projet</div>
           </div>
 
@@ -72,21 +79,66 @@
           
           <div class="p-8 bg-surface rounded-3xl border border-border-light/5">
             <h3 class="text-xl font-bold mb-4">Stack</h3>
-            <div class="flex flex-wrap gap-2">
-              <Badge v-for="tech in project.technologies" :key="tech" class="bg-background border-none">{{ tech }}</Badge>
+            <p class="text-sm text-text-secondary mb-4">
+              {{ project.technologies?.length || 0 }} technologies mobilisees
+            </p>
+
+            <div class="space-y-4">
+              <div v-if="frontendTechs.length">
+                <p class="text-xs uppercase tracking-wide text-text-secondary mb-2">Frontend</p>
+                <div class="flex flex-wrap gap-2">
+                  <Badge
+                    v-for="tech in frontendTechs"
+                    :key="`front-${tech}`"
+                    class="bg-background border-none"
+                  >
+                    {{ tech }}
+                  </Badge>
+                </div>
+              </div>
+
+              <div v-if="backendTechs.length">
+                <p class="text-xs uppercase tracking-wide text-text-secondary mb-2">Backend & Data</p>
+                <div class="flex flex-wrap gap-2">
+                  <Badge
+                    v-for="tech in backendTechs"
+                    :key="`back-${tech}`"
+                    class="bg-background border-none"
+                  >
+                    {{ tech }}
+                  </Badge>
+                </div>
+              </div>
+
+              <div v-if="otherTechs.length">
+                <p class="text-xs uppercase tracking-wide text-text-secondary mb-2">Infra & Outils</p>
+                <div class="flex flex-wrap gap-2">
+                  <Badge
+                    v-for="tech in otherTechs"
+                    :key="`other-${tech}`"
+                    class="bg-background border-none"
+                  >
+                    {{ tech }}
+                  </Badge>
+                </div>
+              </div>
+
+              <div v-if="!normalizedTechnologies.length" class="text-text-secondary text-sm">
+                Stack non renseignee.
+              </div>
             </div>
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <template v-if="project.image_urls && project.image_urls.length">
-            <div v-for="(src, i) in project.image_urls.slice(0,4)" :key="i" class="aspect-video bg-surface rounded-3xl border border-border-light/10 overflow-hidden">
-              <img :src="src" class="w-full h-full object-cover" :alt="`Image ${i+1} - ${project.title}`" />
+            <div v-for="(src, i) in project.image_urls.slice(0,4)" :key="i" class="aspect-video bg-surface rounded-3xl border border-border-light/10 overflow-hidden p-2">
+              <img :src="src" class="w-full h-full object-contain object-center" :alt="`Image ${i+1} - ${project.title}`" loading="lazy" decoding="async" />
             </div>
           </template>
           <template v-else-if="project.image_url">
-            <div class="aspect-video bg-surface rounded-3xl border border-border-light/10 overflow-hidden">
-              <img :src="project.image_url" class="w-full h-full object-cover" alt="Image additionnelle" />
+            <div class="aspect-video bg-surface rounded-3xl border border-border-light/10 overflow-hidden p-2">
+              <img :src="project.image_url" class="w-full h-full object-contain object-center" alt="Image additionnelle" loading="lazy" decoding="async" />
             </div>
           </template>
           <template v-else>
@@ -245,6 +297,33 @@ const { data: projectsData } = await useAsyncData<Project[]>(
 );
 
 const project = computed(() => projectData.value)
+
+const normalizedTechnologies = computed(() =>
+  (project.value?.technologies ?? [])
+    .map((item) => item?.trim())
+    .filter((item): item is string => Boolean(item)),
+)
+
+const includesAny = (tech: string, patterns: string[]) =>
+  patterns.some((pattern) => tech.toLowerCase().includes(pattern))
+
+const frontendTechs = computed(() =>
+  normalizedTechnologies.value.filter((tech) =>
+    includesAny(tech, ['vue', 'nuxt', 'react', 'next', 'tailwind', 'css', 'html', 'javascript', 'typescript']),
+  ),
+)
+
+const backendTechs = computed(() =>
+  normalizedTechnologies.value.filter((tech) =>
+    includesAny(tech, ['node', 'express', 'spring', 'java', 'python', 'postgres', 'mysql', 'mongo', 'supabase', 'api']),
+  ),
+)
+
+const otherTechs = computed(() => {
+  const frontSet = new Set(frontendTechs.value)
+  const backSet = new Set(backendTechs.value)
+  return normalizedTechnologies.value.filter((tech) => !frontSet.has(tech) && !backSet.has(tech))
+})
 
 const formatDate = (dateString: string | null) => {
   if (!dateString) return 'En cours'

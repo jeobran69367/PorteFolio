@@ -150,10 +150,14 @@ export interface Experience {
   company_name: string
   position: string
   description: string | null
+  responsibilities: string[]
+  technologies: string[]
+  project_links: ExperienceProjectLink[]
   start_date: string
   end_date: string | null
   is_current: boolean
   location: string | null
+  work_mode: string
   company_url: string | null
   logo_url: string | null
   achievements: string[]
@@ -167,10 +171,14 @@ export interface ExperienceInsert {
   company_name: string
   position: string
   description?: string | null
+  responsibilities?: string[]
+  technologies?: string[]
+  project_links?: ExperienceProjectLink[]
   start_date: string
   end_date?: string | null
   is_current?: boolean
   location?: string | null
+  work_mode?: string
   company_url?: string | null
   logo_url?: string | null
   achievements?: string[]
@@ -184,10 +192,14 @@ export interface ExperienceUpdate {
   company_name?: string
   position?: string
   description?: string | null
+  responsibilities?: string[]
+  technologies?: string[]
+  project_links?: ExperienceProjectLink[]
   start_date?: string
   end_date?: string | null
   is_current?: boolean
   location?: string | null
+  work_mode?: string
   company_url?: string | null
   logo_url?: string | null
   achievements?: string[]
@@ -211,6 +223,12 @@ export interface Education {
   order_index: number
   created_at: string
   updated_at: string
+}
+
+export interface ExperienceProjectLink {
+  label: string
+  url: string
+  type?: string
 }
 
 export interface EducationInsert {

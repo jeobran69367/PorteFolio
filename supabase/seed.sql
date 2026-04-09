@@ -25,9 +25,48 @@ INSERT INTO skills (name, category, proficiency_level, years_of_experience, orde
 ('Supabase', 'Tools', 4, 1.0, 12);
 
 -- Sample experience
-INSERT INTO experience (company_name, position, description, start_date, end_date, is_current, location, achievements) VALUES
-('Tech Company Inc.', 'Full Stack Developer', 'Developed and maintained web applications using modern JavaScript frameworks.', '2022-01-01', NULL, true, 'Paris, France', '["Led migration to Nuxt.js framework", "Improved application performance by 40%", "Mentored junior developers"]'::jsonb),
-('Startup XYZ', 'Frontend Developer', 'Built responsive user interfaces and implemented new features.', '2020-06-01', '2021-12-31', false, 'Remote', '["Implemented design system", "Reduced page load time by 30%", "Collaborated with design team"]'::jsonb);
+INSERT INTO experience (
+    company_name,
+    position,
+    description,
+    start_date,
+    end_date,
+    is_current,
+    location,
+    work_mode,
+    achievements,
+    responsibilities,
+    technologies,
+    project_links
+) VALUES
+(
+    'Tech Company Inc.',
+    'Full Stack Developer',
+    'Développement et maintenance de plateformes web orientées performance, qualité produit et scalabilité.',
+    '2022-01-01',
+    NULL,
+    true,
+    'Paris, France',
+    'hybrid',
+    '["Pilotage de la migration vers Nuxt.js", "Amélioration des performances de 40%", "Accompagnement de développeurs juniors"]'::jsonb,
+    '["Conception d''APIs REST robustes", "Mise en place de CI/CD", "Revue de code et mentoring", "Collaboration produit-tech"]'::jsonb,
+    '["Nuxt.js", "Vue.js", "TypeScript", "Node.js", "PostgreSQL", "Supabase"]'::jsonb,
+    '[{"label":"Plateforme client B2B", "url":"https://example.com/b2b-platform", "type":"production"}, {"label":"Dashboard analytique", "url":"https://example.com/analytics-dashboard", "type":"case-study"}]'::jsonb
+),
+(
+    'Startup XYZ',
+    'Frontend Developer',
+    'Création d''interfaces orientées conversion et d''un design system unifié pour accélérer les livraisons.',
+    '2020-06-01',
+    '2021-12-31',
+    false,
+    'Lyon, France',
+    'remote',
+    '["Mise en place d''un design system", "Réduction du temps de chargement de 30%", "Amélioration continue avec l''équipe design"]'::jsonb,
+    '["Implémentation de composants UI réutilisables", "Optimisation Lighthouse", "Intégration de tests front-end"]'::jsonb,
+    '["Vue.js", "TypeScript", "TailwindCSS", "Vitest"]'::jsonb,
+    '[{"label":"Application onboarding", "url":"https://example.com/onboarding-app", "type":"production"}]'::jsonb
+);
 
 -- Sample education
 INSERT INTO education (institution, degree, field_of_study, description, start_date, end_date, is_current, location) VALUES

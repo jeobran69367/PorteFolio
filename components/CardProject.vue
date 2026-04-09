@@ -11,7 +11,7 @@
     </div>
     
     <!-- Image placeholder -->
-  <div v-if="hasImage" class="w-full h-60 sm:h-72 md:h-80 bg-background rounded-xl mb-4 overflow-hidden">
+  <div v-if="hasImage" class="card-project-image w-full h-60 sm:h-72 md:h-80 bg-surface rounded-xl mb-4 overflow-hidden border border-border-light/50">
       <slot name="image" />
     </div>
     
@@ -50,3 +50,13 @@ withDefaults(defineProps<Props>(), {
   hasImage: true,
 })
 </script>
+
+<style scoped>
+.card-project-image :deep(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+}
+</style>

@@ -84,23 +84,12 @@
         </div>
 
         <div class="space-y-6">
-          <div
+          <ExperienceCard
             v-for="exp in experiences"
             :key="exp.id"
-            class="bg-surface border border-border-light rounded-xl p-4 sm:p-6 hover:border-border-strong transition-all"
-          >
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-              <div class="flex-1">
-                <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2">
-                  {{ exp.position }}
-                </h3>
-                <p class="text-text-secondary mb-2">{{ exp.company_name }}</p>
-              </div>
-              <span class="text-text-secondary text-sm sm:text-base">{{
-                formatYear(exp.start_date, exp.end_date)
-              }}</span>
-            </div>
-          </div>
+            :experience="exp"
+            :period="formatYear(exp.start_date, exp.end_date)"
+          />
         </div>
       </div>
     </section>
@@ -340,6 +329,7 @@ import Header from "~/components/Header.vue";
 import ContactModal from "~/components/ContactModal.vue";
 import Footer from "~/components/Footer.vue";
 import TechBadge from "~/components/TechBadge.vue";
+import ExperienceCard from "~/components/ExperienceCard.vue";
 import { ref, computed } from "vue";
 import { useAsyncData } from "nuxt/app";
 import { useDatabase } from "../composables/useDatabase";
@@ -353,6 +343,14 @@ interface Experience {
   company_name: string;
   start_date: string;
   end_date: string | null;
+  description: string | null;
+  location: string | null;
+  achievements: string[];
+  technologies?: string[] | null;
+  responsibilities?: string[] | null;
+  project_links?: { label: string; url: string; type?: string }[] | null;
+  work_mode?: string | null;
+  is_current: boolean;
 }
 
 interface Education {
