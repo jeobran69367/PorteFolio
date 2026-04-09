@@ -202,18 +202,12 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-/**
- * Lien vers un projet professionnel associé à l'expérience
- */
 interface ExperienceProjectLink {
   label: string;
   url: string;
   type?: string;
 }
 
-/**
- * Données d'une expérience professionnelle
- */
 interface Experience {
   id: string;
   position: string;
@@ -228,20 +222,13 @@ interface Experience {
   is_current: boolean;
 }
 
-interface Props {
+const props = defineProps<{
   experience: Experience;
   period: string;
-}
+}>();
 
-const props = defineProps<Props>();
-
-// État local
 const isOpen = ref(false);
 
-/**
- * Convertit une valeur quelconque en tableau de chaînes nettoyées
- * Filtre les valeurs vides et les doublons potentiels
- */
 const toCleanStringArray = (value: unknown): string[] => {
   if (!Array.isArray(value)) return [];
   return value
@@ -249,7 +236,6 @@ const toCleanStringArray = (value: unknown): string[] => {
     .filter((item) => item.length > 0);
 };
 
-// Données nettoyées et traitées
 const cleanedAchievements = computed(() =>
   toCleanStringArray(props.experience.achievements),
 );
@@ -262,10 +248,6 @@ const cleanedTechnologies = computed(() =>
   toCleanStringArray(props.experience.technologies),
 );
 
-/**
- * Formate le mode de travail en label lisible
- * @returns Label traduit ou vide string
- */
 const workModeLabel = computed(() => {
   const mode = (props.experience.work_mode ?? "").toLowerCase();
   if (!mode) return "";
@@ -275,10 +257,6 @@ const workModeLabel = computed(() => {
   return props.experience.work_mode ?? "";
 });
 
-/**
- * Valide et formate les liens de projets
- * @returns Tableau de liens valides avec label et url non-vides
- */
 const cleanedProjectLinks = computed(() => {
   const links = props.experience.project_links;
   if (!Array.isArray(links)) return [];
@@ -294,17 +272,7 @@ const cleanedProjectLinks = computed(() => {
     .filter((link): link is { label: string; url: string } => Boolean(link));
 });
 
-/**
- * Premiers points forts (affichés par défaut)
- */
-const highlightAchievements = computed(() => 
-  cleanedAchievements.value.slice(0, 2)
-);
+const highlightAchievements = computed(() => cleanedAchievements.value.slice(0, 2));
 
-/**
- * Points forts détaillés (affichés après expansion)
- */
-const detailedAchievements = computed(() => 
-  cleanedAchievements.value.slice(2)
-);
+const detailedAchievements = computed(() => cleanedAchievements.value.slice(2));
 </script>
