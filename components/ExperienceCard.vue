@@ -1,45 +1,43 @@
 <template>
   <article
-    class="group bg-surface border border-border-light rounded-2xl transition-all duration-300 hover:border-border-strong hover:shadow-md hover:shadow-black/5"
-    :class="isOpen ? 'border-border-strong shadow-md shadow-black/5 bg-gradient-to-br from-surface to-surface/95' : 'hover:bg-gradient-to-br hover:from-surface hover:to-surface/95'"
+    class="group bg-surface border border-border-light rounded-xl sm:rounded-2xl transition-all duration-300 hover:border-border-strong hover:shadow-sm"
+    :class="isOpen ? 'border-border-strong' : ''"
   >
     <button
       type="button"
-      class="w-full p-5 sm:p-7 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
+      class="w-full p-4 sm:p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-xl sm:rounded-2xl"
       :aria-expanded="isOpen"
       @click="isOpen = !isOpen"
     >
-      <div class="flex flex-col gap-5 sm:gap-4">
-        <!-- En-tête: Poste et entreprise -->
-        <div class="flex items-start justify-between gap-4">
+      <div class="flex flex-col gap-4 sm:gap-3">
+        <div class="flex items-start justify-between gap-3">
           <div class="min-w-0 flex-1">
-            <h3 class="text-lg sm:text-2xl font-bold text-text-primary leading-snug">
+            <h3 class="text-lg sm:text-xl font-bold text-text-primary leading-tight">
               {{ experience.position }}
             </h3>
-            <p class="text-sm sm:text-base text-text-secondary mt-2 font-medium">{{ experience.company_name }}</p>
+            <p class="text-text-secondary mt-1 truncate">{{ experience.company_name }}</p>
           </div>
 
           <div class="flex items-center gap-3 shrink-0">
             <span
               v-if="experience.is_current"
-              class="inline-flex items-center rounded-full border border-green-200/50 bg-green-50/30 px-3 py-1.5 text-xs font-semibold text-green-700 dark:border-green-900/30 dark:bg-green-900/20 dark:text-green-300"
+              class="inline-flex items-center rounded-full border border-border-light bg-background px-2.5 py-1 text-xs font-medium text-text-primary"
             >
-              <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5" />
               En cours
             </span>
             <svg
-              width="20"
-              height="20"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
-              class="text-text-secondary transition-transform duration-300 group-hover:text-text-primary"
+              class="text-text-secondary transition-transform duration-300"
               :class="isOpen ? 'rotate-180' : ''"
               aria-hidden="true"
             >
               <path
                 d="M6 9L12 15L18 9"
                 stroke="currentColor"
-                stroke-width="2.5"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
