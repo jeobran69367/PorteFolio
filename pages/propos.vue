@@ -40,9 +40,13 @@
                 @click="showContact = true"
                 >Me contacter</Button
               >
-              <a href="/pdf/Jeobran_Kombou_CV.pdf" download="Jeobran_Kombou_CV.pdf" class="inline-block" aria-label="Télécharger le CV">
-                <Button variant="outline" icon="download" disabled size="md">Télécharger mon CV</Button>
-              </a>
+              <Button
+                variant="outline"
+                icon="download"
+                size="md"
+                @click="$router.push('/ressources')"
+                >Découvrir mes offres</Button
+              >
             </div>
           </div>
 
@@ -341,6 +345,17 @@ import ContactModal from "~/components/ContactModal.vue";
 import Footer from "~/components/Footer.vue";
 import TechBadge from "~/components/TechBadge.vue";
 import { ref, computed } from "vue";
+
+useHead({
+  title: 'À propos — Jeobran Nathanael Kombou',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Découvrez le parcours de Jeobran Nathanael Kombou, développeur Full-Stack, ses expériences, certifications et sa stack technique.',
+    },
+  ],
+})
 import { useAsyncData } from "nuxt/app";
 import { useDatabase } from "../composables/useDatabase";
 

@@ -1,55 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 6rem;
+  }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background: #0B0B0C;
+    color: #FFFFFF;
+    transition: background-color 300ms ease, color 300ms ease;
+    overflow-x: hidden;
   }
-  
-  .font-satoshi {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-weight: 600;
+
+  h1, h2, h3, h4 {
+    font-family: 'Sora', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
   }
-  
-  .font-inter {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+
+  ::selection {
+    background: #3B82F6;
+    color: #fff;
   }
 }
 
-/* Light mode overrides when html has class 'light' */
+/* Font helpers kept for compatibility */
+@layer base {
+  .font-satoshi {
+    font-family: 'Sora', 'Inter', sans-serif;
+    font-weight: 700;
+  }
+  .font-inter {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Custom scrollbar                                                   */
+/* ------------------------------------------------------------------ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+  background-clip: content-box;
+}
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  background-clip: content-box;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reusable components / utilities                                    */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Gradient text accent */
+  .text-gradient {
+    background: linear-gradient(90deg, #3B82F6 0%, #E5D62E 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Subtle radial glow used behind hero / sections */
+  .glow-blue {
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.22) 0%, transparent 70%);
+  }
+
+  .card-hover {
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), border-color 300ms ease,
+      box-shadow 300ms ease, background-color 300ms ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Skeleton loading shimmer */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    animation: shimmer 1.4s infinite;
+  }
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Animation keyframes / utilities                                    */
+/* ------------------------------------------------------------------ */
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease both;
+  }
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
+  }
+  .animate-marquee {
+    animation: marquee 26s linear infinite;
+  }
+  .animate-pulse-soft {
+    animation: pulseSoft 2.4s ease-in-out infinite;
+  }
+  .animate-spin-slow {
+    animation: spin 16s linear infinite;
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Light mode overrides (html.light)                                  */
+/* ------------------------------------------------------------------ */
 @layer base {
   .light body {
     background: #FFFFFF;
     color: #0E0E10;
   }
-
-  /* key utility overrides used across the app */
+  .light ::selection {
+    background: #3B82F6;
+    color: #fff;
+  }
   .light .bg-background { background-color: #FFFFFF !important; }
   .light .bg-surface { background-color: #F5F5F6 !important; }
   .light .text-text-primary { color: #0E0E10 !important; }
   .light .text-text-secondary { color: #6B6B6B !important; }
-  .light .border-border-light { border-color: rgba(0,0,0,0.06) !important; }
+  .light .border-border-light { border-color: rgba(0, 0, 0, 0.07) !important; }
   .light .bg-hover { background-color: #F0F0F0 !important; }
   .light .bg-accent-blue { background-color: #3B82F6 !important; }
-  .light .bg-surface\/bg-opacity-30 { background-color: rgba(245,245,246,0.3) !important; }
+  .light .bg-surface\/bg-opacity-30 { background-color: rgba(245, 245, 246, 0.3) !important; }
+  .light .card-hover:hover {
+    box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.18);
+    border-color: rgba(0, 0, 0, 0.18);
+  }
 }
 
-/* Dark mode overrides when html has class 'dark' */
+/* ------------------------------------------------------------------ */
+/*  Dark mode overrides (html.dark)                                    */
+/* ------------------------------------------------------------------ */
 @layer base {
   .dark body {
     background: #000000;
     color: #FFFFFF;
   }
-
-  /* key utility overrides used across the app */
   .dark .bg-background { background-color: #000000 !important; }
-  /* surface slightly lighter than background for cards/containers */
   .dark .bg-surface { background-color: #050505 !important; }
   .dark .text-text-primary { color: #FFFFFF !important; }
   .dark .text-text-secondary { color: #DADADA !important; }
-  .dark .border-border-light { border-color: rgba(255,255,255,0.06) !important; }
+  .dark .border-border-light { border-color: rgba(255, 255, 255, 0.07) !important; }
   .dark .bg-hover { background-color: #0B0B0C !important; }
   .dark .bg-accent-blue { background-color: #3B82F6 !important; }
-  .dark .bg-surface\/bg-opacity-30 { background-color: rgba(20,20,22,0.3) !important; }
+  .dark .bg-surface\/bg-opacity-30 { background-color: rgba(20, 20, 22, 0.3) !important; }
+}
+
+/* fade transition helper for the mobile menu */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }

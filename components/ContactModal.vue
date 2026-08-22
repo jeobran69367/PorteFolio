@@ -133,7 +133,7 @@
 
 <script setup lang="ts">
 import Button from "~/components/Button.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch, onBeforeUnmount } from "vue";
 
 const IconComponent = ref<any>(null);
 onMounted(async () => {
@@ -151,6 +151,27 @@ const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits(["update:modelValue"]);
 
 const close = () => emit("update:modelValue", false);
+
+// Lock body scroll and close on Escape while the modal is open
+const onKey = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') close()
+}
+watch(
+  () => props.modelValue,
+  (open) => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+      document.addEventListener('keydown', onKey)
+    } else {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', onKey)
+    }
+  },
+)
+onBeforeUnmount(() => {
+  document.body.style.overflow = ''
+  document.removeEventListener('keydown', onKey)
+})
 
 const openWhatsApp = () => {
   const phoneNumber = "33769109626";

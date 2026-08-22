@@ -3,33 +3,36 @@
     <Header @open-contact="showContact = true" />
 
     <!-- Hero Section -->
-    <section id="accueil" class="pt-32 pb-20 px-4 sm:px-6">
-      <div class="max-w-4xl mx-auto">
+    <section id="accueil" class="pt-32 pb-20 px-4 sm:px-6 relative overflow-hidden">
+      <div class="absolute inset-0 glow-blue opacity-30 pointer-events-none"></div>
+      <div class="max-w-4xl mx-auto relative">
         <div class="flex flex-col items-center text-center mb-12">
-          <!-- Profile Image Placeholder -->
+          <!-- Profile Image -->
+          <div class="relative mb-6 sm:mb-8">
+            <div class="absolute -inset-3 rounded-full bg-accent-blue bg-opacity-20 blur-2xl animate-pulse-soft"></div>
             <div
-            class="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full bg-surface border-4 border-border-light mb-6 sm:mb-8 flex items-center justify-center overflow-hidden"
+              class="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full bg-surface border-4 border-border-light flex items-center justify-center overflow-hidden shadow-2xl"
             >
-            <img
-              src="/img/moi.png"
-              srcset="/img/moi.png"
-              sizes="(min-width: 768px) 224px, (min-width: 640px) 192px, 160px"
-              width="224"
-              height="224"
-              alt="Photo de Jeobran Nathanael"
-              class="w-full h-full object-cover"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-            />
+              <img
+                src="/img/moi.png"
+                sizes="(min-width: 768px) 224px, (min-width: 640px) 192px, 160px"
+                width="224"
+                height="224"
+                alt="Photo de Jeobran Nathanael"
+                class="w-full h-full object-cover"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
             </div>
+          </div>
 
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary mb-4 px-4">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary mb-4 px-4 animate-fade-in-up">
             Hey, je suis
             <span class="text-text-secondary block mt-1">Jeobran Nathanael Kombou</span>
           </h1>
 
-          <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-6">
+          <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-6 animate-fade-in-up">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary">
               <span ref="typedEl"></span>
             </h2>
@@ -37,32 +40,39 @@
             <!-- Overlapping tech badges matching design -->
             <div class="flex items-center -space-x-4">
               <div
-                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform -rotate-6 bg-center bg-no-repeat bg-contain"
+                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform -rotate-6 bg-center bg-no-repeat bg-contain animate-float"
                 style="background-image: url(&quot;/img/code.png&quot;)"
               ></div>
               <div
-                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform rotate-2 bg-center bg-no-repeat bg-contain"
-                style="background-image: url(&quot;/img/ia.png&quot;)"
+                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform rotate-2 bg-center bg-no-repeat bg-contain animate-float"
+                style="background-image: url(&quot;/img/ia.png&quot;); animation-delay: 0.6s"
               ></div>
               <div
-                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform rotate-6 bg-center bg-no-repeat bg-contain"
-                style="background-image: url(&quot;/img/po.png&quot;)"
+                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform rotate-6 bg-center bg-no-repeat bg-contain animate-float"
+                style="background-image: url(&quot;/img/po.png&quot;); animation-delay: 1.2s"
               ></div>
             </div>
           </div>
 
-          <p class="text-base sm:text-lg text-text-secondary mb-8 max-w-2xl px-4">
+          <p class="text-base sm:text-lg text-text-secondary mb-8 max-w-2xl px-4 animate-fade-in-up">
             Construire, encadrer et innover : je mets la technologie au service
             de vos projets pour créer des solutions fiables et performantes.
           </p>
 
-          <div class="flex flex-col sm:flex-row items-center gap-4 px-4">
+          <div class="flex flex-col sm:flex-row items-center gap-4 px-4 animate-fade-in-up">
             <Button
               variant="primary"
               icon="arrow"
               size="md"
               @click="showContact = true"
               >Me contacter</Button
+            >
+            <Button
+              variant="outline"
+              icon="download"
+              size="md"
+              @click="$router.push('/ressources')"
+              >Télécharger mes offres</Button
             >
             <Badge type="availability" class="text-lg sm:text-sm">
               Disponible pour un appel
@@ -160,7 +170,7 @@
             </p>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
             <CardProject
               v-for="project in recentProjects"
               :date="formatDate(project.end_date)"
@@ -332,6 +342,9 @@
       </div>
     </section>
 
+    <!-- Resources Section -->
+    <ResourcesSection />
+
     <!-- CTA Section -->
     <section class="py-20 px-4 sm:px-6">
       <div class="max-w-4xl mx-auto">
@@ -364,7 +377,19 @@
 import Header from "~/components/Header.vue";
 import ContactModal from "~/components/ContactModal.vue";
 import Footer from "~/components/Footer.vue";
+import ResourcesSection from "~/components/ResourcesSection.vue";
 import { ref, onMounted, onUnmounted, computed } from "vue";
+
+useHead({
+  title: 'Jeobran Nathanael Kombou — Développeur Full-Stack · IA · Product Owner',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Développeur Full-Stack, IA & Product Owner. Découvrez mes services, projets et ressources téléchargeables. Je construis des solutions digitales fiables et performantes.',
+    },
+  ],
+})
 import Typed from "typed.js"
 import { useAsyncData } from "nuxt/app";
 import { useDatabase } from "../composables/useDatabase";

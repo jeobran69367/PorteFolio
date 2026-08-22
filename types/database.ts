@@ -345,13 +345,15 @@ export interface ServiceUpdate {
   updated_at?: string
 }
 
-// Feature types for the new features table (columns used on services page)
+// Feature types for the features table (columns used on services page)
+// NOTE: the real DB column is `feature_column` (grouped by problems/solutions/benefits)
+// and the content is stored in `content`.
 export interface Feature {
   id: string
   service_id: string | null
   section: string
-  column: string
-  text: string
+  feature_column: string
+  content: string
   italic: boolean
   order_index: number
   created_at: string
@@ -362,8 +364,8 @@ export interface FeatureInsert {
   id?: string
   service_id?: string | null
   section: string
-  column: string
-  text: string
+  feature_column: string
+  content: string
   italic?: boolean
   order_index?: number
   created_at?: string
@@ -374,8 +376,8 @@ export interface FeatureUpdate {
   id?: string
   service_id?: string | null
   section?: string
-  column?: string
-  text?: string
+  feature_column?: string
+  content?: string
   italic?: boolean
   order_index?: number
   updated_at?: string

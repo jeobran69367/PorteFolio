@@ -1,17 +1,35 @@
 # Portfolio Website
 
-A modern portfolio website built with Nuxt.js and Supabase.
+A modern, professional portfolio built with Nuxt 4 + Supabase.
 
 ## Features
 
-- 🎨 Modern and responsive design
+- 🎨 Modern and responsive design with a complete design system (dark/light themes)
 - 🗄️ Supabase backend for data management
 - 🔒 Row Level Security (RLS) for data protection
-- 📝 Contact form with message storage
-- 💼 Projects showcase
-- 🎓 Education and experience sections
-- 🛠️ Skills display with proficiency levels
+- 📝 Contact modal (WhatsApp, Calendly, email)
+- 💼 Projects showcase with detail pages
+- 🛠️ Services with grouped (problems / solutions / benefits) sections
+- 📄 **Ressources** page: downloadable service brochures (PDF)
+- 🎓 Education, certifications and experience sections
 - 📱 TypeScript support for type safety
+- 🧪 **Mock data fallback** — the site is fully functional without a Supabase project (great for local dev, previews and demos)
+
+## Ressources téléchargeables
+
+Le portfolio propose une page `/ressources` avec des brochures de services en PDF :
+`catalogue-services.pdf`, `ia-automatisation.pdf`, `full-stack.pdf`, `product-owner.pdf`.
+
+Ces documents sont générés par un script Python (fpdf2). Pour les régénérer :
+
+```bash
+python3 -m venv .pdfenv
+source .pdfenv/bin/activate
+pip install fpdf2
+python3 scripts/generate-services-pdfs.py
+```
+
+Les PDF sont écrits dans `public/pdf/services/`. (Le venv `.pdfenv` n'est pas versionné.)
 
 ## Setup
 
@@ -39,7 +57,7 @@ You have three options for running the application:
 
 #### Option A: With Mock Data Only (Quickest - No Setup Required)
 
-The application will work immediately without any Supabase configuration. It will use mock data for all content. Simply skip creating a `.env` file and proceed to step 3.
+The application will work immediately without any Supabase configuration. It will use rich mock data for all content. Simply skip creating a `.env` file and proceed to step 3. The seed content lives in `data/mockContent.ts` and is used automatically whenever the Supabase URL is missing or set to the placeholder.
 
 #### Option B: With Local Supabase (Recommended for Development)
 
@@ -160,17 +178,24 @@ See [supabase/README.md](./supabase/README.md) for complete database documentati
 ## Project Structure
 
 ```
-├── app/                    # Nuxt application files
+├── app.vue                 # Root component + global SEO
+├── components/            # Reusable UI components
+├── pages/                 # Routes (index, propos, projets, services, ressources, admin, design-system)
+├── data/                  # Mock / fallback content (used when Supabase is not configured)
+├── composables/           # useDatabase.ts (Supabase + mock fallback)
+├── public/
+│   ├── img/              # Images
+│   └── pdf/services/     # Generated service brochures (PDF)
+├── scripts/               # generate-services-pdfs.py (PDF brochure generator)
 ├── supabase/              # Supabase configuration and migrations
 │   ├── migrations/        # Database migrations
 │   ├── config.toml        # Supabase local config
-│   ├── seed.sql          # Sample data
-│   └── README.md         # Database documentation
+│   ├── seed.sql           # Sample data
+│   └── README.md          # Database documentation
 ├── types/                 # TypeScript type definitions
-│   └── database.ts       # Database types
-├── public/               # Static assets
-├── .env.example          # Environment variables template
-└── nuxt.config.ts        # Nuxt configuration
+│   └── database.ts        # Database types
+├── .env.example           # Environment variables template
+└── nuxt.config.ts         # Nuxt configuration
 ```
 
 ## Resources

@@ -80,6 +80,8 @@
 
   <Methodology :steps="steps" />
 
+    <ResourcesSection />
+
     </main>
 
     <Footer />
@@ -97,6 +99,18 @@ import { useAsyncData } from 'nuxt/app'
 import { useDatabase } from '~/composables/useDatabase'
 import FeatureColumn from '~/components/FeatureColumn.vue'
 import Methodology from '~/components/Methodology.vue'
+import ResourcesSection from '~/components/ResourcesSection.vue'
+
+useHead({
+  title: 'Services — Jeobran Nathanael Kombou',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Mes services : développement IA & automatisation, applications full-stack, product owner. Brochures détaillées téléchargeables.',
+    },
+  ],
+})
 
 const db = useDatabase()
 const showContact = ref(false)

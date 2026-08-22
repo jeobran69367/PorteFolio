@@ -49,6 +49,17 @@ import Badge from '~/components/Badge.vue'
 import ContactModal from '~/components/ContactModal.vue'
 import { ref } from 'vue'
 
+useHead({
+  title: 'Projets — Jeobran Nathanael Kombou',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Une sélection de projets réalisés par Jeobran Nathanael Kombou : applications web, IA et automatisation.',
+    },
+  ],
+})
+
 const db = useDatabase()
 
 const recentProjects = computed<Project[]>(
