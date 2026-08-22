@@ -3,367 +3,237 @@
     <Header @open-contact="showContact = true" />
 
     <!-- Hero Section -->
-    <section id="accueil" class="pt-32 pb-20 px-4 sm:px-6 relative overflow-hidden">
-      <div class="absolute inset-0 glow-blue opacity-30 pointer-events-none"></div>
-      <div class="max-w-4xl mx-auto relative">
-        <div class="flex flex-col items-center text-center mb-12">
-          <!-- Profile Image -->
-          <div class="relative mb-6 sm:mb-8">
-            <div class="absolute -inset-3 rounded-full bg-accent-blue bg-opacity-20 blur-2xl animate-pulse-soft"></div>
-            <div
-              class="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full bg-surface border-4 border-border-light flex items-center justify-center overflow-hidden shadow-2xl"
-            >
-              <img
-                src="/img/moi.png"
-                sizes="(min-width: 768px) 224px, (min-width: 640px) 192px, 160px"
-                width="224"
-                height="224"
-                alt="Photo de Jeobran Nathanael"
-                class="w-full h-full object-cover"
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-              />
-            </div>
+    <section id="accueil" class="relative overflow-hidden pt-32 pb-16 px-4 sm:px-6">
+      <div class="absolute inset-0 glow-blue opacity-40 pointer-events-none"></div>
+      <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-accent-blue bg-opacity-10 blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <!-- Left content -->
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium uppercase tracking-widest border border-border-light bg-hover text-text-secondary mb-6">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+            </span>
+            {{ identity.availability }}
           </div>
 
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary mb-4 px-4 animate-fade-in-up">
-            Hey, je suis
-            <span class="text-text-secondary block mt-1">Jeobran Nathanael Kombou</span>
+          <p class="text-sm sm:text-base font-semibold uppercase tracking-widest text-accent-blue mb-3">
+            {{ valueProposition.eyebrow }}
+          </p>
+
+          <h1 class="text-4xl sm:text-5xl xl:text-6xl font-bold text-text-primary leading-[1.08] mb-6">
+            <span class="text-text-secondary block text-xl sm:text-2xl font-medium mb-3">Je suis {{ identity.name.split(' ').slice(0, 2).join(' ') }}</span>
+            <span class="text-gradient">{{ valueProposition.headline }}</span>
           </h1>
 
-          <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-6 animate-fade-in-up">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary">
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl mb-8">
+            {{ valueProposition.subheadline }}
+          </p>
+
+          <!-- Typed role -->
+          <div class="mb-8 flex items-center gap-3 flex-wrap">
+            <h2 class="text-2xl sm:text-3xl font-bold text-text-primary">
               <span ref="typedEl"></span>
             </h2>
-
-            <!-- Overlapping tech badges matching design -->
-            <div class="flex items-center -space-x-4">
-              <div
-                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform -rotate-6 bg-center bg-no-repeat bg-contain animate-float"
-                style="background-image: url(&quot;/img/code.png&quot;)"
-              ></div>
-              <div
-                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform rotate-2 bg-center bg-no-repeat bg-contain animate-float"
-                style="background-image: url(&quot;/img/ia.png&quot;); animation-delay: 0.6s"
-              ></div>
-              <div
-                class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md transform rotate-6 bg-center bg-no-repeat bg-contain animate-float"
-                style="background-image: url(&quot;/img/po.png&quot;); animation-delay: 1.2s"
-              ></div>
+            <div class="flex items-center -space-x-3">
+              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl shadow-md transform -rotate-6 bg-center bg-no-repeat bg-contain animate-float" style="background-image: url(&quot;/img/code.png&quot;)"></div>
+              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl shadow-md transform rotate-2 bg-center bg-no-repeat bg-contain animate-float" style="background-image: url(&quot;/img/ia.png&quot;); animation-delay:0.6s"></div>
+              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl shadow-md transform rotate-6 bg-center bg-no-repeat bg-contain animate-float" style="background-image: url(&quot;/img/po.png&quot;); animation-delay:1.2s"></div>
             </div>
           </div>
 
-          <p class="text-base sm:text-lg text-text-secondary mb-8 max-w-2xl px-4 animate-fade-in-up">
-            Construire, encadrer et innover : je mets la technologie au service
-            de vos projets pour créer des solutions fiables et performantes.
-          </p>
-
-          <div class="flex flex-col sm:flex-row items-center gap-4 px-4 animate-fade-in-up">
-            <Button
-              variant="primary"
-              icon="arrow"
-              size="md"
-              @click="showContact = true"
-              >Me contacter</Button
-            >
-            <Button
-              variant="outline"
-              icon="download"
-              size="md"
-              @click="$router.push('/ressources')"
-              >Télécharger mes offres</Button
-            >
-            <Badge type="availability" class="text-lg sm:text-sm">
-              Disponible pour un appel
-            </Badge>
+          <div class="flex flex-col sm:flex-row items-center gap-4">
+            <Button variant="primary" icon="arrow" size="lg" @click="showContact = true">Discutons de votre projet</Button>
+            <Button variant="outline" icon="external" size="lg" @click="$router.push('/projets')">Voir mes études de cas</Button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Professional Experience Section -->
-    <section id="apropos" class="py-20 px-4 sm:px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="mb-12">
-          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
-            Expériences professionnelles
-          </h2>
-          <p class="text-text-secondary">
-            Un parcours construit autour de la création de solutions digitales
-            simples, utiles et efficaces.
-          </p>
-        </div>
-
-        <div class="space-y-6">
-          <div
-            v-for="exp in experiences"
-            :key="exp.id"
-            class="bg-surface border border-border-light rounded-xl p-4 sm:p-6 hover:border-border-strong transition-all"
-          >
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-              <div class="flex-1">
-                <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2">
-                  {{ exp.position }}
-                </h3>
-                <p class="text-text-secondary mb-2">{{ exp.company_name }}</p>
+        <!-- Right card -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-3xl border border-border-light bg-surface p-6 sm:p-8 overflow-hidden">
+            <div class="absolute inset-0 glow-blue opacity-30 pointer-events-none"></div>
+            <div class="relative mb-6">
+              <div class="absolute -inset-2 rounded-full bg-accent-blue bg-opacity-20 blur-xl"></div>
+              <div class="relative w-20 h-20 rounded-2xl bg-surface border border-border-light overflow-hidden shadow-xl">
+                <img src="/img/moi.png" alt="Portrait" class="w-full h-full object-cover" loading="lazy" decoding="async" />
               </div>
-              <span class="text-text-secondary text-sm sm:text-base">{{
-                formatYear(exp.start_date, exp.end_date)
-              }}</span>
+            </div>
+
+            <p class="relative text-sm leading-relaxed text-text-secondary mb-6">
+              {{ valueProposition.paragraphs[0] }}
+            </p>
+
+            <div class="relative grid grid-cols-2 gap-3">
+              <div v-for="fact in keyFacts" :key="fact.label" class="rounded-xl bg-background/60 border border-border-light p-3">
+                <p class="text-[11px] uppercase tracking-widest text-text-secondary/70">{{ fact.label }}</p>
+                <p class="text-sm font-semibold text-text-primary mt-1">{{ fact.value }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proof strip -->
+      <div class="max-w-6xl mx-auto mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div v-for="s in proofStrip" :key="s.label" class="text-center rounded-2xl border border-border-light bg-surface/60 p-5">
+          <p class="text-2xl sm:text-3xl font-bold text-gradient">{{ s.value }}</p>
+          <p class="text-xs text-text-secondary mt-1">{{ s.label }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problems I solve -->
+    <section class="py-20 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <SectionHeader eyebrow="Je résous" subtitle="Des problèmes concrets, fréquents en gestion de projet digital. Voici ceux que je prends en charge.">
+          <template #title>Ce que je <span class="text-gradient">résous</span></template>
+        </SectionHeader>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div v-for="p in problemsSolved" :key="p.title" class="card-hover rounded-2xl border border-border-light bg-surface p-6 sm:p-8">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-accent-blue bg-opacity-10 border border-accent-blue border-opacity-20 flex items-center justify-center flex-none">
+                <component :is="IconComponent" v-if="IconComponent" :icon="p.icon" class="w-6 h-6 text-accent-blue" />
+                <svg v-else width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-accent-blue"><path d="M12 9v4m0 4h.01M10.3 3.9L2 18a2 2 0 001.7 3h16.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-text-primary mb-2">{{ p.title }}</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">{{ p.desc }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Certifications Section -->
+    <!-- Expertise domains -->
     <section class="py-20 px-4 sm:px-6 bg-surface bg-opacity-30">
       <div class="max-w-6xl mx-auto">
-        <div class="mb-12">
-          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
-            Certifications
-          </h2>
-          <p class="text-text-secondary">
-            Voici mes certifications obtenues, qui témoignent de mon expertise
-            dans la création de solutions digitales simples, utiles et
-            efficaces.
-          </p>
-        </div>
-
-        <div class="space-y-6">
-          <div
-            v-for="edu in educations"
-            :key="edu.id"
-            class="bg-surface border border-border-light rounded-xl p-4 sm:p-6 hover:border-border-strong transition-all"
-          >
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-              <div class="flex-1">
-                <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2">
-                  {{ edu.degree }}
-                </h3>
-                <p class="text-text-secondary mb-2">{{ edu.institution }}</p>
+        <SectionHeader eyebrow="Mes domaines" subtitle="Chef de projet et expert technique : je couvre toute la chaîne, du cadrage au développement.">
+          <template #title>Mes <span class="text-gradient">domaines d'expertise</span></template>
+        </SectionHeader>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div v-for="domain in expertiseDomains" :key="domain.id" class="card-hover rounded-2xl border border-border-light bg-surface p-6 sm:p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-hover border border-border-light flex items-center justify-center">
+                <component :is="IconComponent" v-if="IconComponent" :icon="domain.icon" class="w-6 h-6 text-accent-blue" />
+                <svg v-else width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-accent-blue"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
               </div>
-              <span class="text-text-secondary text-sm sm:text-base">{{
-                formatYear(edu.start_date, edu.end_date)
-              }}</span>
+              <h3 class="text-lg font-bold text-text-primary">{{ domain.title }}</h3>
             </div>
+            <p class="text-sm text-text-secondary mb-4 leading-relaxed">{{ domain.summary }}</p>
+            <ul class="space-y-2">
+              <li v-for="point in domain.points.slice(0, 4)" :key="point" class="flex items-start gap-2 text-sm text-text-secondary">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" class="text-success mt-0.5 flex-none"><path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>{{ point }}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Recent Projects Section -->
+    <!-- Featured case studies -->
     <section id="projets" class="py-20 px-4 sm:px-6">
       <div class="max-w-7xl mx-auto">
-        <!-- Card wrapper to match CTA style (slightly larger) -->
-        <div
-          class="bg-surface border border-border-light rounded-2xl sm:rounded-3xl pt-12 sm:pt-16 px-4 sm:px-8 lg:px-16 pb-20 sm:pb-24 relative"
-        >
-          <div class="mb-12 text-center">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
-              Projets récents
-            </h2>
-            <p class="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto px-4">
-              Une sélection de travaux réalisés qui illustrent ma façon
-              d'aborder le design et la création de produits digitaux.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
-            <CardProject
-              v-for="project in recentProjects"
-              :date="formatDate(project.end_date)"
-              date-variant="primary"
-            >
-              
-              <template #image>
-                      <div v-if="project.image_urls && project.image_urls.length" class="w-full h-full relative overflow-hidden">
-                        <!-- stacked slides: only the checked radio's image becomes visible via Tailwind peer utilities -->
-                        <div
-                          v-for="(url, idx) in project.image_urls"
-                          :key="idx"
-                          class="absolute inset-0"
-                        >
-                          <input
-                            :id="`p-${project.id}-img-${idx}`"
-                            :name="`p-${project.id}-carousel`"
-                            type="radio"
-                            class="peer sr-only"
-                            :checked="idx === 0"
-                          />
-                          <img
-                            :src="url"
-                            :alt="project.title"
-                            class="absolute inset-0 w-full h-full object-cover opacity-0 peer-checked:opacity-100 transition-opacity duration-500"
-                          />
-                        </div>
-
-                        <!-- dots controls -->
-                        <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-10">
-                          <label
-                            v-for="(url, idx) in project.image_urls"
-                            :key="'dot-' + idx"
-                            :for="`p-${project.id}-img-${idx}`"
-                            class="w-3 h-3 rounded-full bg-white bg-opacity-40 hover:bg-opacity-80 cursor-pointer ring-1 ring-white"
-                          ></label>
-                        </div>
-                      </div>
-
-                      <div v-else class="w-full h-full bg-background flex items-center justify-center">
-                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" class="text-text-muted">
-                          <rect width="80" height="80" fill="currentColor" opacity="0.1" />
-                          <path d="M30 35L40 45L30 55M45 50H55" stroke="currentColor" opacity="0.3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                      </div>
-                    </template>
-
-              <template #title>{{ project.title }}</template>
-
-              <template #description>{{ project.description }}</template>
-
-              <template #technologies>
-                <Badge
-                  v-for="(tech, idx) in project.technologies.slice(0, 3)"
-                  :key="idx"
-                  type="tech"
-                  variant="primary"
-                >
-                  {{ tech }}
-                </Badge>
-              </template>
-            </CardProject>
-          </div>
-          <!-- Floating centered button overlapping the bottom of the card -->
-          <div
-            class="absolute -bottom-5 sm:-bottom-6 left-1/2 transform -translate-x-1/2 z-30"
-          >
-            <Button variant="primary" icon="arrow" size="md" @click="$router.push('/projets')"
-              >Voir d'autres projets</Button
-            >
-          </div>
+        <SectionHeader eyebrow="Études de cas" subtitle="Des projets menés du cadrage à la livraison. Chaque étude détaille le contexte, mon rôle et les résultats.">
+          <template #title>Mes <span class="text-gradient">réalisations</span></template>
+        </SectionHeader>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10">
+          <CardCaseStudy v-for="project in recentProjects" :key="project.id" :project="project" />
+        </div>
+        <div class="text-center">
+          <Button variant="outline" icon="arrow" size="md" @click="$router.push('/projets')">Voir toutes les études de cas</Button>
         </div>
       </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services -->
     <section id="services" class="py-20 px-4 sm:px-6 bg-surface bg-opacity-30">
       <div class="max-w-6xl mx-auto">
-        <div class="mb-12 text-center">
-          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
-            Des services techniques pensés
-          </h2>
-          <h3 class="text-2xl sm:text-3xl font-bold text-text-primary mb-4">
-            pour des projets solides et évolutifs
-          </h3>
-          <p class="text-text-secondary max-w-3xl mx-auto px-4">
-            Du développement à la gestion de projet, j'accompagne les équipes et
-            les entreprises dans la conception, la mise en œuvre et
-            l'optimisation de solutions numériques.
-          </p>
-
-          <div class="flex justify-center mt-8"></div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          <div
-            v-for="service in services"
-            :key="service.id"
-            class="bg-surface border border-border-light rounded-xl p-6 sm:p-8 hover:border-border-strong transition-all group"
-          >
-            <div
-              class="w-16 h-16 bg-hover border border-border-light rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                class="text-text-primary"
-              >
-                <rect
-                  x="8"
-                  y="8"
-                  width="16"
-                  height="16"
-                  rx="2"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path
-                  d="M12 14H20M12 18H18"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </div>
-
-            <h3 class="text-xl font-bold text-text-primary mb-4">
-              {{ service.title }}
-            </h3>
-            <p class="text-text-secondary mb-6 text-sm leading-relaxed">
-              {{ service.description }}
-            </p>
-
-            <div class="space-y-3">
-              <div
-                v-for="(solution, idx) in service.solutions.slice(0, 3)"
-                :key="idx"
-                class="flex items-start gap-3"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  class="text-success mt-0.5 flex-shrink-0"
-                >
-                  <circle
-                    cx="10"
-                    cy="10"
-                    r="8"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <path
-                    d="M6 10L9 13L14 8"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <span class="text-text-secondary text-sm">{{ solution }}</span>
+        <SectionHeader eyebrow="Mes services" subtitle="De la conduite de projet au développement, je vous accompagne concrètement. Zoom sur chaque offre dans les pages Services.">
+          <template #title>Comment je <span class="text-gradient">vous aide</span></template>
+        </SectionHeader>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <NuxtLink v-for="service in services" :key="service.id" :to="`/services`" class="no-underline group card-hover rounded-2xl border border-border-light bg-surface p-6 sm:p-8 flex flex-col">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-accent-blue bg-opacity-10 text-accent-blue border border-accent-blue border-opacity-20 self-start mb-5">
+              {{ service.category }}
+            </span>
+            <h3 class="text-lg font-bold text-text-primary mb-3 group-hover:text-accent-blue transition-colors">{{ service.title }}</h3>
+            <p class="text-sm text-text-secondary leading-relaxed mb-5 line-clamp-3">{{ service.description }}</p>
+            <div class="mt-auto pt-4 border-t border-border-light">
+              <div class="flex items-center gap-2 text-sm font-semibold text-text-primary">
+                <span class="group-hover:text-accent-blue transition-colors">Découvrir</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" class="group-hover:translate-x-1 transition-transform"><path d="M5 10h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
             </div>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why me / strengths -->
+    <section class="py-20 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <SectionHeader eyebrow="Pourquoi moi" subtitle="Ce qui fait la différence quand vous me confiez un projet.">
+          <template #title>Pourquoi un <span class="text-gradient">chef de projet</span> comme moi</template>
+        </SectionHeader>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div v-for="s in strengths" :key="s.title" class="card-hover rounded-2xl border border-border-light bg-surface p-6 sm:p-8">
+            <div class="w-10 h-10 rounded-lg bg-hover border border-border-light flex items-center justify-center mb-4">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-success"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="text-base font-bold text-text-primary mb-2">{{ s.title }}</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">{{ s.desc }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Resources Section -->
-    <ResourcesSection />
+    <!-- Methodology -->
+    <section class="py-20 px-4 sm:px-6 bg-surface bg-opacity-30">
+      <div class="max-w-6xl mx-auto">
+        <SectionHeader eyebrow="Ma méthode" subtitle="Une démarche structurée et éprouvée, pour des projets prévisibles et livrés.">
+          <template #title>Comment je <span class="text-gradient">travaille</span></template>
+        </SectionHeader>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div v-for="(step, i) in process" :key="step.step" class="card-hover rounded-2xl border border-border-light bg-surface p-6 sm:p-8 relative">
+            <span class="absolute top-4 right-5 text-4xl font-bold text-text-muted/20">{{ String(i + 1).padStart(2, '0') }}</span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-accent-blue bg-opacity-10 text-accent-blue border border-accent-blue border-opacity-20 mb-4">{{ step.step }}</span>
+            <h3 class="text-lg font-bold text-text-primary mb-1">{{ step.title }}</h3>
+            <p class="text-xs text-text-secondary mb-3">{{ step.duration }}</p>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">{{ step.desc }}</p>
+            <ul class="space-y-1.5">
+              <li v-for="item in step.items" :key="item" class="flex items-start gap-2 text-xs text-text-secondary">
+                <svg width="12" height="12" viewBox="0 0 20 20" fill="none" class="text-accent-blue mt-0.5 flex-none"><path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>{{ item }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <ResourcesSection @open-contact="showContact = true" />
 
     <!-- CTA Section -->
     <section class="py-20 px-4 sm:px-6">
       <div class="max-w-4xl mx-auto">
-        <div
-          class="bg-surface border border-border-light rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center"
-        >
-          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
-            Travaillons ensemble
-          </h2>
-          <p class="text-text-secondary mb-8">
-            Disponible pour projets, missions et collaborations.
-          </p>
-          <Button
-            variant="primary"
-            @click="showContact = true"
-            icon="arrow"
-            size="lg"
-            >Me contacter</Button
-          >
+        <div class="bg-surface border border-border-light rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+          <div class="absolute inset-0 glow-blue opacity-30 pointer-events-none"></div>
+          <div class="relative">
+            <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+              Un projet à cadrer, piloter ou développer ?
+            </h2>
+            <p class="text-text-secondary mb-8 max-w-xl mx-auto">
+              Décrivez votre besoin et je vous propose une approche concrète, avec des objectifs, un plan et des résultats mesurables.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button variant="primary" icon="arrow" size="lg" @click="showContact = true">Me contacter</Button>
+              <Button variant="outline" icon="external" size="lg" @click="$router.push('/services')">Découvrir mes services</Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -378,164 +248,74 @@ import Header from "~/components/Header.vue";
 import ContactModal from "~/components/ContactModal.vue";
 import Footer from "~/components/Footer.vue";
 import ResourcesSection from "~/components/ResourcesSection.vue";
+import SectionHeader from "~/components/SectionHeader.vue";
+import CardCaseStudy from "~/components/CardCaseStudy.vue";
 import { ref, onMounted, onUnmounted, computed } from "vue";
+import Typed from "typed.js"
+import { useAsyncData } from "nuxt/app";
+import { useDatabase } from "../composables/useDatabase";
+import { identity, valueProposition, problemsSolved, expertiseDomains, strengths, process, keyFacts, type CaseStudy } from "~/data/mockContent";
 
 useHead({
-  title: 'Jeobran Nathanael Kombou — Développeur Full-Stack · IA · Product Owner',
+  title: 'Jeobran Nathanael Kombou — Chef de projet & Développeur Full-Stack',
   meta: [
     {
       name: 'description',
       content:
-        'Développeur Full-Stack, IA & Product Owner. Découvrez mes services, projets et ressources téléchargeables. Je construis des solutions digitales fiables et performantes.',
+        'Chef de projet hybride et développeur full-stack (Vue/Nuxt, Node, Python, IA). Je cadre, pilote et livre vos projets digitaux : études de cas, services et ressources téléchargeables.',
     },
   ],
 })
-import Typed from "typed.js"
-import { useAsyncData } from "nuxt/app";
-import { useDatabase } from "../composables/useDatabase";
 
 const db = useDatabase();
 const typedEl = ref<HTMLElement | null>(null)
 let typed: Typed
+const IconComponent = ref<any>(null)
 
-onMounted(() => {
+onMounted(async () => {
   typed = new Typed(typedEl.value!, {
-    strings: [
-      "Développeur Full-Stack",
-      "Développeur IA",
-      "Product Owner",
-      "Scrum Master",
-    ],
-    typeSpeed: 50,
+    strings: identity.heroRoles,
+    typeSpeed: 55,
     backSpeed: 30,
-    backDelay: 1200,
+    backDelay: 1100,
     loop: true,
     smartBackspace: true,
   })
+  // iconify optional
+  try {
+    const mod = await import('@iconify/vue')
+    IconComponent.value = mod.Icon || mod.default || null
+  } catch (e) {
+    IconComponent.value = null
+  }
 })
 
 onUnmounted(() => {
   typed.destroy()
 })
 
+const { data: projectsData } = await useAsyncData<CaseStudy[]>('projects', async () => {
+  const { data, error } = await db.projects.getFeatured()
+  if (error) { console.error("Error fetching featured projects:", error); return [] }
+  return data ?? []
+})
 
-// align IDs with Supabase UUIDs (string)
-interface Experience {
-  id: string;
-  position: string;
-  company_name: string;
-  start_date: string;
-  end_date: string | null;
-}
+const { data: servicesData } = await useAsyncData('services', async () => {
+  const { data, error } = await db.services.getActive()
+  if (error) { console.error("Error fetching services:", error); return [] }
+  return data ?? []
+})
 
-interface Education {
-  id: string;
-  degree: string;
-  institution: string;
-  start_date: string;
-  end_date: string | null;
-}
+const recentProjects = computed<CaseStudy[]>(() => projectsData.value ?? [])
+const services = computed(() => servicesData.value ?? [])
 
-interface Project {
-  [x: string]:
-  /// <reference types="../../../../../.vscode/extensions/vue.volar-3.2.4/types/template-helpers.d.ts" />
-  /// <reference types="../../../../../.vscode/extensions/vue.volar-3.2.4/types/props-fallback.d.ts" />
-  any;
-  id: string;
-  title: string;
-  description: string;
-  end_date: string | null;
-  technologies: string[];
-}
-
-interface Service {
-  id: string;
-  title: string;
-  description: string;
-  solutions: string[];
-}
-
-// Fetch data from database using Nuxt's useAsyncData so it's SSR-friendly
-const { data: projectsData } = await useAsyncData<Project[]>(
-  "projects",
-  async () => {
-    const { data, error } = await db.projects.getFeatured();
-
-    if (error) {
-      // keep console logging for now; consider reporting to a monitoring service later
-      console.error("Error fetching featured projects:", error);
-      return [];
-    }
-
-    return data ?? [];
-  },
-);
-
-const { data: experiencesData } = await useAsyncData<Experience[]>(
-  "experiences",
-  async () => {
-    const { data, error } = await db.experience.getAll();
-
-    if (error) {
-      console.error("Error fetching experiences:", error);
-      return [];
-    }
-
-    return data ?? [];
-  },
-);
-
-const { data: educationData } = await useAsyncData<Education[]>(
-  "education",
-  async () => {
-    const { data, error } = await db.education.getAll();
-
-    if (error) {
-      console.error("Error fetching education:", error);
-      return [];
-    }
-
-    return data ?? [];
-  },
-);
-
-const { data: servicesData } = await useAsyncData<Service[]>(
-  "services",
-  async () => {
-    // use getActive to fetch all services with status 'active' (not only featured)
-    const { data, error } = await db.services.getActive();
-
-    if (error) {
-      console.error("Error fetching services:", error);
-      return [];
-    }
-
-    return data ?? [];
-  },
-);
-
-const recentProjects = computed<Project[]>(
-  () => projectsData.value?.slice(0, 4) ?? [],
-);
-
-const experiences = computed<Experience[]>(() => experiencesData.value ?? []);
-
-const educations = computed<Education[]>(() => educationData.value ?? []);
-
-const services = computed<Service[]>(() => servicesData.value ?? []);
-
-// Helper functions
-const formatDate = (dateString: string | null) => {
-  if (!dateString) return "En cours";
-  const date = new Date(dateString);
-  return date.toLocaleDateString("fr-FR", { year: "numeric", month: "short" });
-};
-
-const formatYear = (startDate: string, endDate: string | null) => {
-  const start = new Date(startDate).getFullYear();
-  const end = endDate ? new Date(endDate).getFullYear() : "En cours";
-  return `${start} — ${end}`;
-};
+// Qualified phrasing, no invented numbers
+const proofStrip = [
+  { value: 'End-to-end', label: 'Cadrage → livraison' },
+  { value: 'PM + Tech', label: 'Double casquette' },
+  { value: 'Agile', label: 'Scrum · Kanban' },
+  { value: 'Mesuré', label: 'Résultats & KPI' },
+]
 
 const showContact = ref(false);
 </script>

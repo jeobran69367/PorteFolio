@@ -2,204 +2,185 @@
   <div class="min-h-screen bg-background text-text-primary">
     <Header @open-contact="showContact = true" />
 
-    <main class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
-      <div v-if="pending" class="flex justify-center py-24"><div class="animate-pulse">Chargement du projet...</div></div>
+    <main class="pt-28 pb-20 px-4 sm:px-6 max-w-6xl mx-auto">
+      <div v-if="pending" class="flex justify-center py-24"><div class="skeleton w-24 h-24 rounded-full"></div></div>
       <div v-else-if="error" class="text-center text-red-500 py-24">{{ error.statusMessage || "Erreur réseau" }}</div>
-      <div v-else-if="!project" class="text-center py-24">Projet introuvable.</div>
+      <div v-else-if="!project" class="text-center py-24 text-text-secondary">Étude de cas introuvable.</div>
 
-      <div v-else class="space-y-16">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <div class="aspect-video lg:aspect-square bg-surface rounded-3xl overflow-hidden border border-border-light/10">
-            <img v-if="project.image_url" :src="project.image_url" class="w-full h-full object-cover" alt="Hero image">
-            <div v-else class="w-full h-full flex items-center justify-center text-text-secondary/20 italic">Aperçu projet</div>
+      <div v-else>
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-text-secondary mb-8">
+          <NuxtLink to="/projets" class="hover:text-accent-blue transition-colors">Projets</NuxtLink>
+          <span>/</span>
+          <span class="text-text-primary">{{ project.title }}</span>
+        </nav>
+
+        <!-- Header -->
+        <div class="mb-12">
+          <div class="flex flex-wrap items-center gap-3 mb-5">
+            <Badge type="tech" variant="secondary">{{ project.category }}</Badge>
+            <Badge type="date">{{ project.timeline }}</Badge>
+            <Badge v-if="project.personCount" type="tech">{{ project.personCount }}</Badge>
           </div>
-
-          <div class="flex flex-col justify-center h-full">
-            <div class="flex flex-wrap gap-2 mb-6">
-              <Badge type="tech" class="opacity-80">{{ project.category }}</Badge>
-              <Badge v-if="project.end_date" type="date">{{ formatDate(project.end_date) }}</Badge>
-            </div>
-            
-            <h1 class="text-5xl font-bold mb-6 tracking-tight">{{ project.title }}</h1>
-            
-            <p class="text-text-secondary text-lg leading-relaxed mb-8 max-w-lg">
-              {{ project.long_description || project.description }}
-            </p>
-
-            <div class="flex items-center gap-4">
-              <a v-if="project.project_url" :href="project.project_url" target="_blank" class="px-6 py-3 rounded-xl bg-white text-black font-semibold flex items-center gap-2 hover:bg-opacity-90 transition">
-                Voir le projet <span class="text-xs">↗</span>
-              </a>
-              <a v-if="project.github_url" :href="project.github_url" target="_blank" class="px-6 py-3 rounded-xl border border-border-light hover:bg-surface transition">
-                Source
-              </a>
-            </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">{{ project.title }}</h1>
+          <p class="text-xl text-text-secondary max-w-3xl leading-relaxed">{{ project.long_description || project.description }}</p>
+          <div class="mt-6">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-accent-blue bg-opacity-10 text-accent-blue border border-accent-blue border-opacity-20">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20a8 8 0 0116 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Mon rôle : {{ project.role }}
+            </span>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-12">
-          <div class="space-y-12">
-            <section>
-              <h2 class="text-2xl font-bold mb-4">Contexte & objectif</h2>
-              <div class="text-text-secondary leading-relaxed space-y-4">
-                <p v-for="(obj, i) in project.objectif" :key="i">{{ obj }}</p>
-                <p v-if="!project.objectif?.length">Description du contexte académique ou professionnel.</p>
+        <!-- 2-col grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-16">
+          <!-- Left (main) -->
+          <div class="lg:col-span-2 space-y-12">
+            <!-- Contexte & enjeu -->
+            <CaseBlock title="Contexte & enjeu" icon="mdi:map-marker-path">
+              <p class="text-text-secondary leading-relaxed mb-4">{{ project.context }}</p>
+              <div class="rounded-xl bg-hover border border-border-light p-4">
+                <p class="text-xs font-semibold uppercase tracking-widest text-accent-blue mb-2">Besoin initial / problématique</p>
+                <p class="text-text-secondary leading-relaxed">{{ project.need }}</p>
               </div>
-            </section>
+            </CaseBlock>
 
-            <section>
-              <h2 class="text-2xl font-bold mb-4">Solution & fonctionnalités clés</h2>
-              <p class="text-text-secondary mb-4">La solution repose sur une architecture moderne intégrant :</p>
-              <ul class="space-y-2">
-                <li v-for="(sol, i) in project.solution" :key="i" class="flex items-start gap-3 text-text-secondary">
-                  <span class="text-blue-500 mt-1.5">•</span> {{ sol }}
+            <!-- Objectifs -->
+            <CaseBlock title="Objectifs" icon="mdi:bullseye-arrow">
+              <ul class="space-y-2.5">
+                <li v-for="(obj, i) in project.objectives" :key="i" class="flex items-start gap-3 text-text-secondary">
+                  <span class="inline-flex w-6 h-6 rounded-full bg-accent-blue bg-opacity-10 text-accent-blue text-xs font-bold items-center justify-center flex-none">{{ i + 1 }}</span>
+                  <span>{{ obj }}</span>
                 </li>
               </ul>
-            </section>
+            </CaseBlock>
+
+            <!-- Méthodologie -->
+            <CaseBlock title="Méthodologie de travail" icon="mdi:file-tree-outline">
+              <ol class="space-y-3">
+                <li v-for="(m, i) in project.methodology" :key="i" class="flex items-start gap-3 text-text-secondary">
+                  <span class="inline-flex w-6 h-6 rounded-lg bg-hover border border-border-light text-xs font-bold items-center justify-center flex-none">{{ i + 1 }}</span>
+                  <span class="leading-relaxed">{{ m }}</span>
+                </li>
+              </ol>
+            </CaseBlock>
+
+            <!-- Solutions & décisions -->
+            <CaseBlock title="Solutions mises en place" icon="mdi:lightbulb-on-outline">
+              <ul class="space-y-2.5">
+                <li v-for="(s, i) in project.solutions" :key="i" class="flex items-start gap-3 text-text-secondary">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-success mt-0.5 flex-none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>{{ s }}</span>
+                </li>
+              </ul>
+            </CaseBlock>
+
+            <!-- Décisions clés -->
+            <CaseBlock v-if="project.decisions?.length" title="Décisions clés" icon="mdi:comment-check-outline">
+              <ul class="space-y-2.5">
+                <li v-for="(d, i) in project.decisions" :key="i" class="flex items-start gap-3 text-text-secondary">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-accent-blue mt-0.5 flex-none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                  <span>{{ d }}</span>
+                </li>
+              </ul>
+            </CaseBlock>
+
+            <!-- Résultats -->
+            <CaseBlock title="Résultats obtenus" icon="mdi:chart-line-variant">
+              <ul class="space-y-3">
+                <li v-for="(r, i) in project.results" :key="i" class="flex items-start gap-3 text-text-secondary">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-success mt-0.5 flex-none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>{{ r }}</span>
+                </li>
+              </ul>
+            </CaseBlock>
+
+            <!-- Enseignements -->
+            <CaseBlock v-if="project.learnings" title="Enseignements & impact" icon="mdi:school-outline">
+              <p class="text-text-secondary leading-relaxed">{{ project.learnings }}</p>
+            </CaseBlock>
           </div>
 
-          <div class="aspect-square bg-surface rounded-3xl border border-border-light/10 flex items-center justify-center text-text-secondary/20 italic">
-            Visualisation Dashboard / Mobile
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="p-8 bg-surface rounded-3xl border border-border-light/5">
-            <h3 class="text-xl font-bold mb-4">Rôle</h3>
-            <p class="text-text-secondary text-lg">Développeur Full-Stack & IA</p>
-          </div>
-          
-          <div class="p-8 bg-surface rounded-3xl border border-border-light/5">
-            <h3 class="text-xl font-bold mb-4">Stack</h3>
-            <div class="flex flex-wrap gap-2">
-              <Badge v-for="tech in project.technologies" :key="tech" class="bg-background border-none">{{ tech }}</Badge>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <template v-if="project.image_urls && project.image_urls.length">
-            <div v-for="(src, i) in project.image_urls.slice(0,4)" :key="i" class="aspect-video bg-surface rounded-3xl border border-border-light/10 overflow-hidden">
-              <img :src="src" class="w-full h-full object-cover" :alt="`Image ${i+1} - ${project.title}`" />
-            </div>
-          </template>
-          <template v-else-if="project.image_url">
-            <div class="aspect-video bg-surface rounded-3xl border border-border-light/10 overflow-hidden">
-              <img :src="project.image_url" class="w-full h-full object-cover" alt="Image additionnelle" />
-            </div>
-          </template>
-          <template v-else>
-            <div v-for="n in 4" :key="n" class="aspect-video bg-surface rounded-3xl border border-border-light/10 flex items-center justify-center text-text-secondary/10">
-              Aperçu image {{ n }}
-            </div>
-          </template>
-        </div>
-
-        <!-- Recent Projects Section -->
-    <section id="projets" class="py-20 px-6">
-      <div class="max-w-7xl mx-auto">
-        <!-- Card wrapper to match CTA style (slightly larger) -->
-        <div
-          class="bg-surface border border-border-light rounded-3xl pt-16 px-16 pb-24 relative"
-        >
-          <div class="mb-12 text-center">
-            <h2 class="text-5xl font-bold text-text-primary mb-4">
-              Projets récents
-            </h2>
-            <p class="text-text-secondary text-lg max-w-2xl mx-auto">
-              Une sélection de travaux réalisés qui illustrent ma façon
-              d'aborder le design et la création de produits digitaux.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <CardProject
-              v-for="project in recentProjects"
-              :key="project.id"
-              :date="formatDate(project.end_date)"
-              date-variant="primary"
-            >
-              <template #image>
-                <div
-                  class="w-full h-full bg-background flex items-center justify-center"
-                >
-                  <svg
-                    width="80"
-                    height="80"
-                    viewBox="0 0 80 80"
-                    fill="none"
-                    class="text-text-muted"
-                  >
-                    <rect
-                      width="80"
-                      height="80"
-                      fill="currentColor"
-                      opacity="0.1"
-                    />
-                    <path
-                      d="M30 35L40 45L30 55M45 50H55"
-                      stroke="currentColor"
-                      opacity="0.3"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
+          <!-- Right (sidebar) -->
+          <div class="space-y-6">
+            <!-- KPI -->
+            <div class="rounded-2xl border border-border-light bg-surface p-6">
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-text-secondary mb-4">Indicateurs / KPI</h3>
+              <div class="space-y-4">
+                <div v-for="(kpi, i) in project.kpis" :key="i" class="border-b border-border-light pb-3 last:border-0 last:pb-0">
+                  <p class="text-xs text-text-secondary">{{ kpi.label }}</p>
+                  <p class="text-lg font-bold text-accent-blue mt-1">{{ kpi.value }}</p>
+                  <p v-if="kpi.note" class="text-[11px] text-text-secondary/70 mt-0.5">{{ kpi.note }}</p>
                 </div>
-              </template>
+                <p class="text-[11px] text-text-secondary/60 italic">Indicateurs à personnaliser avec vos propres données.</p>
+              </div>
+            </div>
 
-              <template #title>{{ project.title }}</template>
+            <!-- Organisation & parties prenantes -->
+            <div class="rounded-2xl border border-border-light bg-surface p-6">
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-text-secondary mb-4">Organisation du projet</h3>
+              <p class="text-sm text-text-secondary leading-relaxed mb-5">{{ project.organization }}</p>
 
-              <template #description>{{ project.description }}</template>
+              <h4 class="text-xs font-semibold uppercase tracking-widest text-text-secondary mb-3">Parties prenantes</h4>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <Badge v-for="(s, i) in project.stakeholders" :key="i" type="tech">{{ s }}</Badge>
+              </div>
 
-              <template #technologies>
-                <Badge
-                  v-for="(tech, idx) in project.technologies.slice(0, 3)"
-                  :key="idx"
-                  type="tech"
-                  variant="primary"
-                >
-                  {{ tech }}
-                </Badge>
-              </template>
-            </CardProject>
-          </div>
-          <!-- Floating centered button overlapping the bottom of the card -->
-          <div
-            class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-30"
-          >
-            <Button variant="primary" icon="arrow"
-              >Voir d'autres projets</Button
-            >
+              <h4 class="text-xs font-semibold uppercase tracking-widest text-text-secondary mb-3">Responsabilités</h4>
+              <ul class="space-y-2">
+                <li v-for="(r, i) in project.responsibilities" :key="i" class="flex items-start gap-2 text-sm text-text-secondary">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent-blue mt-1.5 flex-none"></span>
+                  <span>{{ r }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Contraintes & difficultés -->
+            <div class="rounded-2xl border border-border-light bg-surface p-6">
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-text-secondary mb-4">Contraintes & difficultés</h3>
+              <p class="text-xs font-semibold uppercase tracking-widest text-text-secondary/70 mb-2">Contraintes</p>
+              <ul class="space-y-2 mb-4">
+                <li v-for="(c, i) in project.constraints" :key="i" class="flex items-start gap-2 text-sm text-text-secondary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-yellow-400 mt-0.5 flex-none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <span>{{ c }}</span>
+                </li>
+              </ul>
+              <p class="text-xs font-semibold uppercase tracking-widest text-text-secondary/70 mb-2">Difficultés</p>
+              <ul class="space-y-2">
+                <li v-for="(c, i) in project.challenges" :key="i" class="flex items-start gap-2 text-sm text-text-secondary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-yellow-400 mt-0.5 flex-none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <span>{{ c }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Outils -->
+            <div class="rounded-2xl border border-border-light bg-surface p-6">
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-text-secondary mb-4">Outils & technologies</h3>
+              <div class="flex flex-wrap gap-2">
+                <Badge v-for="t in project.technologies" :key="t" type="tech" variant="primary">{{ t }}</Badge>
+              </div>
+            </div>
+
+            <!-- Compétences démontrées -->
+            <div class="rounded-2xl border border-border-light bg-surface p-6">
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-text-secondary mb-4">Compétences démontrées</h3>
+              <div class="flex flex-wrap gap-2">
+                <Badge v-for="c in project.competencies" :key="c" type="tech" variant="secondary">{{ c }}</Badge>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-        <!-- CTA Section -->
-    <section class="py-20 px-6">
-      <div class="max-w-4xl mx-auto">
-        <div
-          class="bg-surface border border-border-light rounded-3xl p-12 text-center"
-        >
-          <h2 class="text-4xl font-bold text-text-primary mb-4">
-            Travaillons ensemble
-          </h2>
-          <p class="text-text-secondary mb-8">
-            Disponible pour projets, missions et collaborations.
-          </p>
-          <Button
-            variant="primary"
-            @click="showContact = true"
-            icon="arrow"
-            size="lg"
-            >Me contacter</Button
-          >
+        <!-- CTA -->
+        <div class="bg-surface border border-border-light rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+          <div class="absolute inset-0 glow-blue opacity-30 pointer-events-none"></div>
+          <div class="relative">
+            <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-4">Un projet similaire ?</h2>
+            <p class="text-text-secondary mb-8 max-w-xl mx-auto">Parlons de votre besoin : je peux vous proposer une approche et un plan adaptés.</p>
+            <Button variant="primary" icon="arrow" size="lg" @click="showContact = true">Me contacter</Button>
+          </div>
         </div>
-      </div>
-    </section>
-
       </div>
     </main>
 
@@ -211,56 +192,36 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import type { Project } from '~/types/database' // Assure-toi que le chemin est correct
+import Badge from '~/components/Badge.vue'
+import Button from '~/components/Button.vue'
+import Header from '~/components/Header.vue'
+import Footer from '~/components/Footer.vue'
+import ContactModal from '~/components/ContactModal.vue'
+import CaseBlock from '~/components/CaseBlock.vue'
+import { useDatabase } from '~/composables/useDatabase'
+import type { CaseStudy } from '~/data/projects'
 
 const db = useDatabase()
 const route = useRoute()
 const showContact = ref(false)
 const id = String(route.params.id || '')
 
-const { data: projectData, pending, error } = await useAsyncData<Project | null>(`project-${id}`, async () => {
+const { data: projectData, pending, error } = await useAsyncData<CaseStudy | null>(`project-${id}`, async () => {
   if (!id) return null
   const { data, error } = await db.projects.getById(id)
   if (error) throw createError({ statusCode: 500, statusMessage: error.message })
   return data
 })
 
-const recentProjects = computed<Project[]>(
-  () => projectsData.value?.slice(0, 2) ?? [],
-);
-
-const { data: projectsData } = await useAsyncData<Project[]>(
-  "projects",
-  async () => {
-    const { data, error } = await db.projects.getFeatured();
-
-    if (error) {
-      // keep console logging for now; consider reporting to a monitoring service later
-      console.error("Error fetching featured projects:", error);
-      return [];
-    }
-
-    return data ?? [];
-  },
-);
-
 const project = computed(() => projectData.value)
 
-const formatDate = (dateString: string | null) => {
-  if (!dateString) return 'En cours'
-  return new Date(dateString).toLocaleDateString('fr-FR', { 
-    year: 'numeric', 
-    month: 'short' 
-  })
-}
+useHead(() => ({
+  title: project.value ? `${project.value.title} — Étude de cas · Jeobran` : 'Étude de cas',
+  meta: [
+    {
+      name: 'description',
+      content: project.value?.long_description || project.value?.description || 'Étude de cas',
+    },
+  ],
+}))
 </script>
-
-<style scoped>
-/* Optionnel : pour un dégradé subtil sur le background si tu veux pimper le noir pur */
-.bg-background {
-  background-color: #050505;
-}
-.bg-surface {
-  background-color: #0E0E10;
-}
-</style>

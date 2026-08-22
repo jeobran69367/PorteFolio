@@ -1,19 +1,22 @@
-# Portfolio Website
+# Portfolio Website — Chef de projet & Développeur Full-Stack
 
-A modern, professional portfolio built with Nuxt 4 + Supabase.
+A modern, professional portfolio for **Jeobran Nathanael Kombou**, positioned as a
+**hybrid project manager + technical expert** (Full-Stack & IA). Built with Nuxt 4 + Supabase.
 
 ## Features
 
-- 🎨 Modern and responsive design with a complete design system (dark/light themes)
-- 🗄️ Supabase backend for data management
-- 🔒 Row Level Security (RLS) for data protection
+- 🎨 Premium responsive UI with a design system (dark/light themes, Sora/Inter fonts, animations)
+- 🧭 Clear narrative: profile → positioning → expertise → projects → services → resources → contact
+- 📊 **Case studies** (complete project breakdowns: context, role, methodology, results, KPIs)
+- 🛠️ **Detailed services** (need, deliverables, method, tools, benefits, when relevant)
+- 📄 **Ressources** page with downloadable, professional documents (PDF)
+  - Profil professionnel, fiche de compétences, méthode de travail, études de cas, fiches services
+- 💼 Projects showcase with rich study-of-case detail pages
+- 🗄️ Supabase backend (optional) with RLS
 - 📝 Contact modal (WhatsApp, Calendly, email)
-- 💼 Projects showcase with detail pages
-- 🛠️ Services with grouped (problems / solutions / benefits) sections
-- 📄 **Ressources** page: downloadable service brochures (PDF)
-- 🎓 Education, certifications and experience sections
 - 📱 TypeScript support for type safety
-- 🧪 **Mock data fallback** — the site is fully functional without a Supabase project (great for local dev, previews and demos)
+- 🧪 **Mock data fallback** — fully functional without a Supabase project
+- 🔒 **No invented data** — personal facts (employers, exact figures) are marked "à compléter"
 
 ## Ressources téléchargeables
 

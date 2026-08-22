@@ -8,21 +8,21 @@
 <script setup lang="ts">
 useHead({
   htmlAttrs: { lang: 'fr' },
-  title: 'Jeobran Nathanael Kombou — Développeur Full-Stack · IA · Product Owner',
+  title: 'Jeobran Nathanael Kombou — Chef de projet & Développeur Full-Stack',
   meta: [
     {
       name: 'description',
       content:
-        'Portfolio de Jeobran Nathanael Kombou, développeur Full-Stack spécialisé en IA, automatisation et applications web. Découvrez mes services, projets et ressources téléchargeables.',
+        'Chef de projet hybride et développeur full-stack : pilotage de projets digitaux, product management, développement web et IA. Découvrez mes services, études de cas et ressources.',
     },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { name: 'theme-color', content: '#0B0B0C' },
     { name: 'author', content: 'Jeobran Nathanael Kombou' },
-    { property: 'og:title', content: 'Jeobran Nathanael Kombou — Développeur Full-Stack' },
+    { property: 'og:title', content: 'Jeobran Nathanael Kombou — Chef de projet & Développeur Full-Stack' },
     {
       property: 'og:description',
       content:
-        'Développeur Full-Stack, IA & Product Owner. Services, projets et ressources téléchargeables.',
+        'Chef de projet & expert technique. Pilotage de projets, product management, développement et IA. Services détaillés et ressources téléchargeables.',
     },
     { property: 'og:type', content: 'website' },
     { property: 'og:locale', content: 'fr_FR' },
