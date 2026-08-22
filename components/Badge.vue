@@ -41,7 +41,7 @@ const isUnavailable = computed(() => {
 
 const dotClasses = computed(() => {
   const base = 'w-2 h-2 rounded-full mr-2'
-  return [base, isUnavailable.value ? 'bg-red-600' : 'bg-success'].join(' ')
+  return [base, isUnavailable.value ? 'bg-text-secondary/60' : 'bg-accent-blue'].join(' ')
 })
 
 const badgeClasses = computed(() => {
@@ -51,12 +51,12 @@ const badgeClasses = computed(() => {
       if (isUnavailable.value) {
         return [
           baseClasses,
-          'bg-red-600 bg-opacity-10 text-red-600 border border-red-600 border-opacity-30',
+          'bg-surface text-text-secondary border border-border-light',
         ].join(' ')
       }
       return [
         baseClasses,
-        'bg-success bg-opacity-10 text-success border border-success border-opacity-30',
+        'bg-accent-blue bg-opacity-10 text-accent-blue border border-accent-blue border-opacity-30',
       ].join(' ')
   }
   

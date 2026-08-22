@@ -61,7 +61,7 @@
             <p class="text-sm text-text-secondary mb-4 leading-relaxed">{{ domain.summary }}</p>
             <ul class="space-y-2">
               <li v-for="point in domain.points" :key="point" class="flex items-start gap-2 text-sm text-text-secondary">
-                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" class="text-success mt-0.5 flex-none"><path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" class="text-accent-blue mt-0.5 flex-none"><path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <span>{{ point }}</span>
               </li>
             </ul>
@@ -92,7 +92,7 @@
                 <p class="text-xs font-semibold uppercase tracking-widest text-text-secondary/70 mb-2">Réalisations marquantes</p>
                 <ul class="space-y-1.5">
                   <li v-for="(a, i) in exp.achievements" :key="i" class="flex items-start gap-2 text-sm text-text-secondary">
-                    <span class="w-1.5 h-1.5 rounded-full bg-success mt-1.5 flex-none"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-accent-blue mt-1.5 flex-none"></span>
                     <span>{{ a }}</span>
                   </li>
                 </ul>

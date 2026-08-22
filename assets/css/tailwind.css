@@ -76,9 +76,9 @@
 /*  Reusable components / utilities                                    */
 /* ------------------------------------------------------------------ */
 @layer components {
-  /* Gradient text accent */
+  /* Gradient text accent (blue only) */
   .text-gradient {
-    background: linear-gradient(90deg, #3B82F6 0%, #E5D62E 100%);
+    background: linear-gradient(90deg, #60A5FA 0%, #3B82F6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -182,7 +182,7 @@
   .light .text-text-secondary { color: #6B6B6B !important; }
   .light .border-border-light { border-color: rgba(0, 0, 0, 0.07) !important; }
   .light .bg-hover { background-color: #F0F0F0 !important; }
-  .light .bg-accent-blue { background-color: #3B82F6 !important; }
+  .light .bg-accent-blue { background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1)) !important; }
   .light .bg-surface\/bg-opacity-30 { background-color: rgba(245, 245, 246, 0.3) !important; }
   .light .card-hover:hover {
     box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.18);
@@ -204,7 +204,7 @@
   .dark .text-text-secondary { color: #DADADA !important; }
   .dark .border-border-light { border-color: rgba(255, 255, 255, 0.07) !important; }
   .dark .bg-hover { background-color: #0B0B0C !important; }
-  .dark .bg-accent-blue { background-color: #3B82F6 !important; }
+  .dark .bg-accent-blue { background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1)) !important; }
   .dark .bg-surface\/bg-opacity-30 { background-color: rgba(20, 20, 22, 0.3) !important; }
 }
 

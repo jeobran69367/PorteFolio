@@ -69,7 +69,7 @@
             <CaseBlock title="Solutions mises en place" icon="mdi:lightbulb-on-outline">
               <ul class="space-y-2.5">
                 <li v-for="(s, i) in project.solutions" :key="i" class="flex items-start gap-3 text-text-secondary">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-success mt-0.5 flex-none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-accent-blue mt-0.5 flex-none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   <span>{{ s }}</span>
                 </li>
               </ul>
@@ -89,7 +89,7 @@
             <CaseBlock title="Résultats obtenus" icon="mdi:chart-line-variant">
               <ul class="space-y-3">
                 <li v-for="(r, i) in project.results" :key="i" class="flex items-start gap-3 text-text-secondary">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-success mt-0.5 flex-none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-accent-blue mt-0.5 flex-none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   <span>{{ r }}</span>
                 </li>
               </ul>
@@ -141,14 +141,14 @@
               <p class="text-xs font-semibold uppercase tracking-widest text-text-secondary/70 mb-2">Contraintes</p>
               <ul class="space-y-2 mb-4">
                 <li v-for="(c, i) in project.constraints" :key="i" class="flex items-start gap-2 text-sm text-text-secondary">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-yellow-400 mt-0.5 flex-none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-accent-blue mt-0.5 flex-none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                   <span>{{ c }}</span>
                 </li>
               </ul>
               <p class="text-xs font-semibold uppercase tracking-widest text-text-secondary/70 mb-2">Difficultés</p>
               <ul class="space-y-2">
                 <li v-for="(c, i) in project.challenges" :key="i" class="flex items-start gap-2 text-sm text-text-secondary">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-yellow-400 mt-0.5 flex-none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-accent-blue mt-0.5 flex-none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                   <span>{{ c }}</span>
                 </li>
               </ul>

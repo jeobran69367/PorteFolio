@@ -31,7 +31,6 @@ export default {
         },
         accent: {
           blue: '#3B82F6',
-          yellow: '#E5D62E',
         }
       },
     },

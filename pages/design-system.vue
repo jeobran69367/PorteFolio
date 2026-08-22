@@ -29,11 +29,6 @@
             <p class="text-xs text-text-secondary">#FFFFFF</p>
           </div>
           <div>
-            <div class="bg-success h-24 rounded-lg mb-2"></div>
-            <p class="text-sm text-text-primary">Success</p>
-            <p class="text-xs text-text-secondary">#10B981</p>
-          </div>
-          <div>
             <div class="bg-border-strong h-24 rounded-lg mb-2"></div>
             <p class="text-sm text-text-primary">Border Strong</p>
             <p class="text-xs text-text-secondary">#3A3A3D</p>
@@ -49,9 +44,9 @@
             <p class="text-xs text-text-secondary">#3B82F6</p>
           </div>
           <div>
-            <div class="bg-accent-yellow h-24 rounded-lg mb-2"></div>
-            <p class="text-sm text-text-primary">Accent Yellow</p>
-            <p class="text-xs text-text-secondary">#E5D62E</p>
+            <div class="bg-accent-blue bg-opacity-10 border border-accent-blue border-opacity-20 h-24 rounded-lg mb-2"></div>
+            <p class="text-sm text-text-primary">Accent Blue translucide</p>
+            <p class="text-xs text-text-secondary">#3B82F6 / 10%</p>
           </div>
           <div>
             <div class="bg-background h-24 rounded-lg mb-2 border border-border-light"></div>

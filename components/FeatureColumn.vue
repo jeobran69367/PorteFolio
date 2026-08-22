@@ -12,7 +12,7 @@
           height="20"
           viewBox="0 0 24 24"
           fill="none"
-          class="text-green-500 w-5 h-5 flex-none"
+          class="text-accent-blue w-5 h-5 flex-none"
           aria-hidden="true"
         >
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.3" fill="none" opacity="0.12" />

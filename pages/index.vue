@@ -12,8 +12,8 @@
         <div class="lg:col-span-7">
           <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium uppercase tracking-widest border border-border-light bg-hover text-text-secondary mb-6">
             <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-blue"></span>
             </span>
             {{ identity.availability }}
           </div>
@@ -124,7 +124,7 @@
             <p class="text-sm text-text-secondary mb-4 leading-relaxed">{{ domain.summary }}</p>
             <ul class="space-y-2">
               <li v-for="point in domain.points.slice(0, 4)" :key="point" class="flex items-start gap-2 text-sm text-text-secondary">
-                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" class="text-success mt-0.5 flex-none"><path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" class="text-accent-blue mt-0.5 flex-none"><path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <span>{{ point }}</span>
               </li>
             </ul>
@@ -181,7 +181,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <div v-for="s in strengths" :key="s.title" class="card-hover rounded-2xl border border-border-light bg-surface p-6 sm:p-8">
             <div class="w-10 h-10 rounded-lg bg-hover border border-border-light flex items-center justify-center mb-4">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-success"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-accent-blue"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <h3 class="text-base font-bold text-text-primary mb-2">{{ s.title }}</h3>
             <p class="text-sm text-text-secondary leading-relaxed">{{ s.desc }}</p>

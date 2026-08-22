@@ -42,7 +42,7 @@
         <p class="text-xs font-semibold uppercase tracking-widest text-text-secondary/70 mb-2">Résultats clés</p>
         <ul class="space-y-1.5">
           <li v-for="(r, i) in project.results.slice(0, 2)" :key="i" class="flex items-start gap-2 text-sm text-text-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-success mt-0.5 flex-none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-accent-blue mt-0.5 flex-none">
               <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <span>{{ r }}</span>
